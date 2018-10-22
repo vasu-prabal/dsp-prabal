@@ -1,3 +1,6 @@
 .main-container {
   margin: 16px;
 }
+.white {
+  color: #fff !important;
+}

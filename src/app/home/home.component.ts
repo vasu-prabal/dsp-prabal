@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { HomeService } from "./home.service";
+import { Hero } from "./interfaces";
 
 @Component({
   selector: "app-home",
@@ -6,7 +8,14 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  mailsList: Hero[];
+  constructor(public homeService: HomeService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getMailsList();
+  }
+
+  getMailsList() {
+    this.mailsList = this.homeService.getMailsList();
+  }
 }

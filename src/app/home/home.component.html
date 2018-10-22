@@ -1,3 +1,62 @@
-<div class="row">
-  
+<div class="row projects-actions-container">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <div class="btn-group m-1">
+            <button type="button" class="btn btn-success">
+                <span class="fa fa-plus"></span> &nbsp;&nbsp;Create</button>
+            <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+            </div>
+        </div>
+        <div class="btn-group m-1">
+            <button type="button" class="btn btn-light">Upload files</button>
+            <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+            </div>
+        </div>
+        <h4 class="projects-count">All Projects (5)</h4>
+    </div>
+</div>
+<div class="row email-container">
+    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
+        <div class="side-menu">
+
+        </div>
+    </div>
+    <div class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
+        <table class="table mails-table">
+            <thead>
+                <tr>
+                    <th>...</th>
+                    <th>ID</th>
+                    <th>Project Name</th>
+                    <th>Owner</th>
+                    <th>Laboratory</th>
+                    <th>Area of research</th>
+                    <th>Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let mail of mailsList">
+                    <td>...</td>
+                    <td [innerHtml]="mail.id"></td>
+                    <td [innerHtml]="mail.name"></td>
+                    <td [innerHtml]="mail.owner"></td>
+                    <td [innerHtml]="mail.laboratory"></td>
+                    <td [innerHtml]="mail.area"></td>
+                    <td [innerHtml]="mail.modified"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
 </div>

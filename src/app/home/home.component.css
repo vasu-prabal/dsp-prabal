@@ -1,0 +1,30 @@
+.projects-count {
+  margin-left: 8px !important;
+  margin-top: 8px !important;
+  color: #fff;
+}
+.projects-actions-container {
+  padding: 8px 8px 100px 8px;
+  background: #245a79;
+}
+.email-container {
+  margin-top: -90px;
+}
+
+.mails-table {
+  background: #fff;
+  border: 1px solid #ddd;
+  margin-top: 15px
+}
+
+.mails-table thead,
+.mails-table tbody td:nth-child(1) {
+  background: #cee4f1;
+}
+
+@media screen and (min-width: 599px) {
+  .projects-count {
+    display: inline;
+    position: absolute;
+  }
+}
