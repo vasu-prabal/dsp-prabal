@@ -7,9 +7,10 @@ import { HomeComponent } from "./home/home.component";
 import { HeaderComponent } from "./header/header.component";
 import { HomeService } from "./home/home.service";
 import { HttpModule } from "@angular/http";
+import { SideMenuComponent } from './side-menu/side-menu.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent],
+  declarations: [AppComponent, HomeComponent, HeaderComponent, SideMenuComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule],
   providers: [HomeService],
   bootstrap: [AppComponent]

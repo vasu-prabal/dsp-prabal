@@ -14,14 +14,24 @@
 .mails-table {
   background: #fff;
   border: 1px solid #ddd;
-  margin-top: 15px
 }
-
+.mails-table thead th {
+  font-weight: 500;
+}
 .mails-table thead,
 .mails-table tbody td:nth-child(1) {
   background: #cee4f1;
 }
 
+.filter-mails-list {
+  background: transparent;
+  color: #fff;
+  width: 240px;
+}
+.filter-mails-list::placeholder {
+  color: #fff;
+  opacity: 0.8;
+}
 @media screen and (min-width: 599px) {
   .projects-count {
     display: inline;
