@@ -6,4 +6,5 @@ export class Project {
   area?: string;
   modified?: string;
   enableBlog?: boolean;
+  description?: string;
 }
