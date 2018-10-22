@@ -32,6 +32,19 @@
   color: #fff;
   opacity: 0.8;
 }
+
+.upload-drop-zone {
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  padding: 8px 0;
+  text-align: center;
+}
+.upload-drop-zone.drop {
+  color: #222;
+  border-color: #222;
+}
+
 @media screen and (min-width: 599px) {
   .projects-count {
     display: inline;

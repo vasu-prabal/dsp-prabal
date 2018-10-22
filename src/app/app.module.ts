@@ -8,9 +8,10 @@ import { HeaderComponent } from "./header/header.component";
 import { HomeService } from "./home/home.service";
 import { HttpModule } from "@angular/http";
 import { SideMenuComponent } from './side-menu/side-menu.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent, SideMenuComponent],
+  declarations: [AppComponent, HomeComponent, HeaderComponent, SideMenuComponent, CreateProjectComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule],
   providers: [HomeService],
   bootstrap: [AppComponent]
