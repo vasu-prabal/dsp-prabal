@@ -22,3 +22,15 @@
 /* .side-menu-main-header-title {
     font-weight: 700;
   } */
+.projects-link {
+  position: relative;
+}
+.projects-link a {
+  padding-right: 24px !important;
+}
+.projects-link span {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}

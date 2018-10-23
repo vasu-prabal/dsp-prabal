@@ -21,3 +21,23 @@ export interface IStudy {
   vendor?: string;
   description?: string;
 }
+
+export interface ISearch {
+  page: number;
+  items: number;
+}
+
+export interface IMailSearch extends ISearch {
+  sortingField?: string;
+  asc?: string;
+  filterQuery?: string;
+  labId?: number;
+  modified?: string;
+  userId?: string;
+}
+
+export interface ILogin {
+  j_username: string;
+  j_password: string;
+  _spring_security_remember_me: string;
+}

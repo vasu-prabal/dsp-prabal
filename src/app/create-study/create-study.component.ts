@@ -10,7 +10,7 @@ declare var jQuery: any;
 export class CreateStudyComponent implements OnInit {
   @ViewChild("createStudy")
   myModal: ElementRef;
-  newStudy: IStudy;
+  newStudy: IStudy = {};
   dropZone: HTMLElement;
   constructor() {}
 
