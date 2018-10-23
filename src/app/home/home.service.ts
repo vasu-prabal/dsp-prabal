@@ -35,7 +35,7 @@ export class HomeService {
       },
       {
         id: 2,
-        name: "Drive for biomas",
+        name: "Drive for biomas to feed synthetic organisms",
         owner: "Pavel Kaplin",
         laboratory: "First chorus lab",
         area: "Synthetic Biology",
