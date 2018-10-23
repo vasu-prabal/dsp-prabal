@@ -7,11 +7,19 @@ import { HomeComponent } from "./home/home.component";
 import { HeaderComponent } from "./header/header.component";
 import { HomeService } from "./home/home.service";
 import { HttpModule } from "@angular/http";
-import { SideMenuComponent } from './side-menu/side-menu.component';
-import { CreateProjectComponent } from './create-project/create-project.component';
+import { SideMenuComponent } from "./side-menu/side-menu.component";
+import { CreateProjectComponent } from "./create-project/create-project.component";
+import { CreateStudyComponent } from "./create-study/create-study.component";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent, SideMenuComponent, CreateProjectComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    SideMenuComponent,
+    CreateProjectComponent,
+    CreateStudyComponent
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule],
   providers: [HomeService],
   bootstrap: [AppComponent]

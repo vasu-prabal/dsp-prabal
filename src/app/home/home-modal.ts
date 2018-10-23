@@ -10,3 +10,14 @@ export interface IProject {
   persons?: string;
   sendNotification?: string;
 }
+
+export interface IStudy {
+  name?: string;
+  project?: string;
+  species?: string;
+  allPrograms?: boolean;
+  select?: string;
+  technology?: string;
+  vendor?: string;
+  description?: string;
+}

@@ -1,0 +1,32 @@
+.step-description {
+  position: relative;
+  bottom: -23px;
+  color: #585858;
+  width: 100px;
+  margin-left: -45px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.sw-theme-circles > ul.step-anchor > li {
+  margin-left: 70px !important;
+}
+.sw-theme-circles > ul.step-anchor > li > a {
+  padding: 0.8rem 1rem;
+  height: 35px;
+  width: 35px;
+  box-shadow: none !important;
+}
+.look-program-checkbox{
+  margin-left: 16px;
+}
+.upload-drop-zone {
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  padding: 8px 0;
+  text-align: center;
+}
+.upload-drop-zone.drop {
+  color: #222;
+  border-color: #222;
+}

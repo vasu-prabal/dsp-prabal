@@ -9,6 +9,7 @@
             </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#" (click)="createProjectModalRef.openCreateProjectDialog()">Project</a>
+                <a class="dropdown-item" href="#" (click)="createStudyModalRef.openCreateStudyDialog()">Study</a>
             </div>
         </div>
         <div class="btn-group m-1">
@@ -61,5 +62,7 @@
     </div>
 
     <app-create-project #createProjectModalRef></app-create-project>
+
+    <app-create-study #createStudyModalRef></app-create-study>
 
 </div>
