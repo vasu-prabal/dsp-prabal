@@ -13,7 +13,7 @@ export class HomeService {
         id: 111,
         name: "CPTAC Retrospective",
         owner: "Ratna Thangudu",
-        laboratory: "Clinical",
+        laboratory: "Clinical Proteomic",
         area: "Proteomics",
         modified: "Jul 19, 2018"
       },
@@ -46,7 +46,7 @@ export class HomeService {
         name: "Small Molecule screen",
         owner: "Pavel Kaplin",
         laboratory: "First chorus lab",
-        area: "Techniology science",
+        area: "Technology science",
         modified: "Jul 20, 2018"
       }
     ];
