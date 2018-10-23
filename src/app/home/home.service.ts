@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
-import { Project } from "./interfaces";
+import { IProject } from "./home-modal";
 @Injectable({
   providedIn: "root"
 })
 export class HomeService {
   constructor(public http: Http) {}
 
-  getMailsList(): Project[] {
+  getMailsList(): IProject[] {
     return [
       {
         id: 111,

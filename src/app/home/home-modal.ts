@@ -1,4 +1,4 @@
-export class Project {
+export interface IProject {
   id?: number;
   name?: string;
   owner?: string;
@@ -7,4 +7,6 @@ export class Project {
   modified?: string;
   enableBlog?: boolean;
   description?: string;
+  persons?: string;
+  sendNotification?: string;
 }

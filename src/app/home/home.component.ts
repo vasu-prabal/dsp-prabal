@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HomeService } from "./home.service";
-import { Project } from "./interfaces";
+import { IProject } from "./home-modal";
 declare var jQuery: any;
 
 @Component({
@@ -9,8 +9,8 @@ declare var jQuery: any;
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  mailsList: Project[];
-  newProject: Project = {
+  mailsList: IProject[];
+  newProject: IProject = {
     id: undefined,
     name: "",
     area: "",

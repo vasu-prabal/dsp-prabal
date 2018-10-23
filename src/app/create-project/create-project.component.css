@@ -11,14 +11,14 @@
 }
 .member-container {
   height: 200px;
-  border: 1px solid #ddd;
+  border: 1px solid #585858;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .member-invitation-container {
   padding: 8px 16px;
-  border: 1px solid #ddd;
+  border: 1px solid #585858;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
