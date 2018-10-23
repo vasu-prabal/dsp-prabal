@@ -19,13 +19,19 @@
 }
 .mails-table-container {
   background: #fff;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 2px;
 }
 
 .mails-table-container thead,
 .mails-table-container tbody td:nth-child(1) {
   background: #aed2e9;
   /* opacity: 0.9; */
+}
+
+.mails-table-container thead th {
+  border-right: 1px solid #ddd;
 }
 
 .filter-mails-list {
@@ -36,18 +42,6 @@
 .filter-mails-list::placeholder {
   color: #fff;
   opacity: 0.8;
-}
-
-.upload-drop-zone {
-  color: #ccc;
-  border-style: dashed;
-  border-color: #ccc;
-  padding: 8px 0;
-  text-align: center;
-}
-.upload-drop-zone.drop {
-  color: #222;
-  border-color: #222;
 }
 
 .side-menu-container {
