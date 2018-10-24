@@ -9,7 +9,7 @@
 }
 .email-container {
   margin-top: -90px;
-  padding: 0 8px;
+  padding: 0 4px 0 8px;
   display: flex;
 }
 .mails-table-container {

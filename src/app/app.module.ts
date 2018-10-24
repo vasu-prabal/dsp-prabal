@@ -10,6 +10,7 @@ import { HttpModule } from "@angular/http";
 import { SideMenuComponent } from "./side-menu/side-menu.component";
 import { CreateProjectComponent } from "./create-project/create-project.component";
 import { CreateStudyComponent } from "./create-study/create-study.component";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { CreateStudyComponent } from "./create-study/create-study.component";
     CreateProjectComponent,
     CreateStudyComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [HomeService],
   bootstrap: [AppComponent]
 })
