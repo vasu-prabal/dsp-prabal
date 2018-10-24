@@ -42,6 +42,10 @@
                     <th class="header-2">...</th>
                     <th class="header-2" (click)="sortProjects('id')">
                         ID
+                        <span *ngIf="searchFilter.sortingField==='id'">
+                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
+                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
+                        </span>
                     </th>
                     <th class="header-2" (click)="sortProjects('name')">PROJECT NAME
                         <span *ngIf="searchFilter.sortingField==='name'">
@@ -87,6 +91,10 @@
                     <td [innerHtml]="mail.columns.area"></td>
                     <td [innerHtml]="mail.columns.modified"></td>
                 </tr>
+                <tr *ngIf="mailsList.items.length==0">
+                    <td class="header-2 text-center no-results" colspan="7">No data found</td>
+
+                </tr>
             </tbody>
         </table>
     </div>
@@ -95,6 +103,15 @@
 
     <app-create-study #createStudyModalRef></app-create-study>
 
-    <app-loading #loadingRef></app-loading>
+    <div #loadingRef id="loader_modal" class="modal loader-modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="loader-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img class="loader-gif" src="/assets/images/loader.gif" alt="loader" />
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

@@ -10,7 +10,7 @@ declare var jQuery: any;
 export class CreateProjectComponent implements OnInit {
   @ViewChild("createProject")
   myModal: ElementRef;
-  newProject: IProjectColumns = {
+  newProject: IProject = {
     id: undefined,
     name: "",
     area: "",

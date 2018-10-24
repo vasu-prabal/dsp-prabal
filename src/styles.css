@@ -29,9 +29,14 @@ body {
 }
 
 .loader-gif {
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
 }
+/* .loader-modal {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+} */
 @media screen and (max-width: 800px) {
   .modal-dialog {
     width: 100% !important;

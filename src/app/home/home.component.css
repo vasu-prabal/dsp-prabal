@@ -25,7 +25,7 @@
 }
 
 .mails-table-container thead,
-.mails-table-container tbody td:nth-child(1) {
+.mails-table-container tbody td:not(.no-results):nth-child(1) {
   background: #aed2e9;
   /* opacity: 0.9; */
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { HomeService } from "./home.service";
 import {
   IProject,
@@ -17,6 +17,8 @@ declare var jQuery: any;
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
+  @ViewChild("loadingRef")
+  loader: ElementRef;
   mailsList: IMailsList = {
     items: [],
     itemsCount: 0,
@@ -68,9 +70,6 @@ export class HomeComponent implements OnInit {
       }
     }
     let token = getToken();
-    // jsessionid=18FBB13222FF567DA43A9489A88E75C4
-    // this.cookieService.set("jsessionid", "18FBB13222FF567DA43A9489A88E75C4");
-    // setToken("18FBB13222FF567DA43A9489A88E75C4");
     if (!token) {
       const login: ILogin = {
         j_username: "demo-user",
@@ -89,6 +88,7 @@ export class HomeComponent implements OnInit {
   }
 
   getMailsList() {
+    // this.showOrHideLoading(true);
     this.homeService
       .getMailsList(this.type, this.searchFilter)
       .subscribe(data => {
@@ -98,6 +98,7 @@ export class HomeComponent implements OnInit {
             "MMM DD, YYYY"
           );
         });
+        // this.showOrHideLoading(false);
       });
   }
 
@@ -110,4 +111,12 @@ export class HomeComponent implements OnInit {
     this.searchFilter.asc = isAsc;
     this.getMailsList();
   }
+
+  // showOrHideLoading(isShow) {
+  //   if (isShow) {
+  //     jQuery(this.loader.nativeElement).modal("show");
+  //   } else {
+  //     jQuery(this.loader.nativeElement).modal("hide");
+  //   }
+  // }
 }

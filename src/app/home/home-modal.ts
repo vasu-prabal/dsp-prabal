@@ -4,7 +4,12 @@ export interface IProject {
   description?: string;
   persons?: string;
   sendNotification?: string;
-  columns: IProjectColumns;
+  columns?: IProjectColumns;
+  name?: string;
+  owner?: string;
+  laboratory?: string;
+  area?: string;
+  modified?: string;
 }
 
 export interface IProjectColumns {
