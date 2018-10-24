@@ -8,6 +8,7 @@ export interface IProject {
 }
 
 export interface IProjectColumns {
+  id?: number;
   name?: string;
   owner?: string;
   laboratory?: string;
@@ -33,7 +34,7 @@ export interface ISearch {
 
 export interface IMailSearch extends ISearch {
   sortingField?: string;
-  asc?: string;
+  asc?: boolean;
   filterQuery?: string;
   labId?: number;
   modified?: string;

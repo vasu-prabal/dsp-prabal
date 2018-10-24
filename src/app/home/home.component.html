@@ -38,14 +38,43 @@
     <div class="mails-table-container">
         <table class="table">
             <thead>
-                <tr>
+                <tr class="table-cell-hover">
                     <th class="header-2">...</th>
-                    <th class="header-2">ID</th>
-                    <th class="header-2">PROJECT NAME</th>
-                    <th class="header-2">OWNER</th>
-                    <th class="header-2">LABORATORY</th>
-                    <th class="header-2">AREA OF RESEARCH</th>
-                    <th class="header-2">MODIFIED</th>
+                    <th class="header-2" (click)="sortProjects('id')">
+                        ID
+                    </th>
+                    <th class="header-2" (click)="sortProjects('name')">PROJECT NAME
+                        <span *ngIf="searchFilter.sortingField==='name'">
+                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
+                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
+                        </span>
+                    </th>
+                    <th class="header-2" (click)="sortProjects('owner')">
+                        OWNER
+                        <span *ngIf="searchFilter.sortingField==='owner'">
+                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
+                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
+                        </span>
+                    </th>
+                    <th class="header-2" (click)="sortProjects('laboratory')">LABORATORY
+
+                        <span *ngIf="searchFilter.sortingField==='laboratory'">
+                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
+                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
+                        </span>
+                    </th>
+                    <th class="header-2" (click)="sortProjects('area')">AREA OF RESEARCH
+                        <span *ngIf="searchFilter.sortingField==='area'">
+                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
+                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
+                        </span>
+                    </th>
+                    <th class="header-2" (click)="sortProjects('modified')">MODIFIED
+                        <span *ngIf="searchFilter.sortingField==='modified'">
+                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
+                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
+                        </span>
+                    </th>
                 </tr>
             </thead>
             <tbody>

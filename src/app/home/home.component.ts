@@ -1,8 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { HomeService } from "./home.service";
-import { IProject, IMailSearch, ILogin, IMailsList } from "./home-modal";
+import {
+  IProject,
+  IMailSearch,
+  ILogin,
+  IMailsList,
+  IProjectColumns
+} from "./home-modal";
 import { getToken, setToken } from "../common";
-import * as moment from 'moment';
+import * as moment from "moment";
 declare var jQuery: any;
 
 @Component({
@@ -18,7 +24,7 @@ export class HomeComponent implements OnInit {
     pageSize: 0,
     totalPages: 0
   };
-  newProject: IProject = {
+  newProject: IProjectColumns = {
     id: undefined,
     name: "",
     area: "",
@@ -27,8 +33,13 @@ export class HomeComponent implements OnInit {
     owner: ""
   };
   searchFilter: IMailSearch = {
+    asc: false,
+    filterQuery: "",
+    items: 25,
+    labId: 0,
     page: 1,
-    items: 25
+    sortingField: "modified",
+    userId: undefined
   };
   type = "all";
   projectType = "All Projects";
@@ -56,7 +67,7 @@ export class HomeComponent implements OnInit {
         }
       }
     }
-    const token = getToken();
+    let token = getToken();
     // jsessionid=18FBB13222FF567DA43A9489A88E75C4
     // this.cookieService.set("jsessionid", "18FBB13222FF567DA43A9489A88E75C4");
     // setToken("18FBB13222FF567DA43A9489A88E75C4");
@@ -67,13 +78,7 @@ export class HomeComponent implements OnInit {
         _spring_security_remember_me: "on"
       };
       this.homeService.doLogin(login).subscribe(data => {
-        let main_headers = {};
-        const keys = data.headers.keys();
-        keys.map(key => {
-          `${key}: ${data.headers.get(key)}`;
-          main_headers[key] = data.headers.get(key);
-        });
-        let token = main_headers["x-final-url"];
+        token = data.headers.get("x-final-url");
         token = token.split("=").pop();
         setToken(token);
         this.getMailsList();
@@ -84,12 +89,23 @@ export class HomeComponent implements OnInit {
   }
 
   getMailsList() {
-    this.homeService.getMailsList(this.type).subscribe(data=> {
-      // console.log(data);
-      this.mailsList = data;
-      this.mailsList.items.forEach((project)=>{
-        project.columns.modified=moment(project.columns.modified).format("MMM DD, YYYY");
-      }
-    });
+    this.homeService
+      .getMailsList(this.type, this.searchFilter)
+      .subscribe(data => {
+        this.mailsList = data;
+        this.mailsList.items.forEach((project)=>{
+          project.columns.modified=moment(project.columns.modified).format("MMM DD, YYYY");
+        }
+      });
+  }
+
+  sortProjects(sortType) {
+    let isAsc = false;
+    if (this.searchFilter.sortingField === sortType) {
+      isAsc = this.searchFilter.asc ? false : true;
+    }
+    this.searchFilter.sortingField = sortType;
+    this.searchFilter.asc = isAsc;
+    this.getMailsList();
   }
 }

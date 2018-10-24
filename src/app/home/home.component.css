@@ -29,7 +29,10 @@
   background: #aed2e9;
   /* opacity: 0.9; */
 }
-
+.table-cell-hover th:not(:first-child):hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 .mails-table-container thead th {
   border-right: 1px solid #ddd;
 }
@@ -46,6 +49,12 @@
 
 .side-menu-container {
   width: 200px;
+}
+
+.sort-icon {
+  font-size: 12px;
+  float: right;
+  margin-top: 5px;
 }
 
 @media screen and (min-width: 599px) {

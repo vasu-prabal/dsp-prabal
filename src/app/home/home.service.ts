@@ -1,6 +1,11 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
-import { IProject, ILogin } from "./home-modal";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpResponse,
+  HttpParams
+} from "@angular/common/http";
+import { IProject, ILogin, IMailSearch } from "./home-modal";
 import { getHeaders, getToken } from "../common";
 import { API_URL } from "../constants";
 import { Http, Response, Headers } from "@angular/http";
@@ -66,7 +71,7 @@ export class HomeService {
     // .pipe(map(data => data.json()));
   }
 
-  getMailsList(type: string) {
+  getMailsList(type: string, searchFilter) {
     const headersConfig = getHeaders();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -79,15 +84,7 @@ export class HomeService {
     return this.http.get(
       `${API_URL}projects/paged/${type};jsessionid=${token}`,
       {
-        params: {
-          asc: false,
-          filterQuery: "",
-          items: 25,
-          labId: 0,
-          page: 1,
-          sortingField: "modified",
-          userId: undefined
-        },
+        params: searchFilter,
         headers: new HttpHeaders({
           "Content-Type": "application/json"
         })
