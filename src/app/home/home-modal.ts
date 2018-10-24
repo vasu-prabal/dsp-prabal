@@ -1,14 +1,18 @@
 export interface IProject {
   id?: number;
+  enableBlog?: boolean;
+  description?: string;
+  persons?: string;
+  sendNotification?: string;
+  columns: IProjectColumns;
+}
+
+export interface IProjectColumns {
   name?: string;
   owner?: string;
   laboratory?: string;
   area?: string;
   modified?: string;
-  enableBlog?: boolean;
-  description?: string;
-  persons?: string;
-  sendNotification?: string;
 }
 
 export interface IStudy {
@@ -40,4 +44,12 @@ export interface ILogin {
   j_username: string;
   j_password: string;
   _spring_security_remember_me: string;
+}
+
+export interface IMailsList {
+  items: Array<IProject>;
+  itemsCount: number;
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
 }

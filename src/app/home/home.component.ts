@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { HomeService } from "./home.service";
-import { IProject, IMailSearch, ILogin } from "./home-modal";
+import { IProject, IMailSearch, ILogin, IMailsList } from "./home-modal";
 import { getToken, setToken } from "../common";
+import * as moment from 'moment';
 declare var jQuery: any;
 
 @Component({
@@ -10,7 +11,13 @@ declare var jQuery: any;
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  mailsList: IProject[];
+  mailsList: IMailsList = {
+    items: [],
+    itemsCount: 0,
+    pageNumber: 0,
+    pageSize: 0,
+    totalPages: 0
+  };
   newProject: IProject = {
     id: undefined,
     name: "",
@@ -23,9 +30,32 @@ export class HomeComponent implements OnInit {
     page: 1,
     items: 25
   };
+  type = "all";
+  projectType = "All Projects";
+  defaultProjectTypes: Array<string> = ["all", "my", "shared", "public"];
   constructor(public homeService: HomeService) {}
 
   ngOnInit() {
+    const viewType = location.href.split("/").pop();
+    if (viewType) {
+      if (this.defaultProjectTypes.indexOf(viewType) > -1) {
+        this.type = viewType;
+        switch (this.type) {
+          case "all":
+            this.projectType = "All Projects";
+            break;
+          case "my":
+            this.projectType = "My Projects";
+            break;
+          case "public":
+            this.projectType = "Public Projects";
+            break;
+          case "shared":
+            this.projectType = "Shared Projects";
+            break;
+        }
+      }
+    }
     const token = getToken();
     // jsessionid=18FBB13222FF567DA43A9489A88E75C4
     // this.cookieService.set("jsessionid", "18FBB13222FF567DA43A9489A88E75C4");
@@ -54,9 +84,12 @@ export class HomeComponent implements OnInit {
   }
 
   getMailsList() {
-    this.homeService.getMailsList().subscribe(data => {
-      console.log(data);
+    this.homeService.getMailsList(this.type).subscribe(data=> {
+      // console.log(data);
+      this.mailsList = data;
+      this.mailsList.items.forEach((project)=>{
+        project.columns.modified=moment(project.columns.modified).format("MMM DD, YYYY");
+      }
     });
-    // this.mailsList = this.homeService.getMailsList();
   }
 }

@@ -22,7 +22,8 @@
                 <a class="dropdown-item" href="#">Action</a>
             </div>
         </div>
-        <h4 class="projects-count header-1 text-white bold">ALL PROJECTS (5)</h4>
+        <h4 class="projects-count header-1 text-white bold"><span [innerHTML]="projectType"></span> &nbsp;&nbsp;(<span
+                [innerHTML]="mailsList.itemsCount"></span>)</h4>
     </div>
     <div>
         <div class="input-group">
@@ -48,14 +49,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let mail of mailsList">
+                <tr *ngFor="let mail of mailsList.items">
                     <td class="header-2">...</td>
                     <td [innerHtml]="mail.id"></td>
-                    <td [innerHtml]="mail.name"></td>
-                    <td [innerHtml]="mail.owner"></td>
-                    <td [innerHtml]="mail.laboratory"></td>
-                    <td [innerHtml]="mail.area"></td>
-                    <td [innerHtml]="mail.modified"></td>
+                    <td [innerHtml]="mail.columns.name"></td>
+                    <td [innerHtml]="mail.columns.owner"></td>
+                    <td [innerHtml]="mail.columns.laboratory"></td>
+                    <td [innerHtml]="mail.columns.area"></td>
+                    <td [innerHtml]="mail.columns.modified"></td>
                 </tr>
             </tbody>
         </table>
