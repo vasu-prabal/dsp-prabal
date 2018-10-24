@@ -77,8 +77,17 @@ export class HomeService {
     const token = getToken();
     document.cookie = `jsessionid=${token}`;
     return this.http.get(
-      `${API_URL}projects/paged/${type};jsessionid=${token}?asc=false&filterQuery=&items=25&labId=0&page=1&sortingField=modified&userId=undefined`,
+      `${API_URL}projects/paged/${type};jsessionid=${token}`,
       {
+        params: {
+          asc: false,
+          filterQuery: "",
+          items: 25,
+          labId: 0,
+          page: 1,
+          sortingField: "modified",
+          userId: undefined
+        },
         headers: new HttpHeaders({
           "Content-Type": "application/json"
         })
