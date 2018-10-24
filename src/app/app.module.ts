@@ -11,6 +11,7 @@ import { SideMenuComponent } from "./side-menu/side-menu.component";
 import { CreateProjectComponent } from "./create-project/create-project.component";
 import { CreateStudyComponent } from "./create-study/create-study.component";
 import { HttpClientModule } from "@angular/common/http";
+import { LoadingComponent } from "./loading/loading.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from "@angular/common/http";
     HeaderComponent,
     SideMenuComponent,
     CreateProjectComponent,
-    CreateStudyComponent
+    CreateStudyComponent,
+    LoadingComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [HomeService],

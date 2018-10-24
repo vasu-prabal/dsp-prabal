@@ -5,7 +5,7 @@ import {
   HttpResponse,
   HttpParams
 } from "@angular/common/http";
-import { IProject, ILogin, IMailSearch } from "./home-modal";
+import { IProject, ILogin, IMailSearch, IMailsList } from "./home-modal";
 import { getHeaders, getToken } from "../common";
 import { API_URL } from "../constants";
 import { Http, Response, Headers } from "@angular/http";
@@ -81,7 +81,7 @@ export class HomeService {
     };
     const token = getToken();
     document.cookie = `jsessionid=${token}`;
-    return this.http.get(
+    return this.http.get<IMailsList>(
       `${API_URL}projects/paged/${type};jsessionid=${token}`,
       {
         params: searchFilter,

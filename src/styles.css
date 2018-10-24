@@ -28,6 +28,10 @@ body {
   max-width: 800px !important;
 }
 
+.loader-gif {
+  height: 150px;
+  width: 150px;
+}
 @media screen and (max-width: 800px) {
   .modal-dialog {
     width: 100% !important;

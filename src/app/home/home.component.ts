@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
         _spring_security_remember_me: "on"
       };
       this.homeService.doLogin(login).subscribe(data => {
-        token = data.headers.get("x-final-url");
+        token = data["headers"].get("x-final-url");
         token = token.split("=").pop();
         setToken(token);
         this.getMailsList();
@@ -93,9 +93,11 @@ export class HomeComponent implements OnInit {
       .getMailsList(this.type, this.searchFilter)
       .subscribe(data => {
         this.mailsList = data;
-        this.mailsList.items.forEach((project)=>{
-          project.columns.modified=moment(project.columns.modified).format("MMM DD, YYYY");
-        }
+        this.mailsList.items.forEach(project => {
+          project.columns.modified = moment(project.columns.modified).format(
+            "MMM DD, YYYY"
+          );
+        });
       });
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
-import { IProject } from "../home/home-modal";
+import { IProject, IProjectColumns } from "../home/home-modal";
 
 declare var jQuery: any;
 @Component({
@@ -10,7 +10,7 @@ declare var jQuery: any;
 export class CreateProjectComponent implements OnInit {
   @ViewChild("createProject")
   myModal: ElementRef;
-  newProject: IProject = {
+  newProject: IProjectColumns = {
     id: undefined,
     name: "",
     area: "",
