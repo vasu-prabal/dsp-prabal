@@ -12,6 +12,7 @@ import { CreateProjectComponent } from "./create-project/create-project.componen
 import { CreateStudyComponent } from "./create-study/create-study.component";
 import { HttpClientModule } from "@angular/common/http";
 import { LoadingComponent } from "./loading/loading.component";
+import { CreateScriptComponent } from './create-script/create-script.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LoadingComponent } from "./loading/loading.component";
     SideMenuComponent,
     CreateProjectComponent,
     CreateStudyComponent,
-    LoadingComponent
+    LoadingComponent,
+    CreateScriptComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [HomeService],

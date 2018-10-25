@@ -21,6 +21,15 @@ export interface IProjectColumns {
   modified?: string;
 }
 
+export interface IScript {
+  name?: string;
+  type?: string;
+  laboratory?: string;
+  description?: string;
+  scriptText?: string;
+  parameterName?: string;
+}
+
 export interface IStudy {
   name?: string;
   project?: string;

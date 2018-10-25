@@ -10,6 +10,8 @@
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#" (click)="createProjectModalRef.openCreateProjectDialog()">Project</a>
                 <a class="dropdown-item" href="#" (click)="createStudyModalRef.openCreateStudyDialog()">Study</a>
+                <a class="dropdown-item" href="#" (click)="createScriptModalRef.openCreateScriptDialog()">Script</a>
+
             </div>
         </div>
         <div class="btn-group m-1">
@@ -102,6 +104,8 @@
     <app-create-project #createProjectModalRef></app-create-project>
 
     <app-create-study #createStudyModalRef></app-create-study>
+
+    <app-create-script #createScriptModalRef></app-create-script>
 
     <div #loadingRef id="loader_modal" class="modal loader-modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
