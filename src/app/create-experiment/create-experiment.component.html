@@ -38,7 +38,8 @@
           <div>
             <div id="step-1" class="">
               <p class="text-center">
-                <span><label class="experiment-info">i</label> This Wizard Guides you through the steps necessary to define your Experiment</span>
+                <span><label class="experiment-info">i</label> This Wizard Guides you through the steps necessary to
+                  define your Experiment</span>
               </p>
               <form>
                 <div class="row">
@@ -62,11 +63,12 @@
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-control custom-checkbox">
                     <label>Laboratory</label>
                     <br />
-                    <input [(ngModel)]="newExperiment.allPrograms" name="allPrograms" type="checkbox" class="custom-control-input"
-                      id="allPrograms">
-                    <label class="custom-control-label look-program-checkbox" for="allPrograms">Look
+                    <input [(ngModel)]="newExperiment.allPrograms" name="labAllPrograms" type="checkbox" class="custom-control-input"
+                      id="labAllPrograms">
+                    <label class="custom-control-label look-program-checkbox" for="labAllPrograms">Look
                       through all Labs</label>
                   </div>
+
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                     <!-- <label for="name">Select one</label> -->
                     <select class="form-control custom-input-border header-3" name="project" [(ngModel)]="newExperiment.select">
@@ -93,7 +95,7 @@
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                     <label for="area">Attachments (Optional)</label>
-                    <div class="upload-drop-zone custom-full-border" id="dropZone">
+                    <div class="upload-drop-zone custom-full-border" id="experiment_drop_zone">
                       <span class="mr-2" [inlineSVG]="'/assets/icons/upload.svg'">
                       </span>
                       Drag and Drop files to dialog (Maximum file size is 10.00 MB

@@ -17,7 +17,7 @@ export class CreateExperimentComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.dropZone = document.getElementById("dropZone");
+    this.dropZone = document.getElementById("experiment_drop_zone");
     this.dropZone.ondrop = function(e) {
       e.preventDefault();
       console.log(e.dataTransfer.files);
