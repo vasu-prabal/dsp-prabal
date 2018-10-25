@@ -61,6 +61,15 @@
   display: flex;
   justify-content: space-between;
 }
+.loader-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loader-dialog .modal-content {
+  width: 128px;
+  height: 128px;
+}
 
 @media screen and (min-width: 599px) {
   .projects-count {

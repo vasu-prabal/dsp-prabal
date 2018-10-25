@@ -88,17 +88,17 @@ export class HomeComponent implements OnInit {
   }
 
   getMailsList() {
-    // this.showOrHideLoading(true);
+    this.showOrHideLoading(true);
     this.homeService
       .getMailsList(this.type, this.searchFilter)
       .subscribe(data => {
+        this.showOrHideLoading(false);
         this.mailsList = data;
         this.mailsList.items.forEach(project => {
           project.columns.modified = moment(project.columns.modified).format(
             "MMM DD, YYYY"
           );
         });
-        // this.showOrHideLoading(false);
       });
   }
 
@@ -114,9 +114,10 @@ export class HomeComponent implements OnInit {
 
   showOrHideLoading(isShow) {
     if (isShow) {
-      jQuery(this.loader.nativeElement).modal({ backdrop: "static", keyboard: false }).modal("show");
+      jQuery("#loader_modal").modal("show");
     } else {
-      jQuery(this.loader.nativeElement).modal("hide");
+      jQuery("#loader_modal").modal("hide");
+      $("#myModal").modal("hide");
     }
   }
 }
