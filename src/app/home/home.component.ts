@@ -117,7 +117,6 @@ export class HomeComponent implements OnInit {
       jQuery("#loader_modal").modal("show");
     } else {
       jQuery("#loader_modal").modal("hide");
-      $("#myModal").modal("hide");
     }
   }
 }
