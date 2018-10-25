@@ -5,7 +5,8 @@
   padding: 16px 8px;
 }
 html,
-body ,.header-4{
+body,
+.header-4 {
   font-family: "Lato", sans-serif !important;
   font-size: 12px !important;
   color: #585858 !important;
@@ -27,7 +28,7 @@ body ,.header-4{
   letter-spacing: 0.7px;
 }
 
-.header-5{
+.header-5 {
   font-size: 10px;
   letter-spacing: 0.5px;
 }
@@ -72,7 +73,14 @@ body ,.header-4{
   height: 16px !important;
   width: 16px !important;
 }
-
+.custom-control-label::before {
+  background-color: #fff;
+  border: 1px solid #585858;
+  border-radius: 0px;
+}
+.custom-control-input:checked {
+  border: #007bff;
+}
 .opacity-5 {
   opacity: 0.5;
 }
@@ -89,6 +97,31 @@ body ,.header-4{
   opacity: 0.9;
 }
 
+.input-border {
+  padding: 8px 4px;
+  height: 50px;
+}
+
+.custom-input-border,
+.input-border {
+  border: none;
+  border-bottom: 1px solid #585858;
+  box-shadow: none;
+}
+
+.custom-textarea-border,
+.custom-full-border {
+  border: 1px solid #585858;
+}
+
+.custom-primary-btn {
+  background: #19d3d5;
+  border: 1px solid #19d3d5;
+}
+.custom-primary-btn:hover {
+  background: #00abad;
+  border-color: #00abad;
+}
 @media screen and (max-width: 800px) {
   .modal-dialog {
     width: 100% !important;
