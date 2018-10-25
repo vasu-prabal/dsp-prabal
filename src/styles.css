@@ -17,8 +17,21 @@ body {
   line-height: 27px;
 }
 .header-2 {
+  font-size: 16px !important;
+  color: #3a3a3a;
+  letter-spacing: 0.8px;
+}
+.header-3,
+.nav-tabs .nav-link.active {
   font-size: 14px !important;
   letter-spacing: 0.7px;
+}
+.nav-tabs .nav-link:not(.active) {
+  color: #585858;
+  opacity: 0.6;
+}
+.letter-spacing-0 {
+  letter-spacing: 0;
 }
 .bold {
   font-weight: bold;

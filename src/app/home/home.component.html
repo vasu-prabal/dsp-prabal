@@ -39,41 +39,41 @@
         <table class="table">
             <thead>
                 <tr class="table-cell-hover">
-                    <th class="header-2">...</th>
-                    <th class="header-2" (click)="sortProjects('id')">
+                    <th class="header-3">...</th>
+                    <th class="header-3" (click)="sortProjects('id')">
                         ID
                         <span *ngIf="searchFilter.sortingField==='id'">
                             <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
                             <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
                         </span>
                     </th>
-                    <th class="header-2" (click)="sortProjects('name')">PROJECT NAME
+                    <th class="header-3" (click)="sortProjects('name')">PROJECT NAME
                         <span *ngIf="searchFilter.sortingField==='name'">
                             <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
                             <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
                         </span>
                     </th>
-                    <th class="header-2" (click)="sortProjects('owner')">
+                    <th class="header-3" (click)="sortProjects('owner')">
                         OWNER
                         <span *ngIf="searchFilter.sortingField==='owner'">
                             <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
                             <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
                         </span>
                     </th>
-                    <th class="header-2" (click)="sortProjects('laboratory')">LABORATORY
+                    <th class="header-3" (click)="sortProjects('laboratory')">LABORATORY
 
                         <span *ngIf="searchFilter.sortingField==='laboratory'">
                             <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
                             <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
                         </span>
                     </th>
-                    <th class="header-2" (click)="sortProjects('area')">AREA OF RESEARCH
+                    <th class="header-3" (click)="sortProjects('area')">AREA OF RESEARCH
                         <span *ngIf="searchFilter.sortingField==='area'">
                             <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
                             <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
                         </span>
                     </th>
-                    <th class="header-2" (click)="sortProjects('modified')">MODIFIED
+                    <th class="header-3" (click)="sortProjects('modified')">MODIFIED
                         <span *ngIf="searchFilter.sortingField==='modified'">
                             <span *ngIf="searchFilter.asc===true" class="fa fa-caret-down sort-icon"></span>
                             <span *ngIf="searchFilter.asc===false" class="fa fa-caret-up sort-icon"></span>
@@ -83,7 +83,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let mail of mailsList.items">
-                    <td class="header-2">...</td>
+                    <td class="header-3">...</td>
                     <td [innerHtml]="mail.id"></td>
                     <td [innerHtml]="mail.columns.name"></td>
                     <td [innerHtml]="mail.columns.owner"></td>
@@ -92,7 +92,7 @@
                     <td [innerHtml]="mail.columns.modified"></td>
                 </tr>
                 <tr *ngIf="mailsList.items.length==0">
-                    <td class="header-2 text-center no-results" colspan="7">No data found</td>
+                    <td class="header-3 text-center no-results" colspan="7">No data found</td>
 
                 </tr>
             </tbody>
