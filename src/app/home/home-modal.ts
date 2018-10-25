@@ -68,3 +68,8 @@ export interface IMailsList {
   pageSize: number;
   totalPages: number;
 }
+
+export interface INewSharingGroup {
+  persons?: string;
+  name?: string;
+}

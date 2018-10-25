@@ -13,6 +13,7 @@ import { CreateStudyComponent } from "./create-study/create-study.component";
 import { HttpClientModule } from "@angular/common/http";
 import { LoadingComponent } from "./loading/loading.component";
 import { CreateScriptComponent } from './create-script/create-script.component';
+import { CreateSharingGroupComponent } from './create-sharing-group/create-sharing-group.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CreateScriptComponent } from './create-script/create-script.component';
     CreateProjectComponent,
     CreateStudyComponent,
     LoadingComponent,
-    CreateScriptComponent
+    CreateScriptComponent,
+    CreateSharingGroupComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [HomeService],
