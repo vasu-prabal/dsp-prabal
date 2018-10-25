@@ -35,7 +35,7 @@ export class CreateStudyComponent implements OnInit {
   }
 
   openCreateStudyDialog() {
-    this.newStudy = {};
+    this.newStudy = { select: "" };
     jQuery("#smartwizard").smartWizard({
       theme: "circles"
     });

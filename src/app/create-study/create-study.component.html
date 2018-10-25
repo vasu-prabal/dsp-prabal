@@ -40,19 +40,20 @@
                             <form>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                        <label for="name">Study Name</label>
-                                        <input [(ngModel)]="newStudy.name" name="name" class="form-control" placeholder="Study Name">
+                                        <!-- <label for="name">Study Name</label> -->
+                                        <input [(ngModel)]="newStudy.name" name="name" class="form-control custom-input-border"
+                                            placeholder="Study Name">
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                         <label for="name">Project</label>
-                                        <select class="form-control" name="project" [(ngModel)]="newStudy.project">
+                                        <select class="form-control custom-input-border" name="project" [(ngModel)]="newStudy.project">
                                             <option value="project 1">Project 1</option>
                                             <option value="project 2">Project 2</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                                        <label for="name">Species</label>
-                                        <input [(ngModel)]="newStudy.species" name="species" class="form-control"
+                                        <!-- <label for="name">Species</label> -->
+                                        <input [(ngModel)]="newStudy.species" name="species" class="form-control input-border"
                                             placeholder="Species">
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-control custom-checkbox">
@@ -64,8 +65,9 @@
                                             through all Programs</label>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                        <label for="name">Select one</label>
-                                        <select class="form-control" name="project" [(ngModel)]="newStudy.select">
+                                        <!-- <label for="name">Select one</label> -->
+                                        <select class="form-control custom-input-border" name="project" [(ngModel)]="newStudy.select">
+                                            <option value="">--Select One--</option>
                                             <option value="project 1">Project 1</option>
                                             <option value="project 2">Project 2</option>
                                         </select>
@@ -73,22 +75,24 @@
 
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                         <label for="name">Technology type</label>
-                                        <input [(ngModel)]="newStudy.technology" name="species" class="form-control"
+                                        <input [(ngModel)]="newStudy.technology" name="species" class="form-control custom-input-border"
                                             placeholder="Technology type">
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                         <label for="name">Vendor</label>
-                                        <input [(ngModel)]="newStudy.vendor" name="species" class="form-control"
+                                        <input [(ngModel)]="newStudy.vendor" name="species" class="form-control custom-input-border"
                                             placeholder="Vendor">
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                                         <label for="area">Description (Optional)</label>
-                                        <textarea class="form-control" name="description" id="description" [(ngModel)]="newStudy.description"
-                                            rows="4"></textarea>
+                                        <textarea class="form-control custom-full-border" name="description" id="description"
+                                            [(ngModel)]="newStudy.description" rows="4"></textarea>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                                         <label for="area">Attachments (Optional)</label>
-                                        <div class="upload-drop-zone" id="dropZone">
+                                        <div class="upload-drop-zone custom-full-border" id="dropZone">
+                                            <span class="mr-2" [inlineSVG]="'/assets/icons/upload.svg'">
+                                            </span>
                                             Drag and Drop files to dialog (Maximum file size is 10.00 MB
                                         </div>
                                     </div>

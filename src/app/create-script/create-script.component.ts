@@ -16,7 +16,7 @@ export class CreateScriptComponent implements OnInit {
   ngOnInit() {}
 
   openCreateScriptDialog() {
-    this.newScript = {};
+    this.newScript = { };
     jQuery(this.myModal.nativeElement)
       .modal({ backdrop: "static", keyboard: false })
       .modal("show");

@@ -106,6 +106,7 @@ body,
 .input-border {
   border: none;
   border-bottom: 1px solid #585858;
+  border-radius: 0;
   box-shadow: none;
 }
 
