@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Upload icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.800000012">
+        <g id="PDC-Application-Style-guide-Copy" transform="translate(-528.000000, -576.000000)" fill-rule="nonzero">
+            <g id="Group-5-Copy" transform="translate(471.000000, 548.000000)">
+                <g id="Group-8" transform="translate(58.000000, 29.000000)">
+                    <g id="Group-7">
+                        <g id="Upload-icon">
+                            <circle id="Oval" stroke="#306484" cx="11" cy="11" r="11"></circle>
+                            <g id="Group-6" transform="translate(6.518519, 5.703704)" stroke="#306584" stroke-linecap="round">
+                                <polyline id="Path-6" stroke-linejoin="round" points="0 4.48148148 4.62602617 0 8.96296296 4.48148148"></polyline>
+                                <path d="M4.48148148,0.814814815 L4.48148148,10.1851852" id="Path-7"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

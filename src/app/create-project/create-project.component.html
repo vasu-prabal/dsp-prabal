@@ -4,18 +4,19 @@
       <div class="modal-header">
         <h5 class="modal-title header-2 bold" id="exampleModalLabel">Create Project</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" [inlineSVG]="'/assets/icons/close.svg'">
+          </span>
         </button>
       </div>
       <div class="modal-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active header-3 letter-spacing-0" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general"
-              aria-selected="true">General</a>
+            <a class="nav-link active header-3 letter-spacing-0" id="general-tab" data-toggle="tab" href="#general"
+              role="tab" aria-controls="general" aria-selected="true">General</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link header-3 letter-spacing-0" id="sharing-tab" data-toggle="tab" href="#sharing" role="tab" aria-controls="sharing"
-              aria-selected="false">Sharing</a>
+            <a class="nav-link header-3 letter-spacing-0" id="sharing-tab" data-toggle="tab" href="#sharing" role="tab"
+              aria-controls="sharing" aria-selected="false">Sharing</a>
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -33,10 +34,10 @@
                 <label for="area">Area of Research</label>
                 <input [(ngModel)]="newProject.area" name="area" class="form-control" placeholder="Area of Research">
               </div>
-              <div class="custom-control custom-checkbox mr-sm-2">
+              <div class="custom-control custom-checkbox">
                 <input [(ngModel)]="newProject.enableBlog" name="enableBlog" type="checkbox" class="custom-control-input"
                   id="enableBlog">
-                <label class="custom-control-label" for="enableBlog">Enable Blog</label>
+                <label class="custom-control-label header-3" for="enableBlog">Enable Blog</label>
               </div>
               <div class="form-group">
                 <label for="area">Description (Optional)</label>
@@ -46,6 +47,8 @@
               <div class="form-group">
                 <label for="area">Attachments (Optional)</label>
                 <div class="upload-drop-zone" id="dropZone">
+                  <span class="mr-2" [inlineSVG]="'/assets/icons/upload.svg'">
+                  </span>
                   Drag and Drop files to dialog (Maximum file size is 10.00 MB
                 </div>
               </div>
@@ -55,12 +58,17 @@
           <div class="tab-pane bootstrap-tab-content fade" id="sharing" role="tabpanel" aria-labelledby="sharing-tab">
 
             <form>
-              <label><span class="fa fa-lock"></span> Private Project</label>
+              <label class="header-3"><span class="mr-2" [inlineSVG]="'/assets/icons/lock.svg'"></span> Private Project</label>
+              <br />
+              <br />
               <div class="member-container">
                 <p class="header-3">There are no Members</p>
               </div>
               <div class="member-invitation-container">
-                <p>Invite People Personally or by group. Use "All" Special group to make project public</p>
+                <span class="header-5">Invite People Personally or by group. Use "All" Special group to make project
+                  public</span>
+                <br />
+                <br />
                 <div class="form-group">
                   <input [(ngModel)]="newProject.persons" name="persons" class="form-control" placeholder="Enter Person's Email, group Name or  &quot;All&quot; special group Name">
                 </div>
@@ -68,7 +76,7 @@
               <div class="custom-control custom-checkbox mr-sm-2">
                 <input [(ngModel)]="newProject.sendNotification" name="sendNotification" type="checkbox" class="custom-control-input"
                   id="sendNotification">
-                <label class="custom-control-label" for="sendNotification">Send Email Notifications</label>
+                <label class="custom-control-label header-4" for="sendNotification">Send Email Notifications</label>
               </div>
             </form>
 

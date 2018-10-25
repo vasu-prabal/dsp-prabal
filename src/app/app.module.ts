@@ -12,9 +12,9 @@ import { CreateProjectComponent } from "./create-project/create-project.componen
 import { CreateStudyComponent } from "./create-study/create-study.component";
 import { HttpClientModule } from "@angular/common/http";
 import { LoadingComponent } from "./loading/loading.component";
-import { CreateScriptComponent } from './create-script/create-script.component';
-import { CreateSharingGroupComponent } from './create-sharing-group/create-sharing-group.component';
-
+import { CreateScriptComponent } from "./create-script/create-script.component";
+import { CreateSharingGroupComponent } from "./create-sharing-group/create-sharing-group.component";
+import { InlineSVGModule } from "ng-inline-svg";
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +27,13 @@ import { CreateSharingGroupComponent } from './create-sharing-group/create-shari
     CreateScriptComponent,
     CreateSharingGroupComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    InlineSVGModule.forRoot()
+  ],
   providers: [HomeService],
   bootstrap: [AppComponent]
 })
