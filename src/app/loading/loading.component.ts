@@ -16,6 +16,6 @@ export class LoadingComponent implements OnInit {
   showOrHideLoading(isShow) {
     jQuery(this.myModal.nativeElement)
       .modal({ backdrop: "static", keyboard: false })
-      .modal(isShow ? "show" : false);
+      .modal(isShow ? "show" : "hide");
   }
 }

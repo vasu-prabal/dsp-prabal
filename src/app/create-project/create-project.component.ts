@@ -50,5 +50,6 @@ export class CreateProjectComponent implements OnInit {
 
   addNewProject() {
     console.log(this.newProject);
+    jQuery(this.myModal.nativeElement).modal("hide");
   }
 }

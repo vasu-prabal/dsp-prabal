@@ -23,16 +23,17 @@
           <div class="tab-pane bootstrap-tab-content fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
             <form>
               <div class="form-group">
-                <label for="name">Project Name</label>
-                <input [(ngModel)]="newProject.name" name="name" class="form-control" placeholder="Project Name">
+                <!-- <label for="name">Project Name</label> -->
+                <input [(ngModel)]="newProject.name" name="name" class="form-control input-border" placeholder="Project Name">
               </div>
               <div class="form-group">
-                <label for="laboratory">Laboratory</label>
-                <input [(ngModel)]="newProject.laboratory" name="laboratory" class="form-control" placeholder="Laboratory">
+                <!-- <label for="laboratory">Laboratory</label> -->
+                <input [(ngModel)]="newProject.laboratory" name="laboratory" class="form-control  input-border"
+                  placeholder="Laboratory">
               </div>
               <div class="form-group">
-                <label for="area">Area of Research</label>
-                <input [(ngModel)]="newProject.area" name="area" class="form-control" placeholder="Area of Research">
+                <!-- <label for="area">Area of Research</label> -->
+                <input [(ngModel)]="newProject.area" name="area" class="form-control  input-border" placeholder="Area of Research">
               </div>
               <div class="custom-control custom-checkbox">
                 <input [(ngModel)]="newProject.enableBlog" name="enableBlog" type="checkbox" class="custom-control-input"
@@ -41,12 +42,12 @@
               </div>
               <div class="form-group">
                 <label for="area">Description (Optional)</label>
-                <textarea class="form-control" name="description" id="description" [(ngModel)]="newProject.description"
+                <textarea class="form-control custom-textarea-border" name="description" id="description" [(ngModel)]="newProject.description"
                   rows="4"></textarea>
               </div>
               <div class="form-group">
                 <label for="area">Attachments (Optional)</label>
-                <div class="upload-drop-zone" id="dropZone">
+                <div class="upload-drop-zone custom-full-border" id="dropZone">
                   <span class="mr-2" [inlineSVG]="'/assets/icons/upload.svg'">
                   </span>
                   Drag and Drop files to dialog (Maximum file size is 10.00 MB
@@ -85,7 +86,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="addNewProject()">Create</button>
+        <button type="button" class="btn btn-primary custom-primary-btn" (click)="addNewProject()">Create</button>
       </div>
     </div>
   </div>

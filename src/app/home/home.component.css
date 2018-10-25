@@ -53,8 +53,13 @@
 
 .sort-icon {
   font-size: 12px;
-  float: right;
   margin-top: 5px;
+  margin-left: 8px;
+}
+
+.mails-table-container .is-sorted {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media screen and (min-width: 599px) {

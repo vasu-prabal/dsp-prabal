@@ -28,6 +28,8 @@ export interface IScript {
   description?: string;
   scriptText?: string;
   parameterName?: string;
+  parameterType?: string;
+  parameterDefaultValue?: string;
 }
 
 export interface IStudy {

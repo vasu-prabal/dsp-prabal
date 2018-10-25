@@ -112,11 +112,11 @@ export class HomeComponent implements OnInit {
     this.getMailsList();
   }
 
-  // showOrHideLoading(isShow) {
-  //   if (isShow) {
-  //     jQuery(this.loader.nativeElement).modal("show");
-  //   } else {
-  //     jQuery(this.loader.nativeElement).modal("hide");
-  //   }
-  // }
+  showOrHideLoading(isShow) {
+    if (isShow) {
+      jQuery(this.loader.nativeElement).modal({ backdrop: "static", keyboard: false }).modal("show");
+    } else {
+      jQuery(this.loader.nativeElement).modal("hide");
+    }
+  }
 }
