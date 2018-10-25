@@ -12,7 +12,7 @@
         <form>
           <div class="form-group">
             <!-- <label for="name">Name</label> -->
-            <input [(ngModel)]="newScript.name" name="name" class="form-control input-border" placeholder="Name" />
+            <input [(ngModel)]="newScript.name" name="name" class="form-control header-3 input-border" placeholder="Name" />
           </div>
           <div class="form-group">
             <label for="name">Type</label>
@@ -41,19 +41,19 @@
             <div class="parameters-container">
               <div class="form-group">
                 <!-- <label for="name">Name</label> -->
-                <input [(ngModel)]="newScript.parameterName" name="parameterName" class="form-control input-border" placeholder="Name" />
+                <input [(ngModel)]="newScript.parameterName" name="parameterName" class="form-control header-3 input-border" placeholder="Name" />
               </div>
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                   <label for="name">Type</label>
-                  <select class="form-control custom-full-border" name="project" [(ngModel)]="newScript.parameterType">
+                  <select class="form-control header-3 custom-full-border" name="project" [(ngModel)]="newScript.parameterType">
                     <option value="script r">Statistical Script(R)</option>
                     <option value="script p">Statistical Script(P)</option>
                   </select>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                   <label for="name">Default Value</label>
-                  <input [(ngModel)]="newScript.parameterDefaultValue" name="parameterDefaultValue" class="form-control custom-full-border" placeholder="Default Value" />
+                  <input [(ngModel)]="newScript.parameterDefaultValue" name="parameterDefaultValue" class="form-control header-3 custom-full-border" placeholder="Default Value" />
                 </div>
               </div>
             </div>
