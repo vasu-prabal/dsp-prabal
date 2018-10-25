@@ -15,6 +15,7 @@ import { LoadingComponent } from "./loading/loading.component";
 import { CreateScriptComponent } from "./create-script/create-script.component";
 import { CreateSharingGroupComponent } from "./create-sharing-group/create-sharing-group.component";
 import { InlineSVGModule } from "ng-inline-svg";
+import { CreateExperimentComponent } from './create-experiment/create-experiment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { InlineSVGModule } from "ng-inline-svg";
     CreateStudyComponent,
     LoadingComponent,
     CreateScriptComponent,
-    CreateSharingGroupComponent
+    CreateSharingGroupComponent,
+    CreateExperimentComponent
   ],
   imports: [
     BrowserModule,

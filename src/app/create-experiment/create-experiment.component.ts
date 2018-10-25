@@ -1,16 +1,18 @@
-import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
-import { IStudy } from "../home/home-modal";
-
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { IExperiment } from "../home/home-modal";
 declare var jQuery: any;
 @Component({
-  selector: "app-create-study",
-  templateUrl: "./create-study.component.html",
-  styleUrls: ["./create-study.component.css"]
+  selector: "app-create-experiment",
+  templateUrl: "./create-experiment.component.html",
+  styleUrls: [
+    "./create-experiment.component.css",
+    "../create-study/create-study.component.css"
+  ]
 })
-export class CreateStudyComponent implements OnInit {
-  @ViewChild("createStudy")
+export class CreateExperimentComponent implements OnInit {
+  @ViewChild("createExperiment")
   myModal: ElementRef;
-  newStudy: IStudy = {};
+  newExperiment: IExperiment = {};
   dropZone: HTMLElement;
   constructor() {}
 
@@ -33,9 +35,9 @@ export class CreateStudyComponent implements OnInit {
     };
   }
 
-  openCreateStudyDialog() {
-    this.newStudy = { select: "" };
-    jQuery("#smartwizard").smartWizard({
+  openCreateExperimentDialog() {
+    this.newExperiment = {};
+    jQuery("#experimentWizard").smartWizard({
       theme: "circles"
     });
     jQuery(this.myModal.nativeElement)
@@ -43,7 +45,7 @@ export class CreateStudyComponent implements OnInit {
       .modal("show");
   }
 
-  addNewStudy() {
-    console.log(this.newStudy);
+  addNewExperiment() {
+    console.log(this.newExperiment);
   }
 }

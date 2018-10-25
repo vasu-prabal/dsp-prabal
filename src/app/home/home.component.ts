@@ -76,6 +76,7 @@ export class HomeComponent implements OnInit {
         j_password: "pwd",
         _spring_security_remember_me: "on"
       };
+      this.showOrHideLoading(true);
       this.homeService.doLogin(login).subscribe(data => {
         token = data["headers"].get("x-final-url");
         token = token.split("=").pop();

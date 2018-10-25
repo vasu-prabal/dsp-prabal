@@ -75,3 +75,14 @@ export interface INewSharingGroup {
   persons?: string;
   name?: string;
 }
+
+export interface IExperiment {
+  name?: string;
+  project?: string;
+  species?: string;
+  allPrograms?: boolean;
+  select?: string;
+  technology?: string;
+  vendor?: string;
+  description?: string;
+}

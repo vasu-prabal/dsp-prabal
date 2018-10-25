@@ -1,0 +1,10 @@
+.experiment-info {
+  height: 16px;
+  width: 16px;
+  background: #e8e8e8;
+  border-radius: 50%;
+  font-style: italic;
+  color: #245c7d;
+  letter-spacing: 0.42px;
+  font-weight: bold;
+}
