@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { HomeService } from "./home.service";
 import { IMailSearch, ILogin, IMailsList, IProjectColumns } from "./home-modal";
-import { getToken, setToken } from "../common";
+import { getToken, setToken, showOrHideLoading } from "../common";
 import * as moment from "moment";
 import { Params, ActivatedRoute } from "@angular/router";
 import { loginUserDetails } from "../constants";
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
     }
     let token = getToken();
     if (!token) {
-      this.showOrHideLoading(true);
+      showOrHideLoading(true);
       this.commonService.doLogin(loginUserDetails).subscribe(data => {
         token = data["headers"].get("x-final-url");
         token = token.split("=").pop();
@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
   }
 
   getMailsList() {
-    this.showOrHideLoading(true);
+    showOrHideLoading(true);
     this.homeService
       .getMailsList(this.type, this.searchFilter)
       .subscribe(data => {
@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
             "MMM DD, YYYY"
           );
         });
-        this.showOrHideLoading(false);
+        showOrHideLoading(false);
       });
   }
 
@@ -113,13 +113,5 @@ export class HomeComponent implements OnInit {
     this.searchFilter.page = 1;
     this.searchFilter.asc = isAsc;
     this.getMailsList();
-  }
-
-  showOrHideLoading(isShow) {
-    if (isShow) {
-      jQuery("#loader_modal").modal("show");
-    } else {
-      jQuery("#loader_modal").modal("hide");
-    }
   }
 }

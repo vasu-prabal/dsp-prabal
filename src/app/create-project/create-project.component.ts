@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { IProject, IProjectColumns } from "../home/home-modal";
+import { HomeService } from "../home/home.service";
+import { showOrHideLoading } from "../common";
 
 declare var jQuery: any;
 @Component({
@@ -19,9 +21,10 @@ export class CreateProjectComponent implements OnInit {
     owner: ""
   };
   dropZone: HTMLElement;
-  constructor() {}
+  constructor(public homeService: HomeService) {}
 
   ngOnInit() {
+    this.getUsersList();
     this.dropZone = document.getElementById("dropZone");
     this.dropZone = document.getElementById("dropZone");
     this.dropZone.ondrop = function(e) {
@@ -79,6 +82,14 @@ export class CreateProjectComponent implements OnInit {
     //   //   }
     //   // }
     // });
+  }
+
+  getUsersList() {
+    showOrHideLoading(false);
+    this.homeService.getUsersList().subscribe(data => {
+      console.log(data);
+      showOrHideLoading(false);
+    });
   }
 
   openCreateProjectDialog() {

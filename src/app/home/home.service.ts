@@ -17,4 +17,12 @@ export class HomeService {
       headers: getHttpHeaders()
     });
   }
+
+  getUsersList() {
+    let url = `${API_URL}users`;
+    url = appendSession(url);
+    return this.http.get(url, {
+      headers: getHttpHeaders()
+    });
+  }
 }
