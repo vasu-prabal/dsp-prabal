@@ -4,6 +4,8 @@ import { IMailSearch, ILogin, IMailsList, IProjectColumns } from "./home-modal";
 import { getToken, setToken } from "../common";
 import * as moment from "moment";
 import { Params, ActivatedRoute } from "@angular/router";
+import { loginUserDetails } from "../constants";
+import { CommonService } from "../common.service";
 declare var jQuery: any;
 
 @Component({
@@ -41,7 +43,11 @@ export class HomeComponent implements OnInit {
   type = "all";
   projectType = "All Projects";
   defaultProjectTypes: Array<string> = ["all", "my", "shared", "public"];
-  constructor(public homeService: HomeService, public route: ActivatedRoute) {
+  constructor(
+    public homeService: HomeService,
+    public route: ActivatedRoute,
+    public commonService: CommonService
+  ) {
     this.route.params.subscribe((params: Params) => {
       this.checkToken(params.type);
     });
@@ -71,13 +77,8 @@ export class HomeComponent implements OnInit {
     }
     let token = getToken();
     if (!token) {
-      const login: ILogin = {
-        j_username: "demo-user",
-        j_password: "pwd",
-        _spring_security_remember_me: "on"
-      };
       this.showOrHideLoading(true);
-      this.homeService.doLogin(login).subscribe(data => {
+      this.commonService.doLogin(loginUserDetails).subscribe(data => {
         token = data["headers"].get("x-final-url");
         token = token.split("=").pop();
         setToken(token);
