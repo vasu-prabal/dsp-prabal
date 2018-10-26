@@ -1,3 +1,120 @@
-<p>
-  protocol works!
-</p>
+<div class="d-flex justify-content-between align-items-center projects-actions-container">
+  <div>
+    <div class="btn-group m-1">
+      <button type="button" class="btn btn-success" (click)="createProjectModalRef.openCreateProjectDialog()">
+        <span class="fa fa-plus"></span> &nbsp;&nbsp;Create</button>
+      <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only"></span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" (click)="createProjectModalRef.openCreateProjectDialog()">Project</a>
+        <a class="dropdown-item" href="#" (click)="createStudyModalRef.openCreateStudyDialog()">Study</a>
+        <a class="dropdown-item" href="#" (click)="createScriptModalRef.openCreateScriptDialog()">Script</a>
+        <a class="dropdown-item" href="#" (click)="createSharingGroupModalRef.openCreateSHaringGroupDialog()">Sharing
+          Group</a>
+        <a class="dropdown-item" href="#" (click)="createExperimentModalRef.openCreateExperimentDialog()">Experiment</a>
+
+      </div>
+    </div>
+    <div class="btn-group m-1">
+      <button type="button" class="btn btn-light">Upload files</button>
+      <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only"></span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Action</a>
+      </div>
+    </div>
+    <h4 class="list-data-count header-1 text-white bold">Protocols 
+      <!-- &nbsp;&nbsp;(<span [innerHTML]="mailsList.itemsCount"></span>) -->
+    </h4>
+  </div>
+  <div>
+    <div class="input-group">
+      <input type="text" class="form-control filter-mails-list" placeholder="Filter List" />
+    </div>
+  </div>
+</div>
+<div class="email-container">
+  <div class="side-menu-container">
+    <app-side-menu></app-side-menu>
+  </div>
+  <div class="custom-table">
+    <!-- <table class="table">
+      <thead>
+        <tr class="table-cell-hover">
+          <th class="header-3">...</th>
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='id'}" (click)="sortProjects('id')">
+            ID
+            <span *ngIf="searchFilter.sortingField==='id'">
+              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
+              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
+            </span>
+          </th>
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='name'}" (click)="sortProjects('name')">PROJECT
+            NAME
+            <span *ngIf="searchFilter.sortingField==='name'">
+              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
+              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
+            </span>
+          </th>
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='owner'}" (click)="sortProjects('owner')">
+            OWNER
+            <span *ngIf="searchFilter.sortingField==='owner'">
+              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
+              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
+            </span>
+          </th>
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='laboratory'}" (click)="sortProjects('laboratory')">LABORATORY
+
+            <span *ngIf="searchFilter.sortingField==='laboratory'">
+              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
+              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
+            </span>
+          </th>
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='area'}" (click)="sortProjects('area')">AREA
+            OF RESEARCH
+            <span *ngIf="searchFilter.sortingField==='area'">
+              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
+              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
+            </span>
+          </th>
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='modified'}" (click)="sortProjects('modified')">MODIFIED
+            <span *ngIf="searchFilter.sortingField==='modified'">
+              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
+              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-cell-hover" *ngFor="let mail of mailsList.items">
+          <td class="header-3">...</td>
+          <td [innerHtml]="mail.id"></td>
+          <td [innerHtml]="mail.columns.name"></td>
+          <td [innerHtml]="mail.columns.owner"></td>
+          <td [innerHtml]="mail.columns.laboratory"></td>
+          <td [innerHtml]="mail.columns.area"></td>
+          <td [innerHtml]="mail.columns.modified"></td>
+        </tr>
+        <tr *ngIf="mailsList.items.length==0">
+          <td class="header-3 text-center no-results" colspan="7">No data found</td>
+
+        </tr>
+      </tbody>
+    </table> -->
+  </div>
+
+  <app-create-project #createProjectModalRef></app-create-project>
+
+  <app-create-study #createStudyModalRef></app-create-study>
+
+  <app-create-script #createScriptModalRef></app-create-script>
+
+  <app-create-sharing-group #createSharingGroupModalRef></app-create-sharing-group>
+
+  <app-create-experiment #createExperimentModalRef></app-create-experiment>
+
+</div>
