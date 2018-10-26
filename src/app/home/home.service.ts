@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ILogin, IMailsList } from "./home-modal";
-import { getHeaders, getToken } from "../common";
+import { getToken, getHttpHeaders, appendSession } from "../common";
 import { API_URL } from "../constants";
 @Injectable({
   providedIn: "root"
@@ -10,7 +10,6 @@ export class HomeService {
   constructor(public http: HttpClient) {}
 
   doLogin(login: ILogin) {
-    const headersConfig = getHeaders();
     const headers = new HttpHeaders();
     headers.append("Content-Type", "application/x-www-form-urlencoded");
     const formData = new FormData();
@@ -32,16 +31,11 @@ export class HomeService {
   }
 
   getMailsList(type: string, searchFilter) {
-    const token = getToken();
-    document.cookie = `jsessionid=${token}`;
-    return this.http.get<IMailsList>(
-      `${API_URL}projects/paged/${type};jsessionid=${token}`,
-      {
-        params: searchFilter,
-        headers: new HttpHeaders({
-          "Content-Type": "application/json"
-        })
-      }
-    );
+    let url = `${API_URL}projects/paged/${type}`;
+    url = appendSession(url);
+    return this.http.get<IMailsList>(url, {
+      params: searchFilter,
+      headers: getHttpHeaders()
+    });
   }
 }

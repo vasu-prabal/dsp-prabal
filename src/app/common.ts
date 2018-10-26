@@ -8,25 +8,19 @@ export function setToken(token: string) {
   return localStorage.setItem("authToken", token);
 }
 
-export function getHeaders() {
+export function getHttpHeaders() {
   const token = getToken();
   const headers = {
-    "Content-Type": "application/x-www-form-urlencoded"
+    "Content-Type": "application/json"
   };
   if (token) {
     headers["JSESSIONID"] = token;
   }
-  const contentHeaders = {
-    headers: new HttpHeaders(headers)
-  };
-  // const headers = {
-  //   "Content-Type": "application/x-www-form-urlencoded"
-  // };
-  // const contentHeaders = new HttpHeaders();
-  // contentHeaders.append("Accept", "application/json");
-  // contentHeaders.append("Content-Type", "application/json");
-  // if (token) {
-  //   contentHeaders.append("JSESSIONID", token);
-  // }
-  return contentHeaders;
+  const httpHeaders = new HttpHeaders(headers);
+  return httpHeaders;
+}
+
+export function appendSession(url) {
+  const token = getToken();
+  return `${url};jsessionid=${token}`;
 }
