@@ -12,34 +12,7 @@
   padding: 0 4px 0 8px;
   display: flex;
 }
-.mails-table-container {
-  width: calc(100% - 200px);
-  margin: 0 6px;
-  overflow: auto;
-}
-.mails-table-container {
-  background: #fff;
-  /* border: 1px solid #ddd; */
-  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.24);
-  border-radius: 2px;
-}
 
-.mails-table-container thead,
-.mails-table-container tbody td:not(.no-results):nth-child(1) {
-  background: #aed2e9;
-  /* opacity: 0.9; */
-}
-.table-cell-hover th:not(:first-child):hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-.mails-table-container thead th {
-  border-right: 1px solid #ddd;
-}
-
-.mails-table-container tbody tr:last-child {
-  border-bottom: 1px solid #ddd;
-}
 .filter-mails-list {
   background: transparent;
   color: #fff;
@@ -60,10 +33,6 @@
   margin-left: 8px;
 }
 
-.mails-table-container .is-sorted {
-  display: flex;
-  justify-content: space-between;
-}
 .loader-dialog {
   display: flex;
   align-items: center;
