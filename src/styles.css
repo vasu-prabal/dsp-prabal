@@ -126,6 +126,10 @@ body,
   background: #00abad;
   border-color: #00abad;
 }
+.typeahead.dropdown-menu {
+  width: 100%;
+  position: static;
+}
 @media screen and (max-width: 800px) {
   .modal-dialog {
     width: 100% !important;
