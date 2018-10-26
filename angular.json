@@ -31,7 +31,7 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
-              "src/assets/plugins/autocomplete/typeahead.bundle.js",
+              "src/assets/plugins/typeahead/typeahead.bundle.js",
               "node_modules/smartwizard/dist/js/jquery.smartWizard.min.js"
             ]
           },
