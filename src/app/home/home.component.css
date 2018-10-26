@@ -37,6 +37,9 @@
   border-right: 1px solid #ddd;
 }
 
+.mails-table-container tbody tr:last-child {
+  border-bottom: 1px solid #ddd;
+}
 .filter-mails-list {
   background: transparent;
   color: #fff;

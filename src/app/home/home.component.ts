@@ -9,6 +9,7 @@ import {
 } from "./home-modal";
 import { getToken, setToken } from "../common";
 import * as moment from "moment";
+import { Params, ActivatedRoute } from "@angular/router";
 declare var jQuery: any;
 
 @Component({
@@ -46,9 +47,15 @@ export class HomeComponent implements OnInit {
   type = "all";
   projectType = "All Projects";
   defaultProjectTypes: Array<string> = ["all", "my", "shared", "public"];
-  constructor(public homeService: HomeService) {}
+  constructor(public homeService: HomeService, public route: ActivatedRoute) {
+    this.route.params.subscribe((params: Params) => {
+      this.checkToken(params.type);
+    });
+  }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  checkToken(projectType) {
     const viewType = location.href.split("/").pop();
     if (viewType) {
       if (this.defaultProjectTypes.indexOf(viewType) > -1) {
