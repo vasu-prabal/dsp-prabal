@@ -1,12 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { HomeService } from "./home.service";
-import {
-  IProject,
-  IMailSearch,
-  ILogin,
-  IMailsList,
-  IProjectColumns
-} from "./home-modal";
+import { IMailSearch, ILogin, IMailsList, IProjectColumns } from "./home-modal";
 import { getToken, setToken } from "../common";
 import * as moment from "moment";
 import { Params, ActivatedRoute } from "@angular/router";
@@ -56,10 +50,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {}
 
   checkToken(projectType) {
-    const viewType = location.href.split("/").pop();
-    if (viewType) {
-      if (this.defaultProjectTypes.indexOf(viewType) > -1) {
-        this.type = viewType;
+    if (projectType) {
+      if (this.defaultProjectTypes.indexOf(projectType) > -1) {
+        this.type = projectType;
         switch (this.type) {
           case "all":
             this.projectType = "All Projects";
@@ -100,13 +93,13 @@ export class HomeComponent implements OnInit {
     this.homeService
       .getMailsList(this.type, this.searchFilter)
       .subscribe(data => {
-        this.showOrHideLoading(false);
         this.mailsList = data;
         this.mailsList.items.forEach(project => {
           project.columns.modified = moment(project.columns.modified).format(
             "MMM DD, YYYY"
           );
         });
+        this.showOrHideLoading(false);
       });
   }
 
@@ -116,6 +109,7 @@ export class HomeComponent implements OnInit {
       isAsc = this.searchFilter.asc ? false : true;
     }
     this.searchFilter.sortingField = sortType;
+    this.searchFilter.page = 1;
     this.searchFilter.asc = isAsc;
     this.getMailsList();
   }
