@@ -26,9 +26,10 @@ export class CreateProjectComponent implements OnInit {
   ngOnInit() {
     this.dropZone = document.getElementById("dropZone");
     this.dropZone = document.getElementById("dropZone");
-    this.dropZone.ondrop = function(e) {
+    this.dropZone.ondrop = e => {
       e.preventDefault();
       console.log(e.dataTransfer.files);
+      this.addAttachments(e.dataTransfer.files);
       jQuery(e.target).removeClass("drop");
     };
 
@@ -66,6 +67,31 @@ export class CreateProjectComponent implements OnInit {
         }
       });
       showOrHideLoading(false);
+    });
+  }
+
+  addAttachments(files) {
+    console.log(files);
+    const fileDetails = {
+      filename: files[0].name,
+      sizeInBytes: files[0].size
+    };
+    this.homeService.getUploadFileId(fileDetails).subscribe(data => {
+      console.log(data);
+      this.homeService
+        .getUploadFilePath(data.attachmentId)
+        .subscribe(pathResp => {
+          this.homeService
+            .getUploadSingleFilePath({ objectName: pathResp.destinationPath })
+            .subscribe(singlePathResp => {
+              const uploadUrl = decodeURIComponent(singlePathResp.signedUrl);
+              this.homeService
+                .uploadFile(uploadUrl, files[0], pathResp.destinationPath)
+                .subscribe(uploadResponse => {
+                  console.log("uploaded ..........");
+                });
+            });
+        });
     });
   }
 

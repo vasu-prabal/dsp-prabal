@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ILogin, IMailsList } from "./home-modal";
 import { getToken, getHttpHeaders, appendSession } from "../common";
 import { API_URL } from "../constants";
+import { RequestOptions } from "@angular/http";
 @Injectable({
   providedIn: "root"
 })
 export class HomeService {
   constructor(public http: HttpClient) {}
 
-   getMailsList(type: string, searchFilter) {
+  getMailsList(type: string, searchFilter) {
     let url = `${API_URL}projects/paged/${type}`;
     url = appendSession(url);
     return this.http.get<IMailsList>(url, {
@@ -24,5 +25,40 @@ export class HomeService {
     return this.http.get(url, {
       headers: getHttpHeaders()
     });
+  }
+
+  getUploadFileId(fileDetails) {
+    let url = `${API_URL}attachments/project/items`;
+    url = appendSession(url);
+    return this.http.post(url, fileDetails, {
+      headers: getHttpHeaders()
+    });
+  }
+
+  getUploadFilePath(id) {
+    let url = `${API_URL}attachments/project/destination/${id}`;
+    url = appendSession(url);
+    return this.http.get(url, {
+      headers: getHttpHeaders()
+    });
+  }
+
+  getUploadSingleFilePath(data) {
+    let url = `${API_URL}cors/sign/singlefile`;
+    url = appendSession(url);
+    return this.http.post(url, data, {
+      headers: getHttpHeaders()
+    });
+  }
+
+  uploadFile(url, file, key) {
+    const obj = {
+      Key: key,
+      Body: file,
+      ContentType: file.type
+    };
+    const headers = new Headers({ "Content-Type": "image/jpeg" });
+    const options = new RequestOptions({ headers: headers });
+    return this.http.put(url, file, options);
   }
 }
