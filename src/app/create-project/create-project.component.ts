@@ -45,52 +45,26 @@ export class CreateProjectComponent implements OnInit {
     jQuery("#createProject").on("show.bs.modal", event => {
       this.getUsersList();
     });
-
-    // jQuery("#projects_name").typeahead({
-    //   afterSelect: function(obj) {
-    //     console.log(obj);
-    //   },
-    //   source: [
-    //     { id: 1, name: "John" },
-    //     { id: 2, name: "Alex" },
-    //     { id: 3, name: "Terry" }
-    //   ],
-    //   templates: {
-    //     empty: function(context) {
-    //       //  console.log(1) // put here your code when result not found
-    //       jQuery(".tt-dataset").text("No Results Found");
-    //     }
-    //   }
-    //   // ajax: {
-    //   //   url: "/path/to/source",
-    //   //   timeout: 500,
-    //   //   displayField: "title",
-    //   //   triggerLength: 1,
-    //   //   method: "get",
-    //   //   loadingClass: "loading-circle",
-    //   //   preDispatch: function (query) {
-    //   //     // showLoadingMask(true);
-    //   //     return {
-    //   //       search: query
-    //   //     }
-    //   //   },
-    //   //   preProcess: function (data) {
-    //   //     // showLoadingMask(false);
-    //   //     if (data.success === false) {
-    //   //       // Hide the list, there was some error
-    //   //       return false;
-    //   //     }
-    //   //     // We good!
-    //   //     return data.mylist;
-    //   //   }
-    //   // }
-    // });
   }
 
   getUsersList() {
     showOrHideLoading(false);
     this.homeService.getUsersList().subscribe(data => {
       console.log(data);
+      jQuery("#emails_input").typeahead({
+        afterSelect: function(obj) {
+          console.log(obj);
+        },
+        source: data,
+        displayText: function(item) {
+          return `${item.name} <${item.email}>`;
+        },
+        templates: {
+          empty: function(context) {
+            jQuery(".tt-dataset").text("No Results Found");
+          }
+        }
+      });
       showOrHideLoading(false);
     });
   }

@@ -19,7 +19,7 @@ export class ProtocolComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.checkToken();
+    this.checkToken();
   }
 
   checkToken() {
