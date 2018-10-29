@@ -57,8 +57,6 @@ export class HomeService {
       Body: file,
       ContentType: file.type
     };
-    const headers = new Headers({ "Content-Type": "image/jpeg" });
-    const options = new RequestOptions({ headers: headers });
-    return this.http.put(url, file, options);
+    return this.http.put(url, file);
   }
 }

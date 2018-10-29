@@ -212,6 +212,9 @@ body,
   width: 128px;
   height: 128px;
 }
+.typeahead.dropdown-menu {
+  position: sticky !important;
+}
 @media screen and (max-width: 800px) {
   .modal-dialog {
     width: 100% !important;

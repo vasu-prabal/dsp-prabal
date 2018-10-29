@@ -50,15 +50,26 @@ export class CreateProjectComponent implements OnInit {
 
   getUsersList() {
     showOrHideLoading(false);
-    this.homeService.getUsersList().subscribe(data => {
+    this.homeService.getUsersList().subscribe((data: Array<Object>) => {
       console.log(data);
+      const userData = data.map(x => {
+        const obj = {
+          name: `${x["name"]} <${x["email"]}>`,
+          userName: x["name"],
+          email: x["email"],
+          id: x["id"],
+          displayText: `${x["name"]} ${x["email"]}`
+        };
+        return obj;
+      });
       jQuery("#emails_input").typeahead({
         afterSelect: function(obj) {
           console.log(obj);
         },
-        source: data,
+        source: userData,
         displayText: function(item) {
-          return `${item.name} <${item.email}>`;
+          console.log(item.displayText);
+          return item.displayText;
         },
         templates: {
           empty: function(context) {
@@ -79,14 +90,16 @@ export class CreateProjectComponent implements OnInit {
     this.homeService.getUploadFileId(fileDetails).subscribe(data => {
       console.log(data);
       this.homeService
-        .getUploadFilePath(data.attachmentId)
+        .getUploadFilePath(data["attachmentId"])
         .subscribe(pathResp => {
           this.homeService
-            .getUploadSingleFilePath({ objectName: pathResp.destinationPath })
+            .getUploadSingleFilePath({
+              objectName: pathResp["destinationPath"]
+            })
             .subscribe(singlePathResp => {
-              const uploadUrl = decodeURIComponent(singlePathResp.signedUrl);
+              const uploadUrl = decodeURIComponent(singlePathResp["signedUrl"]);
               this.homeService
-                .uploadFile(uploadUrl, files[0], pathResp.destinationPath)
+                .uploadFile(uploadUrl, files[0], pathResp["destinationPath"])
                 .subscribe(uploadResponse => {
                   console.log("uploaded ..........");
                 });
