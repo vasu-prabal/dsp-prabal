@@ -9,7 +9,7 @@ export class ProtocolService {
   constructor(public http: HttpClient) {}
 
   getProtocolsList() {
-    let url = `${API_URL}mssharing/protocols/details`;
+    let url = `${API_URL}protocols/details/1`;
     url = appendSession(url);
     const headers = getHttpHeaders();
     return this.http.get(url, {
