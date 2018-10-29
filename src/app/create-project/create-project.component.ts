@@ -24,7 +24,6 @@ export class CreateProjectComponent implements OnInit {
   constructor(public homeService: HomeService) {}
 
   ngOnInit() {
-    this.getUsersList();
     this.dropZone = document.getElementById("dropZone");
     this.dropZone = document.getElementById("dropZone");
     this.dropZone.ondrop = function(e) {
@@ -42,6 +41,10 @@ export class CreateProjectComponent implements OnInit {
       jQuery(e.target).removeClass("drop");
       return false;
     };
+
+    jQuery("#createProject").on("show.bs.modal", event => {
+      this.getUsersList();
+    });
 
     // jQuery("#projects_name").typeahead({
     //   afterSelect: function(obj) {

@@ -178,14 +178,19 @@ body,
   display: flex;
 }
 
-.filter-mails-list {
+.filter-list-container {
   background: transparent;
   color: #fff;
-  width: 240px;
+  width: 240px !important;
 }
-.filter-mails-list::placeholder {
+.filter-list-container::placeholder {
   color: #fff;
   opacity: 0.8;
+}
+
+.filter-list-container:focus {
+  background: transparent;
+  color: #fff;
 }
 
 .side-menu-container {
@@ -221,7 +226,7 @@ body,
   }
 }
 @media screen and (max-width: 599px) {
-  .filter-mails-list {
+  .filter-list-container {
     width: auto !important;
   }
 }
