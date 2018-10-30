@@ -50,6 +50,11 @@ body,
   background: #aed2e9;
   /* opacity: 0.9; */
 }
+.custom-table .table-actions > span {
+  cursor: pointer;
+  font-size: 16px;
+  margin: 4px 2px;
+}
 .table-cell-hover th:not(:first-child):hover {
   cursor: pointer;
   text-decoration: underline;

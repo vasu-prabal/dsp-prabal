@@ -4,7 +4,7 @@ import { HomeComponent } from "./home/home.component";
 import { ProtocolComponent } from "./protocol/protocol.component";
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
+  { path: "", redirectTo: "/projects/all", pathMatch: "full" },
   { path: "projects/:type", component: HomeComponent },
   { path: "protocols", component: ProtocolComponent }
 ];

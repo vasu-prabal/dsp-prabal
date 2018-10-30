@@ -28,7 +28,9 @@ export function appendSession(url) {
 
 export function showOrHideLoading(isShow) {
   if (isShow) {
-    jQuery("#loader_modal").modal("show");
+    jQuery("#loader_modal")
+      .modal({ backdrop: "static", keyboard: false })
+      .modal("show");
   } else {
     jQuery("#loader_modal").modal("hide");
   }
