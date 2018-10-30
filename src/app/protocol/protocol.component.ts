@@ -3,6 +3,8 @@ import { getToken, setToken } from "../common";
 import { CommonService } from "../common.service";
 import { loginUserDetails } from "../constants";
 import { ProtocolService } from "./protocol.service";
+import { IProtocol, ISearch, IMailSearch } from "../home/home-modal";
+import * as moment from "moment";
 
 declare var jQuery: any;
 @Component({
@@ -13,6 +15,11 @@ declare var jQuery: any;
 export class ProtocolComponent implements OnInit {
   @ViewChild("loadingRef")
   loader: ElementRef;
+  protocols: Array<IProtocol> = [];
+  searchFilter: IMailSearch = {
+    page: 1,
+    items: 25
+  };
   constructor(
     public commonService: CommonService,
     public protocolService: ProtocolService
@@ -41,6 +48,12 @@ export class ProtocolComponent implements OnInit {
     this.showOrHideLoading(true);
     this.protocolService.getProtocolsList().subscribe(data => {
       console.log(data);
+      this.protocols = data;
+      this.protocols.forEach(protocol => {
+        protocol.protocolDate = moment(protocol.protocolDate).format(
+          "MMM DD, YYYY"
+        );
+      });
       this.showOrHideLoading(false);
     });
   }
@@ -51,5 +64,9 @@ export class ProtocolComponent implements OnInit {
     } else {
       jQuery("#loader_modal").modal("hide");
     }
+  }
+
+  sortProjects(type) {
+    console.log(type);
   }
 }

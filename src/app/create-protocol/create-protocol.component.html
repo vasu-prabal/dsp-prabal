@@ -1,0 +1,57 @@
+<div #createProtocol id="create_protocol_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title header-2 bold" id="exampleModalLabel">Create Protocol</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" [inlineSVG]="'/assets/icons/close.svg'">
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="create_protocol_wizard">
+          <ul>
+            <li>
+              <a href="#step-1">1<br />
+                <div class="step-description">General Details</div>
+              </a></li>
+            <li><a href="#step-2">2<br />
+                <div class="step-description">Analytical</div>
+              </a></li>
+            <li><a href="#step-3">3<br />
+                <div class="step-description">Spectrometry</div>
+              </a></li>
+            <li><a href="#step-4">4<br />
+                <div class="step-description">Chromatography</div>
+              </a></li>
+          </ul>
+          <div>
+            <div id="step-1" class="">
+              <form>
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.name" name="name" class="form-control header-3 custom-input-border"
+                      placeholder="Study Name">
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.owner" name="owner" class="form-control header-3 custom-input-border"
+                      placeholder="Owner">
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.experimentType" name="experimentType" class="form-control header-3 custom-input-border"
+                      placeholder="Experiment Type">
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.study" name="study" class="form-control header-3 custom-input-border"
+                      placeholder="Study">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

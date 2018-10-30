@@ -86,3 +86,15 @@ export interface IExperiment {
   vendor?: string;
   description?: string;
 }
+
+export interface IProtocol {
+  id?: string;
+  name?: string;
+  protocolName?: string;
+  protocolType?: string;
+  enrichmentStrategy?: string;
+  owner?: string;
+  experimentType?: string;
+  study?: string;
+  protocolDate?: string;
+}
