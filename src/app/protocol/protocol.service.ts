@@ -17,4 +17,13 @@ export class ProtocolService {
       headers: headers
     });
   }
+
+  deleteProtocol(id) {
+    let url = `${API_URL}protocols/${id}`;
+    url = appendSession(url);
+    const headers = getHttpHeaders();
+    return this.http.delete(url, {
+      headers: headers
+    });
+  }
 }

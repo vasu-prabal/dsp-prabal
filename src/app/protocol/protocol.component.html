@@ -56,6 +56,7 @@
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>
           </th>
+          <th class="header-3">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -66,10 +67,13 @@
           <td [innerHtml]="protocol.protocolType"></td>
           <td [innerHtml]="protocol.protocolDate"></td>
           <td [innerHtml]="protocol.enrichmentStrategy"></td>
+          <td class="table-actions">
+            <span class="fa fa-edit"></span>
+            <span class="fa fa-trash" (click)="deleteProtocol(protocol.id)"></span>
+          </td>
         </tr>
         <tr *ngIf="protocols.length==0">
           <td class="header-3 text-center no-results" colspan="7">No data found</td>
-
         </tr>
       </tbody>
     </table>

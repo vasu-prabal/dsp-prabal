@@ -69,4 +69,13 @@ export class ProtocolComponent implements OnInit {
   sortProjects(type) {
     console.log(type);
   }
+
+  deleteProtocol(id) {
+    const isConfirm = confirm("Do you want to delete protocol");
+    if (isConfirm) {
+      this.protocolService.deleteProtocol(id).subscribe(data => {
+        console.log(data);
+      });
+    }
+  }
 }
