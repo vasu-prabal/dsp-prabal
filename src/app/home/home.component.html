@@ -1,33 +1,7 @@
 <div class="d-flex justify-content-between align-items-center projects-actions-container">
     <div>
-        <div class="btn-group m-1">
-            <button type="button" class="btn btn-success" (click)="createProjectModalRef.openCreateProjectDialog()">
-                <span class="fa fa-plus"></span> &nbsp;&nbsp;Create</button>
-            <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only"></span>
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" (click)="createProjectModalRef.openCreateProjectDialog()">Project</a>
-                <a class="dropdown-item" href="#" (click)="createStudyModalRef.openCreateStudyDialog()">Study</a>
-                <a class="dropdown-item" href="#" (click)="createScriptModalRef.openCreateScriptDialog()">Script</a>
-                <a class="dropdown-item" href="#" (click)="createSharingGroupModalRef.openCreateSHaringGroupDialog()">Sharing
-                    Group</a>
-                <a class="dropdown-item" href="#" (click)="createExperimentModalRef.openCreateExperimentDialog()">Experiment</a>
-                <a class="dropdown-item" href="#" (click)="createProtocolModalRef.openCreateProtocolDialog()">Protocol</a>
-
-            </div>
-        </div>
-        <div class="btn-group m-1">
-            <button type="button" class="btn btn-light">Upload files</button>
-            <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-            </div>
-        </div>
+        <app-create-button></app-create-button>
+        <app-upload-button></app-upload-button>
         <h4 class="list-data-count header-1 text-white bold"><span [innerHTML]="projectType"></span> &nbsp;&nbsp;(<span
                 [innerHTML]="mailsList.itemsCount"></span>)</h4>
     </div>
@@ -106,18 +80,5 @@
             </tbody>
         </table>
     </div>
-
-    <app-create-project #createProjectModalRef></app-create-project>
-
-    <app-create-study #createStudyModalRef></app-create-study>
-
-    <app-create-script #createScriptModalRef></app-create-script>
-
-    <app-create-sharing-group #createSharingGroupModalRef></app-create-sharing-group>
-
-    <app-create-experiment #createExperimentModalRef></app-create-experiment>
-    <app-create-protocol #createProtocolModalRef></app-create-protocol>
-
-
 
 </div>

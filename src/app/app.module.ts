@@ -18,6 +18,8 @@ import { InlineSVGModule } from "ng-inline-svg";
 import { CreateExperimentComponent } from "./create-experiment/create-experiment.component";
 import { ProtocolComponent } from "./protocol/protocol.component";
 import { CreateProtocolComponent } from "./create-protocol/create-protocol.component";
+import { CreateButtonComponent } from "./create-button/create-button.component";
+import { UploadButtonComponent } from "./upload-button/upload-button.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,9 @@ import { CreateProtocolComponent } from "./create-protocol/create-protocol.compo
     CreateSharingGroupComponent,
     CreateExperimentComponent,
     ProtocolComponent,
-    CreateProtocolComponent
+    CreateProtocolComponent,
+    CreateButtonComponent,
+    UploadButtonComponent
   ],
   imports: [
     BrowserModule,
