@@ -1,5 +1,5 @@
-import { RequestOptions, Headers } from "@angular/http";
 import { HttpHeaders } from "@angular/common/http";
+import Swal from "sweetalert2";
 declare var jQuery: any;
 export function getToken() {
   return localStorage.getItem("authToken");
@@ -48,4 +48,22 @@ export function showToastMessage(msg, type) {
       type: type === "error" ? "danger" : type
     }
   );
+}
+
+export function showConfirmDialog(title, text, type, calBack) {
+  Swal({
+    title: title ? title : "Are you sure?",
+    text: text ? text : "",
+    type: type,
+    showCancelButton: true,
+    allowOutsideClick: false,
+    confirmButtonText: "Yes",
+    cancelButtonText: "No"
+  }).then(result => {
+    if (result.value) {
+      calBack(true);
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      calBack(false);
+    }
+  });
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { getToken, setToken } from "../common";
+import { getToken, setToken, showConfirmDialog } from "../common";
 import { CommonService } from "../common.service";
 import { loginUserDetails } from "../constants";
 import { ProtocolService } from "./protocol.service";
@@ -71,11 +71,25 @@ export class ProtocolComponent implements OnInit {
   }
 
   deleteProtocol(id) {
-    const isConfirm = confirm("Do you want to delete protocol");
-    if (isConfirm) {
-      this.protocolService.deleteProtocol(id).subscribe(data => {
-        console.log(data);
-      });
-    }
+    showConfirmDialog(
+      "Are you sure",
+      "Do you want to delete protocol",
+      "warning",
+      isConfirm => {
+        console.log(isConfirm);
+        if (isConfirm) {
+          this.protocolService.deleteProtocol(id).subscribe(data => {
+            console.log(data);
+          });
+        }
+      }
+    );
+
+    // const isConfirm = confirm("Do you want to delete protocol");
+    // if (isConfirm) {
+    //   this.protocolService.deleteProtocol(id).subscribe(data => {
+    //     console.log(data);
+    //   });
+    // }
   }
 }

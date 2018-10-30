@@ -19,5 +19,11 @@
         "typescript",
         "typescriptreact",
         "yml"
+    ],
+    "cSpell.words": [
+        "JSESSIONID",
+        "Swal",
+        "jsessionid",
+        "sweetalert"
     ]
 }
