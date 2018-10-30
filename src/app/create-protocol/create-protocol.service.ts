@@ -15,4 +15,12 @@ export class CreateProtocolService {
       headers: getHttpHeaders()
     });
   }
+
+  updateProtocol(protocolObj) {
+    let url = `${API_URL}protocols`;
+    url = appendSession(url);
+    return this.http.put(url, protocolObj, {
+      headers: getHttpHeaders()
+    });
+  }
 }

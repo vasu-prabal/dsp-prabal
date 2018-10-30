@@ -32,6 +32,7 @@
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "src/assets/plugins/typeahead/typeahead.bundle.js",
+              "node_modules/bootstrap-notify/bootstrap-notify.min.js",
               "node_modules/smartwizard/dist/js/jquery.smartWizard.min.js"
             ]
           },

@@ -33,3 +33,17 @@ export function showOrHideLoading(isShow) {
     jQuery("#loader_modal").modal("hide");
   }
 }
+
+export function showToastMessage(msg, type) {
+  jQuery.notify(
+    {
+      message: msg
+    },
+    {
+      element: "body",
+      position: null,
+      allow_dismiss: true,
+      type: type === "error" ? "danger" : type
+    }
+  );
+}
