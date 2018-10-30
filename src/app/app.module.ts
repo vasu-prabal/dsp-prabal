@@ -20,6 +20,7 @@ import { ProtocolComponent } from "./protocol/protocol.component";
 import { CreateProtocolComponent } from "./create-protocol/create-protocol.component";
 import { CreateButtonComponent } from "./create-button/create-button.component";
 import { UploadButtonComponent } from "./upload-button/upload-button.component";
+import { CreateProtocolService } from "./create-protocol/create-protocol.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,7 @@ import { UploadButtonComponent } from "./upload-button/upload-button.component";
     HttpClientModule,
     InlineSVGModule.forRoot()
   ],
-  providers: [HomeService],
+  providers: [HomeService, CreateProtocolService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
