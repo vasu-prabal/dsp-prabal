@@ -45,6 +45,7 @@ export function showToastMessage(msg, type) {
       element: "body",
       position: null,
       allow_dismiss: true,
+      delay: 2000,
       type: type === "error" ? "danger" : type
     }
   );
