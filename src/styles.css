@@ -1,3 +1,5 @@
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
 .main-container {
   margin: 16px;
 }

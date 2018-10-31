@@ -16,6 +16,7 @@ import { CreateScriptComponent } from "./create-script/create-script.component";
 import { CreateSharingGroupComponent } from "./create-sharing-group/create-sharing-group.component";
 import { InlineSVGModule } from "ng-inline-svg";
 import { CreateExperimentComponent } from "./create-experiment/create-experiment.component";
+import { NgSelectModule } from "@ng-select/ng-select";
 import { ProtocolComponent } from "./protocol/protocol.component";
 import { CreateProtocolComponent } from "./create-protocol/create-protocol.component";
 import { CreateButtonComponent } from "./create-button/create-button.component";
@@ -43,6 +44,7 @@ import { CreateProtocolService } from "./create-protocol/create-protocol.service
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgSelectModule,
     InlineSVGModule.forRoot()
   ],
   providers: [HomeService, CreateProtocolService],

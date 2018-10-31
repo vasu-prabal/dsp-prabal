@@ -12,6 +12,11 @@ declare var jQuery: any;
 export class CreateProjectComponent implements OnInit {
   @ViewChild("createProject")
   myModal: ElementRef;
+  users: Array<Object> = [
+    { id: 1, name: "John", fullName: "John <john@a.com>" },
+    { id: 2, name: "Alex", fullName: "Alex <alex@a.com>"  },
+    { id: 3, name: "Terry", fullName: "Terry <terry@a.com>"  }
+  ];
   newProject: IProject = {
     id: undefined,
     name: "",
