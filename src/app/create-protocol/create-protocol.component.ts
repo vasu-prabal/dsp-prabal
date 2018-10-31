@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { IProtocol } from "../home/home-modal";
 import { CreateProtocolService } from "./create-protocol.service";
-import { showToastMessage } from "../common";
+import { showToastMessage, showOrHideLoading } from "../common";
 
 declare var jQuery;
 
@@ -89,9 +89,16 @@ export class CreateProtocolComponent implements OnInit {
 
   createProtocol() {
     console.log(this.newProtocol);
-    this.service.createProtocol(this.newProtocol).subscribe(data => {
-      console.log(data);
-    });
+    showOrHideLoading(true);
+    this.service.createProtocol(this.newProtocol).subscribe(
+      data => {
+        console.log(data);
+        showOrHideLoading(false);
+      },
+      error => {
+        showOrHideLoading(false);
+      }
+    );
   }
 
   updateProtocol() {

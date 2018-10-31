@@ -226,8 +226,21 @@ body,
   z-index: 9999 !important;
   position: absolute !important;
 }
+ng-select .ng-value-icon {
+  float: right;
+  padding-left: 4px;
+}
 .ng-select .ng-select-container:after {
   border-bottom: 1px solid #585858;
+}
+.ng-select.ng-select-multiple
+  .ng-select-container
+  .ng-value-container
+  .ng-value {
+  background-color: #585858;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+  color: #585858;
 }
 .ng-select-container > * {
   padding: 4px 8px !important;
