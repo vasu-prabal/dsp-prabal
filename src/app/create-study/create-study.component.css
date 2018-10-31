@@ -16,7 +16,7 @@
   width: 35px;
   box-shadow: none !important;
 }
-.look-program-checkbox{
+.look-program-checkbox {
   margin-left: 16px;
 }
 .upload-drop-zone {
@@ -25,5 +25,16 @@
 }
 .upload-drop-zone.drop {
   color: #585858;
-  border: 1px dashed #585858;
+  border: 1px dashed #b3a2a2;
+}
+
+.slider-container div:nth-child(1) {
+  width: 100% !important;
+}
+.ng-select .ng-select-container {
+  min-height: 40px !important;
+}
+.custom-input-border,
+.input-border {
+  min-height: 51.5px;
 }

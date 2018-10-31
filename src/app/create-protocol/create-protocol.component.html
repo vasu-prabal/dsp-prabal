@@ -31,20 +31,227 @@
               <form>
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.name" name="name" class="form-control header-3 custom-input-border"
-                      placeholder="Study Name">
+                    <input [(ngModel)]="newProtocol.protocolName" name="name" class="form-control header-3 custom-input-border"
+                      placeholder="Protocol Name">
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.owner" name="owner" class="form-control header-3 custom-input-border"
-                      placeholder="Owner">
+                    <input [(ngModel)]="newProtocol.documentName" name="documentName" class="form-control header-3 custom-input-border"
+                      placeholder="Document Name">
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.experimentType" name="experimentType" class="form-control header-3 custom-input-border"
-                      placeholder="Experiment Type">
+                    <ng-select placeholder="Protocol Type" class="ng-select-dropdown header-3" name="protocolType"
+                      [(ngModel)]="newProtocol.protocolType">
+                      <ng-option value="Orbitrap Mass Spectrometry Protocol">Orbitrap Mass Spectrometry Protocol</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div id="step-2" class="">
+              <form>
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.startingAmount" name="startingAmount" class="form-control header-3 custom-input-border"
+                      placeholder="Starting Amount">
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.fractionsProducedCount" name="fractionsProducedCount" class="form-control header-3 custom-input-border"
+                      placeholder="Fractions Produced Count ">
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Starting Amount Uom" class="ng-select-dropdown header-3" name="startingAmountUom"
+                      [(ngModel)]="newProtocol.startingAmountUom">
+                      <ng-option value="mg">Mg</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Enrichment Strategy" class="ng-select-dropdown header-3" multiple="true"
+                      name="enrichmentStrategy" [(ngModel)]="newProtocol.enrichmentStrategy">
+                      <ng-option value="Proteome">Proteome</ng-option>
+                      <ng-option value="Phosphoproeome">Phosphoproeome</ng-option>
+                      <ng-option value="Glycoproteome">Glycoproteome</ng-option>
+                      <ng-option value="Acetylome">Acetylome</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Labeling Strategy" class="ng-select-dropdown header-3" multiple="true" name="labelingStrategy"
+                      [(ngModel)]="newProtocol.labelingStrategy">
+                      <ng-option value="label-free">Label Free</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Label Free Quantitation" class="ng-select-dropdown header-3" multiple="true"
+                      name="labelFreeQuantitation" [(ngModel)]="newProtocol.labelFreeQuantitation">
+                      <ng-option value="ion counting">Ion Counting</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Labelled Quantitation" class="ng-select-dropdown header-3" multiple="true"
+                      name="labeledQuantitation" [(ngModel)]="newProtocol.labeledQuantitation">
+                      <ng-option value="TMT-tag">TMT tag</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Isobaric Labeling Agent" class="ng-select-dropdown header-3" multiple="true"
+                      name="isobaricLabelingReagent" [(ngModel)]="newProtocol.isobaricLabelingReagent">
+                      <ng-option value="TMT11">TMT11</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Digestion Reagent" class="ng-select-dropdown header-3" multiple="true" name="digestionReagent"
+                      [(ngModel)]="newProtocol.digestionReagent">
+                      <ng-option value="Trypsin">Trypsin</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Alkylation Reagent" multiple="true" class="ng-select-dropdown header-3"
+                      multiple="true" name="alkylationReagent" [(ngModel)]="newProtocol.alkylationReagent">
+                      <ng-option value="Iodoacetamide">Iodoacetamide</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.chromatographyDimensionsCount" name="chromatographyDimensionsCount"
+                      class="form-control header-3 custom-input-border" placeholder="Chromatography Dimension Count">
+                  </div>
+
+                </div>
+              </form>
+            </div>
+            <div id="step-3" class="">
+              <form>
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Instrument Make" class="ng-select-dropdown header-3" name="instrumentMake"
+                      [(ngModel)]="newProtocol.instrumentMake">
+                      <ng-option value="Thermo Fisher">Thermo Fisher</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Instrument Model" class="ng-select-dropdown header-3" name="instrumentModel"
+                      [(ngModel)]="newProtocol.instrumentModel">
+                      <ng-option value="QExactive HF">QExactive HF</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.instrumentSerialNumber" name="instrumentSerialNumber" class="form-control header-3 custom-input-border"
+                      placeholder="Serial Number">
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.ms1Resolution" name="ms1Resolution" class="form-control header-3 custom-input-border"
+                      placeholder="MS1 Resolution">
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.study" name="study" class="form-control header-3 custom-input-border"
-                      placeholder="Study">
+                    <input [(ngModel)]="newProtocol.ms2Resolution" name="ms2Resolution" class="form-control header-3 custom-input-border"
+                      placeholder="MS2 Resolution">
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Dissociation Type" class="ng-select-dropdown header-3" name="dissociationType"
+                      [(ngModel)]="newProtocol.dissociationType">
+                      <ng-option value="high-energy collision-induced dissociation (HCD)">high-energy collision-induced
+                        dissociation (HCD)</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Dial Multiplexing" class="ng-select-dropdown header-3" name="diaMultiplexing"
+                      [(ngModel)]="newProtocol.diaMultiplexing">
+                      <ng-option value="false">False</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group slider-container">
+                    <label class="header-3">Collision Energy
+                      <span *ngIf="newProtocol.collisionEnergy">
+                        (<strong [innerHtml]="newProtocol.collisionEnergy"></strong>)
+                      </span> &nbsp;&nbsp;&nbsp;
+                    </label>
+                    <input data-provide="slider" id="collisionEnergy" data-slider-min="1" data-slider-max="100"
+                      data-slider-step="1" [(ngModel)]="newProtocol.collisionEnergy" name="collisionEnergy" class="form-control header-3 custom-input-border"
+                      placeholder="Collision Energy">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div id="step-4" class="">
+              <form>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.particleSize" name="particleSize" class="form-control header-3 custom-input-border"
+                      placeholder="Particle Size">
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Unit" class="ng-select-dropdown header-3" name="particleSizeUom"
+                      [(ngModel)]="newProtocol.particleSizeUom">
+                      <ng-option value="um">UM</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.particleType" name="particleType" class="form-control header-3 custom-input-border"
+                      placeholder="Particle Type">
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.gradientLength" name="gradientLength" class="form-control header-3 custom-input-border"
+                      placeholder="Gradient Length">
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Unit" class="ng-select-dropdown header-3" name="gradientLengthUom"
+                      [(ngModel)]="newProtocol.gradientLengthUom">
+                      <ng-option value="min">Min</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Acquisition Type" class="ng-select-dropdown header-3" name="acquisitionType"
+                      [(ngModel)]="newProtocol.acquisitionType">
+                      <ng-option value="DDA">DDA</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Chromatography Type" multiple="true" class="ng-select-dropdown header-3"
+                      name="chromatographyType" [(ngModel)]="newProtocol.chromatographyType">
+                      <ng-option value="RPLC">RPLC</ng-option>
+                      <ng-option value="bRPLC">bRPLC</ng-option>
+                      <ng-option value="SCX">SCX</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Dimension" class="ng-select-dropdown header-3" name="chromatographicDimension"
+                      [(ngModel)]="newProtocol.chromatographicDimension">
+                      <ng-option value="1">1</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Column Type" class="ng-select-dropdown header-3" name="columnType"
+                      [(ngModel)]="newProtocol.columnType">
+                      <ng-option value="C18">C18</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.amountOnColumn" name="amountOnColumn" class="form-control header-3 custom-input-border"
+                      placeholder="Amount on Column">
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Unit" class="ng-select-dropdown header-3" name="amountOnColumnUom"
+                      [(ngModel)]="newProtocol.amountOnColumnUom">
+                      <ng-option value="ug">UG</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.columnLength" name="columnLength" class="form-control header-3 custom-input-border"
+                      placeholder="Column Length">
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Unit" class="ng-select-dropdown header-3" name="columnLengthUom"
+                      [(ngModel)]="newProtocol.columnLengthUom">
+                      <ng-option value="cm">CM</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <input [(ngModel)]="newProtocol.columnInnerDiameter" name="columnInnerDiameter" class="form-control header-3 custom-input-border"
+                      placeholder="Column Diameter">
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select placeholder="Unit" class="ng-select-dropdown header-3" name="columnInnerDiameterUom"
+                      [(ngModel)]="newProtocol.columnInnerDiameterUom">
+                      <ng-option value="um">UM</ng-option>
+                    </ng-select>
                   </div>
                 </div>
               </form>

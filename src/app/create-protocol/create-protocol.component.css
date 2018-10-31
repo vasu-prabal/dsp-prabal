@@ -1,3 +1,13 @@
 .sw-theme-circles > ul.step-anchor > li {
-    margin-left: 120px !important;
-  }
+  margin-left: 120px !important;
+}
+.slider-container div:nth-child(1) {
+  width: 100% !important;
+}
+.ng-select .ng-select-container {
+  min-height: 40px !important;
+}
+.custom-input-border,
+.input-border {
+  min-height: 51.5px;
+}

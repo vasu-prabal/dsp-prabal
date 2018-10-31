@@ -222,6 +222,16 @@ body,
 .typeahead.dropdown-menu {
   position: sticky !important;
 }
+[data-notify="container"] {
+  z-index: 9999 !important;
+  position: absolute !important;
+}
+.ng-select .ng-select-container:after {
+  border-bottom: 1px solid #585858;
+}
+.ng-select-container > * {
+  padding: 4px 8px !important;
+}
 @media screen and (max-width: 800px) {
   .modal-dialog {
     width: 100% !important;
