@@ -78,12 +78,17 @@ export class HomeComponent implements OnInit {
     let token = getToken();
     if (!token) {
       showOrHideLoading(true);
-      this.commonService.doLogin(loginUserDetails).subscribe(data => {
-        token = data["headers"].get("x-final-url");
-        token = token.split("=").pop();
-        setToken(token);
-        this.getMailsList();
-      });
+      this.commonService.doLogin(loginUserDetails).subscribe(
+        data => {
+          token = data["headers"].get("x-final-url");
+          token = token.split("=").pop();
+          setToken(token);
+          this.getMailsList();
+        },
+        error => {
+          showOrHideLoading(false);
+        }
+      );
     } else {
       this.getMailsList();
     }
@@ -91,9 +96,8 @@ export class HomeComponent implements OnInit {
 
   getMailsList() {
     showOrHideLoading(true);
-    this.homeService
-      .getMailsList(this.type, this.searchFilter)
-      .subscribe(data => {
+    this.homeService.getMailsList(this.type, this.searchFilter).subscribe(
+      data => {
         this.mailsList = data;
         this.mailsList.items.forEach(project => {
           project.columns.modified = moment(project.columns.modified).format(
@@ -101,7 +105,11 @@ export class HomeComponent implements OnInit {
           );
         });
         showOrHideLoading(false);
-      });
+      },
+      error => {
+        showOrHideLoading(false);
+      }
+    );
   }
 
   sortProjects(sortType) {

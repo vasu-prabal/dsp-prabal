@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { getToken, setToken, showConfirmDialog } from "../common";
+import {
+  getToken,
+  setToken,
+  showConfirmDialog,
+  showOrHideLoading
+} from "../common";
 import { CommonService } from "../common.service";
 import { loginUserDetails } from "../constants";
 import { ProtocolService } from "./protocol.service";
@@ -32,38 +37,40 @@ export class ProtocolComponent implements OnInit {
   checkToken() {
     let token = getToken();
     if (!token) {
-      this.showOrHideLoading(true);
-      this.commonService.doLogin(loginUserDetails).subscribe(data => {
-        token = data["headers"].get("x-final-url");
-        token = token.split("=").pop();
-        setToken(token);
-        this.getProtocolsList();
-      });
+      showOrHideLoading(true);
+      this.commonService.doLogin(loginUserDetails).subscribe(
+        data => {
+          token = data["headers"].get("x-final-url");
+          token = token.split("=").pop();
+          setToken(token);
+          this.getProtocolsList();
+        },
+        error => {
+          showOrHideLoading(false);
+        }
+      );
     } else {
       this.getProtocolsList();
     }
   }
 
   getProtocolsList() {
-    this.showOrHideLoading(true);
-    this.protocolService.getProtocolsList().subscribe(data => {
-      console.log(data);
-      this.protocols = data;
-      this.protocols.forEach(protocol => {
-        protocol.protocolDate = moment(protocol.protocolDate).format(
-          "MMM DD, YYYY"
-        );
-      });
-      this.showOrHideLoading(false);
-    });
-  }
-
-  showOrHideLoading(isShow) {
-    if (isShow) {
-      jQuery("#loader_modal").modal("show");
-    } else {
-      jQuery("#loader_modal").modal("hide");
-    }
+    showOrHideLoading(true);
+    this.protocolService.getProtocolsList().subscribe(
+      data => {
+        console.log(data);
+        this.protocols = data;
+        this.protocols.forEach(protocol => {
+          protocol.protocolDate = moment(protocol.protocolDate).format(
+            "MMM DD, YYYY"
+          );
+        });
+        showOrHideLoading(false);
+      },
+      error => {
+        showOrHideLoading(false);
+      }
+    );
   }
 
   sortProjects(type) {
