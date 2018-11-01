@@ -14,8 +14,8 @@ export class CreateProjectComponent implements OnInit {
   myModal: ElementRef;
   users: Array<Object> = [
     { id: 1, name: "John", fullName: "John <john@a.com>" },
-    { id: 2, name: "Alex", fullName: "Alex <alex@a.com>"  },
-    { id: 3, name: "Terry", fullName: "Terry <terry@a.com>"  }
+    { id: 2, name: "Alex", fullName: "Alex <alex@a.com>" },
+    { id: 3, name: "Terry", fullName: "Terry <terry@a.com>" }
   ];
   newProject: IProject = {
     id: undefined,
@@ -50,11 +50,19 @@ export class CreateProjectComponent implements OnInit {
 
     jQuery("#createProject").on("show.bs.modal", event => {
       this.getUsersList();
+      this.getLabItems();
+    });
+  }
+
+  getLabItems() {
+    showOrHideLoading(true);
+    this.homeService.getLabItems().subscribe((data: any) => {
+      console.log(data);
     });
   }
 
   getUsersList() {
-    showOrHideLoading(false);
+    showOrHideLoading(true);
     this.homeService.getUsersList().subscribe((data: Array<Object>) => {
       console.log(data);
       const userData = data.map(x => {

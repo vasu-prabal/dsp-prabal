@@ -13,7 +13,7 @@ export class HomeService {
   getMailsList(type: string, searchFilter) {
     let url = `${API_URL}projects/paged/${type}`;
     url = appendSession(url);
-    
+
     return this.http.post<IMailsList>(LOCAL_API_URL, {
       url: url,
       type: "get",
@@ -28,36 +28,74 @@ export class HomeService {
     // });
   }
 
+  getLabItems() {
+    let url = `${API_URL}laboratories/my/labitems`;
+    url = appendSession(url);
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "get"
+    });
+
+    // return this.http.get(url, { headers: getHttpHeaders() });
+  }
+
   getUsersList() {
     let url = `${API_URL}users`;
     url = appendSession(url);
-    return this.http.get(url, {
-      headers: getHttpHeaders()
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "get"
     });
+
+    // return this.http.get(url, {
+    //   headers: getHttpHeaders()
+    // });
   }
 
   getUploadFileId(fileDetails) {
     let url = `${API_URL}attachments/project/items`;
     url = appendSession(url);
-    return this.http.post(url, fileDetails, {
-      headers: getHttpHeaders()
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "post",
+      data: fileDetails
     });
+
+    // return this.http.post(url, fileDetails, {
+    //   headers: getHttpHeaders()
+    // });
   }
 
   getUploadFilePath(id) {
     let url = `${API_URL}attachments/project/destination/${id}`;
     url = appendSession(url);
-    return this.http.get(url, {
-      headers: getHttpHeaders()
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "get"
     });
+
+    // return this.http.get(url, {
+    //   headers: getHttpHeaders()
+    // });
   }
 
   getUploadSingleFilePath(data) {
     let url = `${API_URL}cors/sign/singlefile`;
     url = appendSession(url);
-    return this.http.post(url, data, {
-      headers: getHttpHeaders()
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "post",
+      data: data
     });
+
+    // return this.http.post(url, data, {
+    //   headers: getHttpHeaders()
+    // });
   }
 
   uploadFile(url, file, key) {
