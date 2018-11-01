@@ -80,8 +80,9 @@ export class HomeComponent implements OnInit {
       showOrHideLoading(true);
       this.commonService.doLogin(loginUserDetails).subscribe(
         data => {
-          token = data["headers"].get("x-final-url");
-          token = token.split("=").pop();
+          token = data["sessionId"];
+          // token = data["headers"].get("x-final-url");
+          // token = token.split("=").pop();
           setToken(token);
           this.getMailsList();
         },

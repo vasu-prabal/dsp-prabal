@@ -20,6 +20,11 @@ export class HomeService {
       // params: searchFilter,
       // headers: getHttpHeaders()
     });
+
+    // return this.http.get<IMailsList>(url, {
+    //   params: searchFilter,
+    //   headers: getHttpHeaders()
+    // });
   }
 
   getUsersList() {

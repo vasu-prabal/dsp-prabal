@@ -18,6 +18,10 @@ export class ProtocolService {
       type: "get"
       // headers: headers
     });
+
+    // return this.http.get<Array<IProtocol>>(url, {
+    //   headers: headers
+    // });
   }
 
   deleteProtocol(id) {

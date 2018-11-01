@@ -84,4 +84,17 @@ app.post("/getData", function(req, res, next) {
   );
 });
 
+app.post("/getData/login", function(req, res, next) {
+  return request(
+    { url: req.body.url, method: "post", formData: req.body.data },
+    function(error, response, body) {
+      console.log("error:", error); // Print the error if one occurred
+      console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+      let session = response.request.headers.referer.split(";").pop();
+      let sessionId = session.split("=").pop();
+      return res.send({ sessionId: sessionId });
+    }
+  );
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
