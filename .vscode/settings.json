@@ -25,6 +25,7 @@
         "CPTAC",
         "Exactive",
         "Glycoproteome",
+        "Injectable",
         "Iodoacetamide",
         "JSESSIONID",
         "LCMS",
@@ -41,6 +42,7 @@
         "haspopup",
         "jsessionid",
         "labelledby",
+        "singlefile",
         "sweetalert",
         "tabindex"
     ]
