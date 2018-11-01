@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between align-items-center projects-actions-container">
   <div>
-    <app-create-button></app-create-button>
+    <app-create-button #createProtocol></app-create-button>
     <app-upload-button></app-upload-button>
     <h4 class="list-data-count header-1 text-white bold">Protocols (<span [innerHtml]="protocols.length"></span>)
       <!-- &nbsp;&nbsp;(<span [innerHTML]="mailsList.itemsCount"></span>) -->
@@ -68,7 +68,7 @@
           <td [innerHtml]="protocol.protocolDate"></td>
           <td [innerHtml]="protocol.enrichmentStrategy"></td>
           <td class="table-actions">
-            <span class="fa fa-edit"></span>
+            <span class="fa fa-edit" (click)="editProtocol(protocol.id)"></span>
             <span class="fa fa-trash" (click)="deleteProtocol(protocol.id)"></span>
           </td>
         </tr>

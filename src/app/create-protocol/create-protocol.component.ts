@@ -69,8 +69,7 @@ export class CreateProtocolComponent implements OnInit {
       });
   }
 
-  openCreateProtocolDialog() {
-    this.newProtocol = {};
+  openProtocolDialog() {
     this.collisionEnergySlider = jQuery("#collisionEnergy")
       .slider()
       .on("slide", slideEvt => {
@@ -80,6 +79,16 @@ export class CreateProtocolComponent implements OnInit {
         this.newProtocol.collisionEnergy = slideEvt.value.newValue;
       });
 
+    if (this.newProtocol.collisionEnergy) {
+      this.newProtocol.collisionEnergy = Number(
+        this.newProtocol.collisionEnergy.replace("%", "")
+      );
+      this.collisionEnergySlider.slider(
+        "setValue",
+        this.newProtocol.collisionEnergy
+      );
+    }
+
     jQuery("#create_protocol_wizard").smartWizard("reset");
     jQuery(".sw-btn-group-extra").hide();
     jQuery("#create_protocol_dialog")
@@ -87,9 +96,13 @@ export class CreateProtocolComponent implements OnInit {
       .modal("show");
   }
 
+  openCreateProtocolDialog() {
+    this.newProtocol = {};
+    this.openProtocolDialog();
+  }
+
   createProtocol() {
     console.log(this.newProtocol);
-
     const obj = this.newProtocol;
     obj.chromatographicDimension = Number(obj.chromatographicDimension);
     obj.diaMultiplexing = Boolean(obj.diaMultiplexing);
@@ -99,8 +112,47 @@ export class CreateProtocolComponent implements OnInit {
     obj.protocolDocumentName = obj.documentName;
     showOrHideLoading(true);
     console.log(obj);
-    this.service.createProtocol(obj).subscribe(
+    if (this.newProtocol.id) {
+      this.service.updateProtocol(obj).subscribe(
+        data => {
+          console.log(data);
+          showOrHideLoading(false);
+          jQuery("#create_protocol_dialog").modal("hide");
+        },
+        error => {
+          showOrHideLoading(false);
+          showToastMessage(
+            `Error while getting ${
+              this.newProtocol.id !== undefined ? "updating" : "adding"
+            } the protocol`,
+            "error"
+          );
+        }
+      );
+    } else {
+      this.service.createProtocol(obj).subscribe(
+        data => {
+          console.log(data);
+          showOrHideLoading(false);
+        },
+        error => {
+          showOrHideLoading(false);
+        }
+      );
+    }
+  }
+
+  editProtocol(id) {
+    console.log("protocol edit", id);
+    showOrHideLoading(true);
+    this.service.getProtocol(id).subscribe(
       data => {
+        if (data["successMessage"] === "Success") {
+          this.newProtocol = data["details"];
+          this.openProtocolDialog();
+        } else {
+          showToastMessage("Error while getting protocol details", "error");
+        }
         console.log(data);
         showOrHideLoading(false);
       },
@@ -108,55 +160,5 @@ export class CreateProtocolComponent implements OnInit {
         showOrHideLoading(false);
       }
     );
-  }
-
-  updateProtocol() {
-    const obj = {
-      id: 2,
-      protocolName: "CPTAC-CompRef-Global2 update",
-      protocolDate: "2017-03-06T00:00:00.000Z",
-      documentName: "PNNL_CPTAC_LCMSProtocol_CompRef",
-      startingAmount: 3,
-      startingAmountUom: "mg",
-      enrichmentStrategy: "Proteome, Phosphoproeome, Glycoproteome, Acetylome",
-      labelingStrategy: "label-free",
-      labelFreeQuantitation: "ion counting",
-      labeledQuantitation: "TMT-tag",
-      isobaricLabelingReagent: "TMT11",
-      digestionReagent: "Trypsin",
-      alkylationReagent: "Iodoacetamide",
-      chromatographyDimensionsCount: 1,
-      fractionsProducedCount: 24,
-      chromatographyType: "RPLC, bRPLC, SCX",
-      chromatographicDimension: 1,
-      columnType: "C18",
-      amountOnColumn: 0.75,
-      amountOnColumnUom: "ug",
-      columnLength: 70,
-      columnLengthUom: "cm",
-      columnInnerDiameter: 75,
-      columnInnerDiameterUom: "um",
-      particleSize: 3,
-      particleSizeUom: "um",
-      particleType: "Phenomenex Jupiter C18",
-      gradientLength: 100,
-      gradientLengthUom: "min",
-      protocolDocumentName: "PNNL_CPTAC_LCMSProtocol_CompRef",
-      protocolType: "Orbitrap Mass Spectrometry Protocol",
-      acquisitionType: "DDA",
-      instrumentMake: "Thermo Fisher",
-      instrumentModel: "QExactive HF",
-      instrumentSerialNumber: "Exactive Series slot",
-      dissociationType: "high-energy collision-induced dissociation (HCD)",
-      ms1Resolution: 30000,
-      ms2Resolution: 7500,
-      ddaTopN: "Top 10",
-      diaMultiplexing: false,
-      diaIms: true,
-      collisionEnergy: "45%"
-    };
-    this.service.updateProtocol(obj).subscribe(data => {
-      console.log(data);
-    });
   }
 }

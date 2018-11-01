@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
 import {
   getToken,
   setToken,
@@ -10,6 +10,8 @@ import { loginUserDetails } from "../constants";
 import { ProtocolService } from "./protocol.service";
 import { IProtocol, ISearch, IMailSearch } from "../home/home-modal";
 import * as moment from "moment";
+import { CreateProtocolComponent } from "../create-protocol/create-protocol.component";
+import { CreateButtonComponent } from "../create-button/create-button.component";
 
 declare var jQuery: any;
 @Component({
@@ -18,8 +20,8 @@ declare var jQuery: any;
   styleUrls: ["./protocol.component.css"]
 })
 export class ProtocolComponent implements OnInit {
-  @ViewChild("loadingRef")
-  loader: ElementRef;
+  @ViewChild(CreateButtonComponent)
+  createButton: CreateButtonComponent;
   protocols: Array<IProtocol> = [];
   searchFilter: IMailSearch = {
     page: 1,
@@ -104,5 +106,9 @@ export class ProtocolComponent implements OnInit {
     //     console.log(data);
     //   });
     // }
+  }
+
+  editProtocol(id) {
+    this.createButton.createProtocol.editProtocol(id);
   }
 }

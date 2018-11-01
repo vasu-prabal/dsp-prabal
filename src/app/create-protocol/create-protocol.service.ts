@@ -31,8 +31,29 @@ export class CreateProtocolService {
   updateProtocol(protocolObj) {
     let url = `${API_URL}protocols`;
     url = appendSession(url);
-    return this.http.put(url, protocolObj, {
-      headers: getHttpHeaders()
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "put",
+      data: protocolObj
     });
+
+    // return this.http.put(url, protocolObj, {
+    //   headers: getHttpHeaders()
+    // });
+  }
+
+  getProtocol(id) {
+    let url = `${API_URL}protocols/details/${id}`;
+    url = appendSession(url);
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "get"
+    });
+
+    // return this.http.get(url, {
+    //   headers: getHttpHeaders()
+    // });
   }
 }

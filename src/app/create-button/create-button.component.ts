@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { CreateProtocolComponent } from "../create-protocol/create-protocol.component";
 
 @Component({
   selector: "app-create-button",
@@ -6,7 +7,10 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./create-button.component.css"]
 })
 export class CreateButtonComponent implements OnInit {
+  @ViewChild(CreateProtocolComponent)
+  createProtocol: CreateProtocolComponent;
   constructor() {}
 
   ngOnInit() {}
+
 }
