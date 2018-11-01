@@ -90,6 +90,7 @@ export class CreateProtocolComponent implements OnInit {
   createProtocol() {
     console.log(this.newProtocol);
     showOrHideLoading(true);
+    console.log(JSON.stringify(this.newProtocol));
     this.service.createProtocol(this.newProtocol).subscribe(
       data => {
         console.log(data);

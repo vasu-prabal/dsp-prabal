@@ -60,6 +60,17 @@ app.post("/getData", function(req, res, next) {
           return res.send(parsed);
         }
       );
+    case "put":
+      return request(
+        { url: req.body.url, method: "put", body: req.body.data, json: true },
+        function(error, response, body) {
+          console.log("error:", error); // Print the error if one occurred
+          console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+          // var parsed = JSON.parse(body);
+          // console.log(parsed);
+          return res.send(body);
+        }
+      );
   }
   return request(
     "http://pdc-development.esacinc.com:8080/workspace/projects/paged/all;jsessionid=A4F940C159E5ECDC29B89E90AF5B7D73?asc=false&filterQuery=&items=25&labId=0&page=1&sortingField=modified&userId=undefined",
