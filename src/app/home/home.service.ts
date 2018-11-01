@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ILogin, IMailsList } from "./home-modal";
 import { getToken, getHttpHeaders, appendSession } from "../common";
-import { API_URL } from "../constants";
+import { API_URL, LOCAL_API_URL } from "../constants";
 import { RequestOptions } from "@angular/http";
 @Injectable({
   providedIn: "root"
@@ -13,9 +13,12 @@ export class HomeService {
   getMailsList(type: string, searchFilter) {
     let url = `${API_URL}projects/paged/${type}`;
     url = appendSession(url);
-    return this.http.get<IMailsList>(url, {
-      params: searchFilter,
-      headers: getHttpHeaders()
+    return this.http.post<IMailsList>(LOCAL_API_URL, {
+      url: url,
+      type: "get",
+      params: searchFilter
+      // params: searchFilter,
+      // headers: getHttpHeaders()
     });
   }
 

@@ -12,7 +12,8 @@ export function setToken(token: string) {
 export function getHttpHeaders() {
   const token = getToken();
   const headers = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    Origin: "header"
   };
   if (token) {
     headers["JSESSIONID"] = token;

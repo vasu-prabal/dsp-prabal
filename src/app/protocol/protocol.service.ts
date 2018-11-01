@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { getToken, appendSession, getHttpHeaders } from "../common";
-import { API_URL } from "../constants";
+import { API_URL, LOCAL_API_URL } from "../constants";
 import { IProtocol } from "../home/home-modal";
 @Injectable({
   providedIn: "root"
@@ -13,8 +13,10 @@ export class ProtocolService {
     let url = `${API_URL}protocols`;
     url = appendSession(url);
     const headers = getHttpHeaders();
-    return this.http.get<Array<IProtocol>>(url, {
-      headers: headers
+    return this.http.post<Array<IProtocol>>(LOCAL_API_URL, {
+      url: url,
+      type: "get"
+      // headers: headers
     });
   }
 
