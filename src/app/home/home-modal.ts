@@ -129,5 +129,5 @@ export interface IProtocol {
   ddaTopN?: string;
   diaMultiplexing?: string | boolean;
   diaIms?: string | boolean;
-  collisionEnergy?: string;
+  collisionEnergy?: string | Number;
 }
