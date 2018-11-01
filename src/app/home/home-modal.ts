@@ -71,6 +71,18 @@ export interface IMailsList {
   totalPages: number;
 }
 
+export interface ISpeciesList {
+  name: string;
+  unspecified: boolean;
+  id: number;
+}
+
+export interface ITechTypes {
+  name: string;
+  unspecified: boolean;
+  id: number;
+}
+
 export interface INewSharingGroup {
   persons?: string;
   name?: string;
