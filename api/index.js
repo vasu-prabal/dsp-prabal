@@ -24,19 +24,6 @@ app.use(function(req, res, next) {
 
 app.get("/", (req, res) => res.send("Hello World!"));
 
-app.get("/getMailsList", function(req, res, next) {
-  return request(
-    "http://pdc-development.esacinc.com:8080/workspace/projects/paged/all;jsessionid=A4F940C159E5ECDC29B89E90AF5B7D73?asc=false&filterQuery=&items=25&labId=0&page=1&sortingField=modified&userId=undefined",
-    function(error, response, body) {
-      console.log("error:", error); // Print the error if one occurred
-      console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
-      var parsed = JSON.parse(body);
-      console.log(parsed);
-      return res.send(body);
-    }
-  );
-});
-
 app.post("/getData", function(req, res, next) {
   switch (req.body.type) {
     case "get":
@@ -54,35 +41,19 @@ app.post("/getData", function(req, res, next) {
         }
       });
     case "post":
-      return request(
-        { url: req.body.url, method: "post", body: req.body.data, json: true },
-        function(error, response, body) {
-          console.log("error:", error); // Print the error if one occurred
-          console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
-          var parsed = JSON.parse(body);
-          console.log(parsed);
-          return res.send(response.statusCode, parsed);
-        }
-      );
     case "put":
     case "delete":
       return request(
-        {
-          url: req.body.url,
-          method: req.body.type,
-          body: req.body.data,
-          json: true
-        },
+        { url: req.body.url, method: req.body.type, body: req.body.data, json: true },
         function(error, response, body) {
+          console.log("error:", error); // Print the error if one occurred
+          console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+          var parsed = {};
           if (body) {
-            console.log("error:", error); // Print the error if one occurred
-            console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
-            // var parsed = JSON.parse(body);
-            // console.log(parsed);
-            return res.send(body);
-          } else {
-            return res.send(response.statusCode);
+             parsed = JSON.parse(body);
+            console.log(parsed);
           }
+          return res.send(response.statusCode, parsed);
         }
       );
   }
