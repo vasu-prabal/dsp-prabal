@@ -10,6 +10,7 @@ import { SideMenuComponent } from "./side-menu/side-menu.component";
 import { CreateProjectComponent } from "./create-project/create-project.component";
 import { CreateStudyComponent } from "./create-study/create-study.component";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 import { LoadingComponent } from "./loading/loading.component";
 import { CreateScriptComponent } from "./create-script/create-script.component";
 import { CreateSharingGroupComponent } from "./create-sharing-group/create-sharing-group.component";
@@ -54,7 +55,8 @@ import { RequestInterceptor } from "./http-interceptor";
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
       multi: true
-    }
+    },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })
