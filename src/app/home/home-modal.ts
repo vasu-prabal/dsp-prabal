@@ -90,7 +90,7 @@ export interface IExperiment {
 export interface IProtocol {
   id?: string;
   protocolName?: string;
-  protocolDate?: string;
+  protocolDate?: string | Date;
   documentName?: string;
   startingAmount?: string;
   startingAmountUom?: string;
@@ -104,7 +104,7 @@ export interface IProtocol {
   chromatographyDimensionsCount?: string;
   fractionsProducedCount?: string;
   chromatographyType?: string;
-  chromatographicDimension?: string;
+  chromatographicDimension?: string | Number;
   columnType?: string;
   amountOnColumn?: string;
   amountOnColumnUom?: string;
@@ -127,7 +127,7 @@ export interface IProtocol {
   ms1Resolution?: string;
   ms2Resolution?: string;
   ddaTopN?: string;
-  diaMultiplexing?: string;
-  diaIms?: string;
+  diaMultiplexing?: string | boolean;
+  diaIms?: string | boolean;
   collisionEnergy?: string;
 }

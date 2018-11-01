@@ -5,7 +5,7 @@
       <div class="modal-header">
         <h5 class="modal-title header-2 bold" id="exampleModalLabel">Create Protocol</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" [inlineSVG]="'/assets/icons/close.svg'">
+          <span aria-hidden="true" [inlineSVG]="'./assets/icons/close.svg'">
           </span>
         </button>
       </div>
@@ -51,12 +51,12 @@
               <form>
                 <div class="row">
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.startingAmount" name="startingAmount" class="form-control header-3 custom-input-border"
+                    <input type="number" [(ngModel)]="newProtocol.startingAmount" name="startingAmount" class="form-control header-3 custom-input-border"
                       placeholder="Starting Amount">
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.fractionsProducedCount" name="fractionsProducedCount" class="form-control header-3 custom-input-border"
-                      placeholder="Fractions Produced Count ">
+                    <input type="number" [(ngModel)]="newProtocol.fractionsProducedCount" name="fractionsProducedCount"
+                      class="form-control header-3 custom-input-border" placeholder="Fractions Produced Count ">
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                     <ng-select placeholder="Starting Amount Uom" class="ng-select-dropdown header-3" name="startingAmountUom"
@@ -65,8 +65,8 @@
                     </ng-select>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <ng-select placeholder="Enrichment Strategy" class="ng-select-dropdown header-3"
-                      name="enrichmentStrategy" [(ngModel)]="newProtocol.enrichmentStrategy">
+                    <ng-select placeholder="Enrichment Strategy" class="ng-select-dropdown header-3" name="enrichmentStrategy"
+                      [(ngModel)]="newProtocol.enrichmentStrategy">
                       <ng-option value="Proteome">Proteome</ng-option>
                       <ng-option value="Phosphoproeome">Phosphoproeome</ng-option>
                       <ng-option value="Glycoproteome">Glycoproteome</ng-option>
@@ -80,20 +80,20 @@
                     </ng-select>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <ng-select placeholder="Label Free Quantitation" class="ng-select-dropdown header-3" 
-                      name="labelFreeQuantitation" [(ngModel)]="newProtocol.labelFreeQuantitation">
+                    <ng-select placeholder="Label Free Quantitation" class="ng-select-dropdown header-3" name="labelFreeQuantitation"
+                      [(ngModel)]="newProtocol.labelFreeQuantitation">
                       <ng-option value="ion counting">Ion Counting</ng-option>
                     </ng-select>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <ng-select placeholder="Labelled Quantitation" class="ng-select-dropdown header-3"
-                      name="labeledQuantitation" [(ngModel)]="newProtocol.labeledQuantitation">
+                    <ng-select placeholder="Labelled Quantitation" class="ng-select-dropdown header-3" name="labeledQuantitation"
+                      [(ngModel)]="newProtocol.labeledQuantitation">
                       <ng-option value="TMT-tag">TMT tag</ng-option>
                     </ng-select>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <ng-select placeholder="Isobaric Labeling Agent" class="ng-select-dropdown header-3" 
-                      name="isobaricLabelingReagent" [(ngModel)]="newProtocol.isobaricLabelingReagent">
+                    <ng-select placeholder="Isobaric Labeling Agent" class="ng-select-dropdown header-3" name="isobaricLabelingReagent"
+                      [(ngModel)]="newProtocol.isobaricLabelingReagent">
                       <ng-option value="TMT11">TMT11</ng-option>
                     </ng-select>
                   </div>
@@ -104,13 +104,13 @@
                     </ng-select>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <ng-select placeholder="Alkylation Reagent"class="ng-select-dropdown header-3"
-                       name="alkylationReagent" [(ngModel)]="newProtocol.alkylationReagent">
+                    <ng-select placeholder="Alkylation Reagent" class="ng-select-dropdown header-3" name="alkylationReagent"
+                      [(ngModel)]="newProtocol.alkylationReagent">
                       <ng-option value="Iodoacetamide">Iodoacetamide</ng-option>
                     </ng-select>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.chromatographyDimensionsCount" name="chromatographyDimensionsCount"
+                    <input type="number" [(ngModel)]="newProtocol.chromatographyDimensionsCount" name="chromatographyDimensionsCount"
                       class="form-control header-3 custom-input-border" placeholder="Chromatography Dimension Count">
                   </div>
 
@@ -137,11 +137,11 @@
                       placeholder="Serial Number">
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.ms1Resolution" name="ms1Resolution" class="form-control header-3 custom-input-border"
+                    <input type="number" [(ngModel)]="newProtocol.ms1Resolution" name="ms1Resolution" class="form-control header-3 custom-input-border"
                       placeholder="MS1 Resolution">
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.ms2Resolution" name="ms2Resolution" class="form-control header-3 custom-input-border"
+                  <div type="number" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                    <input type="number" [(ngModel)]="newProtocol.ms2Resolution" name="ms2Resolution" class="form-control header-3 custom-input-border"
                       placeholder="MS2 Resolution">
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
@@ -174,7 +174,7 @@
               <form>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.particleSize" name="particleSize" class="form-control header-3 custom-input-border"
+                    <input type="number" [(ngModel)]="newProtocol.particleSize" name="particleSize" class="form-control header-3 custom-input-border"
                       placeholder="Particle Size">
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
@@ -188,7 +188,7 @@
                       placeholder="Particle Type">
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.gradientLength" name="gradientLength" class="form-control header-3 custom-input-border"
+                    <input type="number" [(ngModel)]="newProtocol.gradientLength" name="gradientLength" class="form-control header-3 custom-input-border"
                       placeholder="Gradient Length">
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
@@ -204,8 +204,8 @@
                     </ng-select>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <ng-select placeholder="Chromatography Type" class="ng-select-dropdown header-3"
-                      name="chromatographyType" [(ngModel)]="newProtocol.chromatographyType">
+                    <ng-select placeholder="Chromatography Type" class="ng-select-dropdown header-3" name="chromatographyType"
+                      [(ngModel)]="newProtocol.chromatographyType">
                       <ng-option value="RPLC">RPLC</ng-option>
                       <ng-option value="bRPLC">bRPLC</ng-option>
                       <ng-option value="SCX">SCX</ng-option>
@@ -224,7 +224,7 @@
                     </ng-select>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.amountOnColumn" name="amountOnColumn" class="form-control header-3 custom-input-border"
+                    <input type="number" [(ngModel)]="newProtocol.amountOnColumn" name="amountOnColumn" class="form-control header-3 custom-input-border"
                       placeholder="Amount on Column">
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
@@ -234,7 +234,7 @@
                     </ng-select>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.columnLength" name="columnLength" class="form-control header-3 custom-input-border"
+                    <input type="number" [(ngModel)]="newProtocol.columnLength" name="columnLength" class="form-control header-3 custom-input-border"
                       placeholder="Column Length">
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
@@ -244,7 +244,7 @@
                     </ng-select>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                    <input [(ngModel)]="newProtocol.columnInnerDiameter" name="columnInnerDiameter" class="form-control header-3 custom-input-border"
+                    <input type="number" [(ngModel)]="newProtocol.columnInnerDiameter" name="columnInnerDiameter" class="form-control header-3 custom-input-border"
                       placeholder="Column Diameter">
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">

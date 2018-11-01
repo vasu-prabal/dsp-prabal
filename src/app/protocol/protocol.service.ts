@@ -27,9 +27,15 @@ export class ProtocolService {
   deleteProtocol(id) {
     let url = `${API_URL}protocols/${id}`;
     url = appendSession(url);
-    const headers = getHttpHeaders();
-    return this.http.delete(url, {
-      headers: headers
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "delete"
+      // headers: headers
     });
+    // const headers = getHttpHeaders();
+    // return this.http.delete(url, {
+    //   headers: headers
+    // });
   }
 }

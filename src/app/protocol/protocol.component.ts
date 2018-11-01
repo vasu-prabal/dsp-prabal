@@ -86,9 +86,14 @@ export class ProtocolComponent implements OnInit {
       isConfirm => {
         console.log(isConfirm);
         if (isConfirm) {
-          this.protocolService.deleteProtocol(id).subscribe(data => {
-            console.log(data);
-          });
+          this.protocolService.deleteProtocol(id).subscribe(
+            data => {
+              this.getProtocolsList();
+            },
+            error => {
+              this.getProtocolsList();
+            }
+          );
         }
       }
     );

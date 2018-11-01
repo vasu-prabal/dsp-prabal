@@ -13,6 +13,7 @@ export class HomeService {
   getMailsList(type: string, searchFilter) {
     let url = `${API_URL}projects/paged/${type}`;
     url = appendSession(url);
+    
     return this.http.post<IMailsList>(LOCAL_API_URL, {
       url: url,
       type: "get",

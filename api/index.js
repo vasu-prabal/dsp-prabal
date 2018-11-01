@@ -45,9 +45,13 @@ app.post("/getData", function(req, res, next) {
         response,
         body
       ) {
-        var parsed = JSON.parse(body);
-        console.log(parsed);
-        return res.send(body);
+        if (body) {
+          var parsed = JSON.parse(body);
+          console.log(parsed);
+          return res.send(body);
+        } else {
+          return res.send(response.statusCode);
+        }
       });
     case "post":
       return request(
@@ -57,18 +61,28 @@ app.post("/getData", function(req, res, next) {
           console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
           var parsed = JSON.parse(body);
           console.log(parsed);
-          return res.send(parsed);
+          return res.send(response.statusCode, parsed);
         }
       );
     case "put":
+    case "delete":
       return request(
-        { url: req.body.url, method: "put", body: req.body.data, json: true },
+        {
+          url: req.body.url,
+          method: req.body.type,
+          body: req.body.data,
+          json: true
+        },
         function(error, response, body) {
-          console.log("error:", error); // Print the error if one occurred
-          console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
-          // var parsed = JSON.parse(body);
-          // console.log(parsed);
-          return res.send(body);
+          if (body) {
+            console.log("error:", error); // Print the error if one occurred
+            console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+            // var parsed = JSON.parse(body);
+            // console.log(parsed);
+            return res.send(body);
+          } else {
+            return res.send(response.statusCode);
+          }
         }
       );
   }

@@ -57,7 +57,7 @@ export class CreateProtocolComponent implements OnInit {
         } else {
           jQuery(".sw-btn-group-extra").hide();
         }
-        // console.log(this.newProtocol);
+        console.log(this.newProtocol);
         if (
           stepNumber === 1 &&
           stepDirection === "forward" &&
@@ -89,9 +89,17 @@ export class CreateProtocolComponent implements OnInit {
 
   createProtocol() {
     console.log(this.newProtocol);
+
+    const obj = this.newProtocol;
+    obj.chromatographicDimension = Number(obj.chromatographicDimension);
+    obj.diaMultiplexing = Boolean(obj.diaMultiplexing);
+    obj.ddaTopN = "Top 10";
+    obj.diaIms = true;
+    obj.protocolDate = new Date();
+    obj.protocolDocumentName = obj.documentName;
     showOrHideLoading(true);
-    console.log(JSON.stringify(this.newProtocol));
-    this.service.createProtocol(this.newProtocol).subscribe(
+    console.log(obj);
+    this.service.createProtocol(obj).subscribe(
       data => {
         console.log(data);
         showOrHideLoading(false);
