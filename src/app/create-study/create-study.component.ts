@@ -8,6 +8,7 @@ import {
 } from "../home/home-modal";
 import { showOrHideLoading } from "../common";
 import { CreateStudyService } from "../create-study/create-study.service";
+import { HomeService } from "../home/home.service";
 
 declare var jQuery: any;
 @Component({
@@ -24,15 +25,20 @@ export class CreateStudyComponent implements OnInit {
   techTypes: Array<ITechTypes>;
   vendors: Array<IVendorList>;
   projects: Array<IProject>;
+  fileUploadSize: number;
 
-  constructor(public createStudyService: CreateStudyService) {}
+  constructor(
+    public createStudyService: CreateStudyService,
+    public homeService: HomeService
+  ) {}
 
   ngOnInit() {
     this.dropZone = document.getElementById("study_drop_zone");
 
-    this.dropZone.ondrop = function(e) {
+    this.dropZone.ondrop = e => {
       e.preventDefault();
       console.log(e.dataTransfer.files);
+      this.addAttachments(e.dataTransfer.files);
       jQuery(e.target).removeClass("drop");
     };
 
@@ -51,6 +57,7 @@ export class CreateStudyComponent implements OnInit {
     this.getSpecies();
     this.getTechType();
     this.getProjects();
+    this.getMaxFileUploadSize();
 
     this.newStudy = { select: "" };
     jQuery("#smartwizard").smartWizard({
@@ -60,6 +67,47 @@ export class CreateStudyComponent implements OnInit {
     jQuery(this.myModal.nativeElement)
       .modal({ backdrop: "static", keyboard: false })
       .modal("show");
+  }
+
+  getMaxFileUploadSize() {
+    showOrHideLoading(true);
+    this.homeService
+      .getMaxFileSizeUpload("experiment")
+      .subscribe((data: any) => {
+        console.log(data.value);
+        this.fileUploadSize = data.value / (1024 * 1024);
+      });
+  }
+
+  addAttachments(files) {
+    console.log(files);
+    const fileDetails = {
+      filename: files[0].name,
+      sizeInBytes: files[0].size
+    };
+    this.homeService
+      .getUploadFileId("experiment", fileDetails)
+      .subscribe(data => {
+        console.log(data);
+        this.homeService
+          .getUploadFilePath("experiment", data["attachmentId"])
+          .subscribe(pathResp => {
+            this.homeService
+              .getUploadSingleFilePath({
+                objectName: pathResp["destinationPath"]
+              })
+              .subscribe(singlePathResp => {
+                const uploadUrl = decodeURIComponent(
+                  singlePathResp["signedUrl"]
+                );
+                this.homeService
+                  .uploadFile(uploadUrl, files[0], pathResp["destinationPath"])
+                  .subscribe(uploadResponse => {
+                    console.log("uploaded ..........");
+                  });
+              });
+          });
+      });
   }
 
   getProjects() {

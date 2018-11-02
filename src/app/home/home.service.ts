@@ -54,6 +54,20 @@ export class HomeService {
     // });
   }
 
+  getMaxFileSizeUpload(type) {
+    let url = `${API_URL}attachments/${type}/maxSizeInBytes`;
+    url = appendSession(url);
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "get"
+    });
+
+    // return this.http.get(url, {
+    //   headers: getHttpHeaders()
+    // });
+  }
+
   getUploadFileId(type, fileDetails) {
     let url = `${API_URL}attachments/${type}/items`;
     url = appendSession(url);
