@@ -46,10 +46,14 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                         <label for="name">Project</label>
-                                        <select class="form-control custom-input-border" name="project" [(ngModel)]="newStudy.project">
+                                        <!-- <select class="form-control custom-input-border" name="project" [(ngModel)]="newStudy.project">
                                             <option value="project 1">Project 1</option>
                                             <option value="project 2">Project 2</option>
-                                        </select>
+                                        </select> -->
+
+                                        <ng-select class="ng-select-dropdown" [items]="projects" name="project"
+                                            bindLabel="name" bindValue="id" [(ngModel)]="newStudy.project">
+                                        </ng-select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                         <!-- <label for="name">Species</label> -->
@@ -82,13 +86,17 @@
                                         <!-- <input [(ngModel)]="newStudy.technology" name="species" class="form-control header-3 custom-input-border"
                                             placeholder="Technology type"> -->
                                         <ng-select class="ng-select-dropdown" [items]="techTypes" name="technology"
-                                            bindLabel="name" bindValue="id" [(ngModel)]="newStudy.technology">
+                                            bindLabel="name" bindValue="id" [(ngModel)]="newStudy.technology" (change)="getVendorsList()">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-6 mt-4 col-md-6 col-sm-12 col-xs-12 form-group">
                                         <!-- <label for="name">Vendor</label> -->
-                                        <input [(ngModel)]="newStudy.vendor" name="species" class="form-control header-3 custom-input-border"
-                                            placeholder="Vendor">
+                                        <!-- <input [(ngModel)]="newStudy.vendor" name="species" class="form-control header-3 custom-input-border"
+                                            placeholder="Vendor"> -->
+
+                                            <ng-select class="ng-select-dropdown" [items]="vendors" name="vendor"
+                                            bindLabel="name" bindValue="id" [(ngModel)]="newStudy.vendor">
+                                        </ng-select>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                                         <label for="area">Description (Optional)</label>
