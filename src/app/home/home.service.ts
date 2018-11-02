@@ -10,7 +10,7 @@ import { RequestOptions } from "@angular/http";
 export class HomeService {
   constructor(public http: HttpClient) {}
 
-  getMailsList(type: string, searchFilter) {
+  getProjectsList(type: string, searchFilter) {
     let url = `${API_URL}projects/paged/${type}`;
     url = appendSession(url);
 
