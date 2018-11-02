@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { ILogin, IMailsList } from "./home-modal";
+import { ILogin, IMailsList, IProject } from "./home-modal";
 import { getToken, getHttpHeaders, appendSession } from "../common";
 import { API_URL, LOCAL_API_URL } from "../constants";
 import { RequestOptions } from "@angular/http";
@@ -24,6 +24,23 @@ export class HomeService {
 
     // return this.http.get<IMailsList>(url, {
     //   params: searchFilter,
+    //   headers: getHttpHeaders()
+    // });
+  }
+
+  addNewProject(projectDetails: IProject) {
+    let url = `${API_URL}/projects`;
+    url = appendSession(url);
+
+    url = `${url}?userId=undefined`;
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "post",
+      data: projectDetails
+    });
+
+    // return this.http.post(url, fileDetails, {
     //   headers: getHttpHeaders()
     // });
   }
