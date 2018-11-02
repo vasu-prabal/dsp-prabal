@@ -34,3 +34,7 @@
 .ng-select .ng-select-container {
   min-height: 40px !important;
 }
+#create_study_dialog .custom-input-border,
+.input-border {
+  min-height: 51.5px;
+}

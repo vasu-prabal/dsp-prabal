@@ -1,4 +1,4 @@
-<div #createStudy class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div #createStudy id="create_study_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -45,13 +45,13 @@
                                             placeholder="Study Name">
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                                        <label for="name">Project</label>
+                                        <!-- <label for="name">Project</label> -->
                                         <!-- <select class="form-control custom-input-border" name="project" [(ngModel)]="newStudy.project">
                                             <option value="project 1">Project 1</option>
                                             <option value="project 2">Project 2</option>
                                         </select> -->
 
-                                        <ng-select class="ng-select-dropdown" [items]="projects" name="project"
+                                        <ng-select placeholder="Project" class="ng-select-dropdown" [items]="projects" name="project"
                                             bindLabel="name" bindValue="id" [(ngModel)]="newStudy.project">
                                         </ng-select>
                                     </div>
@@ -59,7 +59,7 @@
                                         <!-- <label for="name">Species</label> -->
                                         <!-- <input [(ngModel)]="newStudy.species" name="species" class="form-control input-border header-3"
                                             placeholder="Species"> -->
-                                        <ng-select class="ng-select-dropdown" [items]="species" name="species"
+                                        <ng-select placeholder="Species" class="ng-select-dropdown" [items]="species" name="species"
                                             bindLabel="name" bindValue="id" [(ngModel)]="newStudy.species">
                                         </ng-select>
                                     </div>
@@ -85,7 +85,7 @@
                                         <!-- <label for="name">Technology type</label> -->
                                         <!-- <input [(ngModel)]="newStudy.technology" name="species" class="form-control header-3 custom-input-border"
                                             placeholder="Technology type"> -->
-                                        <ng-select class="ng-select-dropdown" [items]="techTypes" name="technology"
+                                        <ng-select placeholder="Technology" class="ng-select-dropdown" [items]="techTypes" name="technology"
                                             bindLabel="name" bindValue="id" [(ngModel)]="newStudy.technology" (change)="getVendorsList()">
                                         </ng-select>
                                     </div>
@@ -94,7 +94,7 @@
                                         <!-- <input [(ngModel)]="newStudy.vendor" name="species" class="form-control header-3 custom-input-border"
                                             placeholder="Vendor"> -->
 
-                                            <ng-select class="ng-select-dropdown" [items]="vendors" name="vendor"
+                                            <ng-select placeholder="Vendor" class="ng-select-dropdown" [items]="vendors" name="vendor"
                                             bindLabel="name" bindValue="id" [(ngModel)]="newStudy.vendor">
                                         </ng-select>
                                     </div>
