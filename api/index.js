@@ -13,7 +13,7 @@ const port = 4201;
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Content-Type", "application/json");
+  // res.header("Content-Type", "application/json");
   res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -44,14 +44,26 @@ app.post("/getData", function(req, res, next) {
     case "put":
     case "delete":
       return request(
-        { url: req.body.url, method: req.body.type, body: req.body.data, json: true },
+        {
+          url: req.body.url,
+          method: req.body.type,
+          body: req.body.data,
+          json: true
+        },
         function(error, response, body) {
           console.log("error:", error); // Print the error if one occurred
           console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+
           var parsed = {};
-          if (body) {
-             parsed = JSON.parse(body);
-            console.log(parsed);
+          if (response.statusCode === 200 || response.statusCode === 201) {
+            if (body) {
+              if (typeof body === "string") {
+                parsed = JSON.parse(body);
+              } else {
+                parsed = body;
+              }
+              console.log(parsed);
+            }
           }
           return res.send(response.statusCode, parsed);
         }

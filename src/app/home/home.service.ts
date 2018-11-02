@@ -54,8 +54,8 @@ export class HomeService {
     // });
   }
 
-  getUploadFileId(fileDetails) {
-    let url = `${API_URL}attachments/project/items`;
+  getUploadFileId(type, fileDetails) {
+    let url = `${API_URL}attachments/${type}/items`;
     url = appendSession(url);
 
     return this.http.post(LOCAL_API_URL, {
@@ -69,8 +69,8 @@ export class HomeService {
     // });
   }
 
-  getUploadFilePath(id) {
-    let url = `${API_URL}attachments/project/destination/${id}`;
+  getUploadFilePath(type, id) {
+    let url = `${API_URL}attachments/${type}/destination/${id}`;
     url = appendSession(url);
 
     return this.http.post(LOCAL_API_URL, {
@@ -104,6 +104,15 @@ export class HomeService {
       Body: file,
       ContentType: file.type
     };
-    return this.http.put(url, file);
+
+    return this.http.post(LOCAL_API_URL, {
+      url: url,
+      type: "put",
+      data: file
+    });
+
+    // return this.http.put(url, file, {
+    //   headers: new HttpHeaders({ "Content-Type": "image/jpg" })
+    // });
   }
 }

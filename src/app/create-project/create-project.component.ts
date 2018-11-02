@@ -100,10 +100,10 @@ export class CreateProjectComponent implements OnInit {
       filename: files[0].name,
       sizeInBytes: files[0].size
     };
-    this.homeService.getUploadFileId(fileDetails).subscribe(data => {
+    this.homeService.getUploadFileId("project", fileDetails).subscribe(data => {
       console.log(data);
       this.homeService
-        .getUploadFilePath(data["attachmentId"])
+        .getUploadFilePath("project", data["attachmentId"])
         .subscribe(pathResp => {
           this.homeService
             .getUploadSingleFilePath({
