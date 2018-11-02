@@ -84,20 +84,20 @@ export class HomeComponent implements OnInit {
           // token = data["headers"].get("x-final-url");
           // token = token.split("=").pop();
           setToken(token);
-          this.getMailsList();
+          this.getProjectsList();
         },
         error => {
           showOrHideLoading(false);
         }
       );
     } else {
-      this.getMailsList();
+      this.getProjectsList();
     }
   }
 
-  getMailsList() {
+  getProjectsList() {
     showOrHideLoading(true);
-    this.homeService.getMailsList(this.type, this.searchFilter).subscribe(
+    this.homeService.getProjectsList(this.type, this.searchFilter).subscribe(
       data => {
         this.mailsList = data;
         this.mailsList.items.forEach(project => {
@@ -121,6 +121,6 @@ export class HomeComponent implements OnInit {
     this.searchFilter.sortingField = sortType;
     this.searchFilter.page = 1;
     this.searchFilter.asc = isAsc;
-    this.getMailsList();
+    this.getProjectsList();
   }
 }
