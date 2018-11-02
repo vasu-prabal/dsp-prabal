@@ -175,7 +175,7 @@
                                         <input [(ngModel)]="newStudy.filterUploadFromSelected" name="filterUploadFromSelected"
                                             type="checkbox" class="filter-checkbox" id="filterUploadFromSelected">
                                         <input class="form-control" placeholder="yyyy-mm-dd" name="uploadFrom"
-                                            [(ngModel)]="filterUploadFrom" ngbDatepicker #uploadFrom="ngbDatepicker">
+                                            [(ngModel)]="newStudy.filterUploadFrom" ngbDatepicker #uploadFrom="ngbDatepicker">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" (click)="uploadFrom.toggle()"
                                                 type="button"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i></button>
@@ -185,7 +185,7 @@
                                         <input [(ngModel)]="newStudy.filterUploadToSelected" name="filterUploadToSelected"
                                             type="checkbox" class="filter-checkbox" id="filterUploadToSelected">
                                         <input class="form-control" placeholder="yyyy-mm-dd" name="uploadTo"
-                                            [(ngModel)]="filterUploadTo" ngbDatepicker #uploadTo="ngbDatepicker">
+                                            [(ngModel)]="newStudy.filterUploadTo" ngbDatepicker #uploadTo="ngbDatepicker">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" (click)="uploadTo.toggle()" type="button"><i
                                                     class="fa fa-calendar-minus-o" aria-hidden="true"></i></button>
@@ -233,10 +233,100 @@
                             Step Content5
                         </div>
                         <div id="step-6" class="">
-                            Step Content6
+                            <div class="text-center">
+                                <div class="study-design-info">
+                                    <label class="study-info">i</label>
+                                    <ul>
+                                        <li>Specify Experiment Design</li>
+                                        <li>Add factors as a stable columns and fill factor levels as column values to
+                                            assign biological condition(treatment group)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <label>Add Factor</label>
+                            <div class="row design-factor-container">
+                                <div class="col-lg-10">
+                                    <input [(ngModel)]="newStudy.factorName" name="factorName" class="form-control header-3 custom-input-border"
+                                        placeholder="Factor Name">
+                                </div>
+                                <div class="col-lg-4">
+                                    <input [(ngModel)]="newStudy.valueType" name="valueType" class="form-control header-3 custom-input-border"
+                                        placeholder="Value Type">
+                                </div>
+                                <div class="col-lg-4">
+                                    <input [(ngModel)]="newStudy.ubits" name="ubits" class="form-control header-3 custom-input-border"
+                                        placeholder="Ubits">
+                                </div>
+                                <div class="col-lg-2">
+                                    <button class="btn btn-primary custom-primary-btn filter-apply-btn">Apply</button>
+                                </div>
+                            </div>
+                            <br />
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ROW</th>
+                                        <th>SAMPLE NAME</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <label>Choose Annotation CSV File</label>
+                            <input type="file" class="choose-csv-file" accept=".csv" />
+                            <!--  , application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel -->
                         </div>
                         <div id="step-7" class="">
-                            Step Content7
+                            <p class="text-center">
+                                <span><label class="study-info">i</label> Verify experiment design</span>
+                            </p>
+
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>Test</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Project</th>
+                                        <td>SETD2 metabolomics</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Laboratory</th>
+                                        <td>Look through all labs</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Species</th>
+                                        <td>Acropora Cervicornics (coral)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Files</th>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <label class="header-3">Experiment Design</label>
+                            <br />
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ROW</th>
+                                        <th>SAMPLE NAME</th>
+                                        <th>CONDITION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

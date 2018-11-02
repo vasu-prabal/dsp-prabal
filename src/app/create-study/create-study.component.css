@@ -48,6 +48,7 @@
   color: #245c7d;
   letter-spacing: 0.42px;
   font-weight: bold;
+  text-align: center;
 }
 .filter-align-center {
   display: flex;
@@ -88,4 +89,22 @@
   width: 150px;
   min-height: 30px !important;
   margin-left: 8px;
+}
+.study-design-info {
+  display: -webkit-inline-box;
+  width: 58%;
+  text-align: left;
+}
+.study-design-filter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.choose-csv-file {
+  width: 100%;
+}
+.design-factor-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
 }
