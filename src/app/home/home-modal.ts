@@ -41,6 +41,22 @@ export interface IStudy {
   technology?: string;
   vendor?: string;
   description?: string;
+  instrumentModel?: string;
+  instrument?: string;
+  experimentType?: string;
+  lc?: string;
+  labeled?: string;
+  filterNameHasSelected?: boolean;
+  filterName?: string;
+  filterUploadFromSelected?: boolean;
+  filterUploadFrom?: string;
+  filterUploadToSelected?: string;
+  filterUploadTo?: string;
+  filterFilesSelectAll?: boolean;
+  filterFilesBy?: string;
+  factorName?: string;
+  valueType?: string;
+  ubits?: string;
 }
 
 export interface ISearch {
