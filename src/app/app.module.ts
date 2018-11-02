@@ -23,6 +23,7 @@ import { CreateButtonComponent } from "./create-button/create-button.component";
 import { UploadButtonComponent } from "./upload-button/upload-button.component";
 import { CreateProtocolService } from "./create-protocol/create-protocol.service";
 import { RequestInterceptor } from "./http-interceptor";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { RequestInterceptor } from "./http-interceptor";
     FormsModule,
     HttpClientModule,
     NgSelectModule,
+    NgbModule,
     InlineSVGModule.forRoot()
   ],
   providers: [

@@ -1,4 +1,5 @@
-<div #createStudy class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div #createStudy id="create_study_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -45,22 +46,22 @@
                                             placeholder="Study Name">
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                                        <label for="name">Project</label>
+                                        <!-- <label for="name">Project</label> -->
                                         <!-- <select class="form-control custom-input-border" name="project" [(ngModel)]="newStudy.project">
                                             <option value="project 1">Project 1</option>
                                             <option value="project 2">Project 2</option>
                                         </select> -->
 
-                                        <ng-select class="ng-select-dropdown" [items]="projects" name="project"
-                                            bindLabel="name" bindValue="id" [(ngModel)]="newStudy.project">
+                                        <ng-select placeholder="Project" class="ng-select-dropdown header-3" [items]="projects"
+                                            name="project" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.project">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                         <!-- <label for="name">Species</label> -->
                                         <!-- <input [(ngModel)]="newStudy.species" name="species" class="form-control input-border header-3"
                                             placeholder="Species"> -->
-                                        <ng-select class="ng-select-dropdown" [items]="species" name="species"
-                                            bindLabel="name" bindValue="id" [(ngModel)]="newStudy.species">
+                                        <ng-select placeholder="Species" class="ng-select-dropdown header-3" [items]="species"
+                                            name="species" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.species">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-control custom-checkbox">
@@ -85,8 +86,9 @@
                                         <!-- <label for="name">Technology type</label> -->
                                         <!-- <input [(ngModel)]="newStudy.technology" name="species" class="form-control header-3 custom-input-border"
                                             placeholder="Technology type"> -->
-                                        <ng-select class="ng-select-dropdown" [items]="techTypes" name="technology"
-                                            bindLabel="name" bindValue="id" [(ngModel)]="newStudy.technology" (change)="getVendorsList()">
+                                        <ng-select placeholder="Technology" class="ng-select-dropdown header-3" [items]="techTypes"
+                                            name="technology" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.technology"
+                                            (change)="getVendorsList()">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-6 mt-4 col-md-6 col-sm-12 col-xs-12 form-group">
@@ -94,8 +96,8 @@
                                         <!-- <input [(ngModel)]="newStudy.vendor" name="species" class="form-control header-3 custom-input-border"
                                             placeholder="Vendor"> -->
 
-                                        <ng-select class="ng-select-dropdown" [items]="vendors" name="vendor" bindLabel="name"
-                                            bindValue="id" [(ngModel)]="newStudy.vendor">
+                                        <ng-select placeholder="Vendor" class="ng-select-dropdown header-3" [items]="vendors"
+                                            name="vendor" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.vendor">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
@@ -108,17 +110,121 @@
                                         <div class="upload-drop-zone custom-full-border" id="study_drop_zone">
                                             <span class="mr-2" [inlineSVG]="'./assets/icons/upload.svg'">
                                             </span>
-                                            Drag and Drop files to dialog (Maximum file size is <span [innerHtml]="fileUploadSize"></span> MB)
+                                            Drag and Drop files to dialog (Maximum file size is <span [innerHtml]="fileUploadSize"></span>
+                                            MB)
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div id="step-2" class="">
-                            Step Content2
+                            <p class="text-center">
+                                <span><label class="study-info">i</label> Select files that are part of the
+                                    experiment. Scroll down to load more.</span>
+                            </p>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <ng-select placeholder="Instrument Model" class="ng-select-dropdown header-3"
+                                        [(ngModel)]="newStudy.instrumentModel">
+                                        <ng-option value="Agilent">Agilent - 6200 Series Accurate-Mass Time</ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <ng-select placeholder="Instrument" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.instrument">
+                                        <ng-option value="Agilent">Agilent - 6520 Series Accurate-Mass Q-TOP LC/MS</ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <ng-select placeholder="Experiment Type" class="ng-select-dropdown header-3"
+                                        [(ngModel)]="newStudy.experimentType">
+                                        <ng-option value="exp1">Experiment 1</ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <ng-select placeholder="2D/LC" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.lc">
+                                        <ng-option value="no">No</ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <ng-select placeholder="Labeled" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.labeled">
+                                        <ng-option value="no">No</ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
                         </div>
                         <div id="step-3" class="">
-                            Step Content3
+                            <p class="text-center">
+                                <span><label class="study-info">i</label> Specify experiment type for data processing
+                                    and analysis</span>
+                            </p>
+                            <label>Filter</label>
+                            <div class="filter-container">
+                                <div class="row">
+                                    <div class="filter-align-center col-lg-10">
+                                        <input [(ngModel)]="newStudy.filterNameHasSelected" name="filterNameHasSelected"
+                                            type="checkbox" class="filter-checkbox" id="filterNameHasSelected">
+                                        <input [(ngModel)]="newStudy.filterName" name="filterName" class="form-control header-3 custom-input-border"
+                                            placeholder="Name Contains">
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div class="row">
+                                    <div class="input-group col-lg-4">
+                                        <input [(ngModel)]="newStudy.filterUploadFromSelected" name="filterUploadFromSelected"
+                                            type="checkbox" class="filter-checkbox" id="filterUploadFromSelected">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="uploadFrom"
+                                            [(ngModel)]="filterUploadFrom" ngbDatepicker #uploadFrom="ngbDatepicker">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" (click)="uploadFrom.toggle()"
+                                                type="button"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="input-group col-lg-4">
+                                        <input [(ngModel)]="newStudy.filterUploadToSelected" name="filterUploadToSelected"
+                                            type="checkbox" class="filter-checkbox" id="filterUploadToSelected">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="uploadTo"
+                                            [(ngModel)]="filterUploadTo" ngbDatepicker #uploadTo="ngbDatepicker">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" (click)="uploadTo.toggle()" type="button"><i
+                                                    class="fa fa-calendar-minus-o" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <button class="btn btn-primary custom-primary-btn filter-apply-btn">Apply</button>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-lg-12 selected-files-container">
+                                        <label class="header-3">Selected Files(selected 0)</label>
+                                        <label class="header-3">Files loaded (0 of 0)</label>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <table class="table">
+                                            <thead>
+                                                <tr class="filter-files">
+                                                    <th>
+                                                        <input [(ngModel)]="newStudy.filterFilesSelectAll" name="filterFilesSelectAll"
+                                                            type="checkbox" class="filter-checkbox" id="filterFilesSelectAll">
+                                                    </th>
+                                                    <th><label>FILE NAME</label></th>
+                                                    <th><label>DATE</label></th>
+                                                    <th>Labels
+                                                        <input [(ngModel)]="newStudy.filterFilesBy" name="filterFilesBy"
+                                                            class="form-control header-3" placeholder="Filter List">
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
                         </div>
                         <div id="step-4" class="">
                             Step Content4
