@@ -1,15 +1,26 @@
 export interface IProject {
   id?: number;
-  enableBlog?: boolean;
+  blogEnabled?: boolean;
   description?: string;
-  persons?: string;
-  sendNotification?: string;
+  persons?: IProjectsUser;
+  withEmailNotification?: string;
   columns?: IProjectColumns;
   name?: string;
   owner?: string;
-  laboratory?: string;
-  area?: string;
+  lab?: string;
+  areaOfResearch?: string;
   modified?: string;
+  colleagues?: Object;
+  groups?: Object;
+  allowCreateStudies?: boolean;
+}
+
+export interface IProjectsUser {
+  email: string;
+  id: string;
+  name: string;
+  userName: string;
+  allowCreateStudies: boolean;
 }
 
 export interface IProjectColumns {

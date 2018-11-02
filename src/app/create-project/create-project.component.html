@@ -30,15 +30,16 @@
               </div>
               <div class="form-group">
                 <!-- <label for="laboratory">Laboratory</label> -->
-                <input [(ngModel)]="newProject.laboratory" name="laboratory" class="form-control header-3 input-border"
+                <input [(ngModel)]="newProject.lab" name="laboratory" class="form-control header-3 input-border"
                   placeholder="Laboratory">
               </div>
               <div class="form-group">
                 <!-- <label for="area">Area of Research</label> -->
-                <input [(ngModel)]="newProject.area" name="area" class="form-control header-3 input-border" placeholder="Area of Research">
+                <input [(ngModel)]="newProject.areaOfResearch" name="area" class="form-control header-3 input-border"
+                  placeholder="Area of Research">
               </div>
               <div class="custom-control custom-checkbox">
-                <input [(ngModel)]="newProject.enableBlog" name="enableBlog" type="checkbox" class="custom-control-input"
+                <input [(ngModel)]="newProject.blogEnabled" name="enableBlog" type="checkbox" class="custom-control-input"
                   id="enableBlog">
                 <label class="custom-control-label header-3" for="enableBlog">Enable Blog</label>
               </div>
@@ -61,11 +62,23 @@
           <div class="tab-pane bootstrap-tab-content fade" id="sharing" role="tabpanel" aria-labelledby="sharing-tab">
 
             <form>
-              <label class="header-3"><span class="mr-2" [inlineSVG]="'./assets/icons/lock.svg'"></span> Private Project</label>
+              <label class="header-3"><span class="mr-2" [inlineSVG]="'./assets/icons/lock.svg'"></span> Private
+                Project</label>
               <br />
               <br />
               <div class="member-container">
                 <p class="header-3">There are no Members</p>
+                <!-- <div *ngFor="let user of usersProject">
+                  <div>
+                    <p>{{user.email}}</p>
+                    <p>{{user.name}}</p>
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input [(ngModel)]="user.allowCreateStudies" name="allowCreateStudies" type="checkbox" class="custom-control-input"
+                      id="allowCreateStudies">
+                    <label class="custom-control-label header-3" for="allowCreateStudies">Allow Create Studies</label>
+                  </div>
+                </div> -->
               </div>
               <div class="member-invitation-container">
                 <span class="header-5">Invite People Personally or by group. Use "All" Special group to make project
@@ -73,14 +86,15 @@
                 <br />
                 <br />
                 <div class="form-group">
-                  <ng-select class="ng-select-dropdown" [items]="users" name="persons" bindLabel="fullName" bindValue="id" [(ngModel)]="newProject.persons">
+                  <ng-select class="ng-select-dropdown" [items]="users" name="persons" bindLabel="name" [(ngModel)]="newProject.persons"
+                    (change)="addUsersToProject()">
                   </ng-select>
                   <!-- <input [(ngModel)]="newProject.persons" autocomplete="off" id="emails_input" name="persons" class="form-control"
                     placeholder="Enter Person's Email, group Name or  &quot;All&quot; special group Name"> -->
                 </div>
               </div>
               <div class="custom-control custom-checkbox mr-sm-2">
-                <input [(ngModel)]="newProject.sendNotification" name="sendNotification" type="checkbox" class="custom-control-input"
+                <input [(ngModel)]="newProject.withEmailNotification" name="sendNotification" type="checkbox" class="custom-control-input"
                   id="sendNotification">
                 <label class="custom-control-label header-4" for="sendNotification">Send Email Notifications</label>
               </div>

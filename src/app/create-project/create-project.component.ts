@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
-import { IProject, IProjectColumns } from "../home/home-modal";
+import { IProject, IProjectColumns, IProjectsUser } from "../home/home-modal";
 import { HomeService } from "../home/home.service";
-import { showOrHideLoading } from "../common";
+import { showOrHideLoading, showToastMessage } from "../common";
 
 declare var jQuery: any;
 @Component({
@@ -12,20 +12,19 @@ declare var jQuery: any;
 export class CreateProjectComponent implements OnInit {
   @ViewChild("createProject")
   myModal: ElementRef;
-  users: Array<Object> = [
-    { id: 1, name: "John", fullName: "John <john@a.com>" },
-    { id: 2, name: "Alex", fullName: "Alex <alex@a.com>" },
-    { id: 3, name: "Terry", fullName: "Terry <terry@a.com>" }
-  ];
-  newProject: IProject = {
-    id: undefined,
-    name: "",
-    area: "",
-    laboratory: "",
-    modified: "",
-    owner: ""
-  };
+  users: Array<Object> = [];
+
+  // = [
+  //   { id: 1, name: "John", fullName: "John <john@a.com>" },
+  //   { id: 2, name: "Alex", fullName: "Alex <alex@a.com>" },
+  //   { id: 3, name: "Terry", fullName: "Terry <terry@a.com>" }
+  // ];
+  newProject: IProject = {};
   dropZone: HTMLElement;
+  usersProject: Array<IProjectsUser> = [];
+
+  coll = {};
+
   constructor(public homeService: HomeService) {}
 
   ngOnInit() {
@@ -70,26 +69,30 @@ export class CreateProjectComponent implements OnInit {
           name: `${x["name"]} <${x["email"]}>`,
           userName: x["name"],
           email: x["email"],
-          id: x["id"],
-          displayText: `${x["name"]} ${x["email"]}`
+          id: x["id"]
         };
         return obj;
       });
-      jQuery("#emails_input").typeahead({
-        afterSelect: function(obj) {
-          console.log(obj);
-        },
-        source: userData,
-        displayText: function(item) {
-          console.log(item.displayText);
-          return item.displayText;
-        },
-        templates: {
-          empty: function(context) {
-            jQuery(".tt-dataset").text("No Results Found");
-          }
-        }
-      });
+
+      console.log(`Complete user data`, userData);
+
+      this.users = userData;
+
+      // jQuery("#emails_input").typeahead({
+      //   afterSelect: function(obj) {
+      //     console.log(obj);
+      //   },
+      //   source: userData,
+      //   displayText: function(item) {
+      //     console.log(item.displayText);
+      //     return item.displayText;
+      //   },
+      //   templates: {
+      //     empty: function(context) {
+      //       jQuery(".tt-dataset").text("No Results Found");
+      //     }
+      //   }
+      // });
       showOrHideLoading(false);
     });
   }
@@ -129,7 +132,33 @@ export class CreateProjectComponent implements OnInit {
   }
 
   addNewProject() {
+    this.newProject.colleagues = {};
+    this.usersProject.forEach(element => {
+      this.newProject.colleagues[element.id.toString()] = false;
+    });
     console.log(this.newProject);
-    jQuery(this.myModal.nativeElement).modal("hide");
+    showOrHideLoading(true);
+    this.homeService.addNewProject(this.newProject).subscribe((data: any) => {
+      if (data.errorMessage === null) {
+        showToastMessage(`Project Created Successfully`, "success");
+        jQuery(this.myModal.nativeElement).modal("hide");
+      } else {
+        showToastMessage(`Failed to create project`, "error");
+      }
+      showOrHideLoading(false);
+    });
+  }
+
+  addUsersToProject() {
+    console.log(this.newProject.persons);
+    if (this.newProject.persons !== null) {
+      this.usersProject.push(this.newProject.persons);
+
+      this.users = this.users.filter(
+        x => x["id"] !== this.newProject.persons.id
+      );
+
+      this.newProject.persons = null;
+    }
   }
 }
