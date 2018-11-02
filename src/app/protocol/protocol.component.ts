@@ -6,11 +6,10 @@ import {
   showOrHideLoading
 } from "../common";
 import { CommonService } from "../common.service";
-import { loginUserDetails } from "../constants";
+import { loginUserDetails, PROTOCOL_ADDED } from "../constants";
 import { ProtocolService } from "./protocol.service";
 import { IProtocol, ISearch, IMailSearch } from "../home/home-modal";
 import * as moment from "moment";
-import { CreateProtocolComponent } from "../create-protocol/create-protocol.component";
 import { CreateButtonComponent } from "../create-button/create-button.component";
 
 declare var jQuery: any;
@@ -30,7 +29,13 @@ export class ProtocolComponent implements OnInit {
   constructor(
     public commonService: CommonService,
     public protocolService: ProtocolService
-  ) {}
+  ) {
+    this.commonService.listen().subscribe((type: any) => {
+      if (type === PROTOCOL_ADDED) {
+        this.getProtocolsList();
+      }
+    });
+  }
 
   ngOnInit() {
     this.checkToken();

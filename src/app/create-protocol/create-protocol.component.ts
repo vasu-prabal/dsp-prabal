@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { IProtocol } from "../home/home-modal";
 import { CreateProtocolService } from "./create-protocol.service";
 import { showToastMessage, showOrHideLoading } from "../common";
+import { CommonService } from "../common.service";
 
 declare var jQuery;
 
@@ -14,9 +15,14 @@ declare var jQuery;
   ]
 })
 export class CreateProtocolComponent implements OnInit {
+  @Output()
+  createProtocolEvent = new EventEmitter();
   newProtocol: IProtocol = {};
   collisionEnergySlider: any;
-  constructor(public service: CreateProtocolService) {}
+  constructor(
+    public service: CreateProtocolService,
+    public commonService: CommonService
+  ) {}
 
   ngOnInit() {
     jQuery("#create_protocol_wizard")
@@ -106,37 +112,40 @@ export class CreateProtocolComponent implements OnInit {
     const obj = this.newProtocol;
     obj.chromatographicDimension = Number(obj.chromatographicDimension);
     obj.diaMultiplexing = Boolean(obj.diaMultiplexing);
-    obj.ddaTopN = "Top 10";
-    obj.diaIms = true;
-    obj.protocolDate = new Date();
     obj.protocolDocumentName = obj.documentName;
     showOrHideLoading(true);
-    console.log(obj);
     if (this.newProtocol.id) {
       this.service.updateProtocol(obj).subscribe(
         data => {
           console.log(data);
           showOrHideLoading(false);
           jQuery("#create_protocol_dialog").modal("hide");
+          this.commonService.protocolAdded();
+          showToastMessage("Protocol updated successfully", "success");
         },
         error => {
           showOrHideLoading(false);
           showToastMessage(
-            `Error while getting ${
-              this.newProtocol.id !== undefined ? "updating" : "adding"
-            } the protocol`,
+            "Error while getting updating the protocol",
             "error"
           );
         }
       );
     } else {
+      obj.ddaTopN = "Top 10";
+      obj.diaIms = true;
+      obj.protocolDate = new Date();
       this.service.createProtocol(obj).subscribe(
         data => {
           console.log(data);
           showOrHideLoading(false);
+          jQuery("#create_protocol_dialog").modal("hide");
+          this.commonService.protocolAdded();
+          showToastMessage("Protocol added successfully", "success");
         },
         error => {
           showOrHideLoading(false);
+          showToastMessage("Error while getting adding the protocol", "error");
         }
       );
     }
