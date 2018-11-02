@@ -81,7 +81,7 @@ export class CreateProtocolComponent implements OnInit {
 
     if (this.newProtocol.collisionEnergy) {
       this.newProtocol.collisionEnergy = Number(
-        this.newProtocol.collisionEnergy.replace("%", "")
+        this.newProtocol.collisionEnergy.toString().replace("%", "")
       );
       this.collisionEnergySlider.slider(
         "setValue",

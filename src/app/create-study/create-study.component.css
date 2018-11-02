@@ -34,7 +34,3 @@
 .ng-select .ng-select-container {
   min-height: 40px !important;
 }
-.custom-input-border,
-.input-border {
-  min-height: 51.5px;
-}
