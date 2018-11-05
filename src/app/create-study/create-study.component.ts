@@ -138,8 +138,17 @@ export class CreateStudyComponent implements OnInit {
 
   getProjects() {
     showOrHideLoading(true);
-    this.createStudyService.getProjects().subscribe((data: any) => {
-      this.projects = data;
+    const filter = {
+      asc: false,
+      filterQuery: "",
+      items: 25,
+      labId: 0,
+      page: 1,
+      sortingField: "modified"
+    };
+    // this.createStudyService.getProjects
+    this.homeService.getProjectsList("all", filter).subscribe((data: any) => {
+      this.projects = data.items;
       showOrHideLoading(false);
     });
   }
