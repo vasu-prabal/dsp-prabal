@@ -58,7 +58,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    jQuery(".projects-table").colResizable({
+      // resizeMode: "overflow",
+      disabledColumns: [0, 1],
+      minWidth: 180
+    });
+  }
 
   checkToken(projectType) {
     if (projectType) {

@@ -35,7 +35,8 @@
               "src/assets/plugins/typeahead/typeahead.bundle.js",
               "node_modules/bootstrap-notify/bootstrap-notify.min.js",
               "node_modules/smartwizard/dist/js/jquery.smartWizard.min.js",
-              "node_modules/bootstrap-slider/dist/bootstrap-slider.min.js"
+              "node_modules/bootstrap-slider/dist/bootstrap-slider.min.js",
+              "node_modules/colresizable/colResizable-1.6.min.js"
             ]
           },
           "configurations": {

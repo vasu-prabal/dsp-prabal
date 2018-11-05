@@ -39,6 +39,11 @@ export class ProtocolComponent implements OnInit {
 
   ngOnInit() {
     this.checkToken();
+    jQuery(".protocols-table").colResizable({
+      // resizeMode: "overflow",
+      disabledColumns: [0, 1],
+      minWidth: 150
+    });
   }
 
   checkToken() {
