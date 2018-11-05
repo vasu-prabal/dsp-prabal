@@ -8,3 +8,6 @@
   letter-spacing: 0.42px;
   font-weight: bold;
 }
+.sw-theme-circles > ul.step-anchor > li {
+  margin-left: 70px !important;
+}

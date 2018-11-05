@@ -245,6 +245,9 @@ ng-select .ng-value-icon {
 .ng-select-container > * {
   padding: 4px 8px !important;
 }
+.modal {
+  overflow-y: auto;
+}
 @media screen and (max-width: 800px) {
   .modal-dialog {
     width: 100% !important;

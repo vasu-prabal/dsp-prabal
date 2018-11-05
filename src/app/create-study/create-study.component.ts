@@ -19,8 +19,6 @@ declare var jQuery: any;
   styleUrls: ["./create-study.component.css"]
 })
 export class CreateStudyComponent implements OnInit {
-  @ViewChild("createStudy")
-  myModal: ElementRef;
   newStudy: IStudy = {};
   dropZone: HTMLElement;
   species: Array<ISpeciesList> = [];
@@ -89,7 +87,7 @@ export class CreateStudyComponent implements OnInit {
     this.newStudy = {};
     jQuery("#study_creation_wizard").smartWizard("reset");
     jQuery(".sw-btn-group-extra").hide();
-    jQuery(this.myModal.nativeElement)
+    jQuery("#create_study_dialog")
       .modal({ backdrop: "static", keyboard: false })
       .modal("show");
   }
@@ -182,7 +180,7 @@ export class CreateStudyComponent implements OnInit {
   addNewStudy() {
     showOrHideLoading(true);
     setTimeout(() => {
-      jQuery(this.myModal.nativeElement).modal("hide");
+      jQuery("#create_study_dialog").modal("hide");
       showOrHideLoading(false);
     }, 1000);
   }

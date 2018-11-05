@@ -8,7 +8,7 @@
   font-weight: 500;
 }
 .sw-theme-circles > ul.step-anchor > li {
-  margin-left: 70px !important;
+  margin-left: 100px !important;
 }
 .sw-theme-circles > ul.step-anchor > li > a {
   padding: 0.8rem 1rem;
@@ -34,6 +34,7 @@
 .ng-select .ng-select-container {
   min-height: 40px !important;
 }
+
 #create_study_dialog .custom-input-border,
 .input-border {
   min-height: 51.5px;

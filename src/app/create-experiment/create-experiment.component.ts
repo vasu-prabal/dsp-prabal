@@ -5,8 +5,8 @@ declare var jQuery: any;
   selector: "app-create-experiment",
   templateUrl: "./create-experiment.component.html",
   styleUrls: [
-    "./create-experiment.component.css",
-    "../create-study/create-study.component.css"
+    "../create-study/create-study.component.css",
+    "./create-experiment.component.css"
   ]
 })
 export class CreateExperimentComponent implements OnInit {
