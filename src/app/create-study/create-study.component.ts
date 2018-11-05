@@ -61,7 +61,8 @@ export class CreateStudyComponent implements OnInit {
 
     this.newStudy = { select: "" };
     jQuery("#smartwizard").smartWizard({
-      theme: "circles"
+      theme: "circles",
+      showStepURLhash: false
     });
 
     jQuery(this.myModal.nativeElement)

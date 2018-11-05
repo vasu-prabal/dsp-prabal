@@ -38,7 +38,8 @@ export class CreateExperimentComponent implements OnInit {
   openCreateExperimentDialog() {
     this.newExperiment = {};
     jQuery("#experimentWizard").smartWizard({
-      theme: "circles"
+      theme: "circles",
+      showStepURLhash: false
     });
     jQuery(this.myModal.nativeElement)
       .modal({ backdrop: "static", keyboard: false })

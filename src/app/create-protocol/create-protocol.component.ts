@@ -29,7 +29,7 @@ export class CreateProtocolComponent implements OnInit {
       .smartWizard({
         theme: "circles",
         selected: 0,
-        useURLhash: false,
+        showStepURLhash: false,
         buttonOrder: ["finish", "next", "prev"],
         onLeaveStep: function() {
           console.log("on leave");
