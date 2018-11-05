@@ -6,7 +6,7 @@ import {
   showOrHideLoading
 } from "../common";
 import { CommonService } from "../common.service";
-import { loginUserDetails, PROTOCOL_ADDED } from "../constants";
+import { loginUserDetails, PROTOCOL_ADDED, IS_LOCAL_API } from "../constants";
 import { ProtocolService } from "./protocol.service";
 import { IProtocol, ISearch, IMailSearch } from "../home/home-modal";
 import * as moment from "moment";
@@ -52,9 +52,12 @@ export class ProtocolComponent implements OnInit {
       showOrHideLoading(true);
       this.commonService.doLogin(loginUserDetails).subscribe(
         data => {
-          token = data["sessionId"];
-          // token = data["headers"].get("x-final-url");
-          // token = token.split("=").pop();
+          if (IS_LOCAL_API) {
+            token = data["sessionId"];
+          } else {
+            token = data["headers"].get("x-final-url");
+            token = token.split("=").pop();
+          }
           setToken(token);
           this.getProtocolsList();
         },

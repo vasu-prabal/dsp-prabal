@@ -4,7 +4,12 @@ import { IMailSearch, ILogin, IMailsList, IProjectColumns } from "./home-modal";
 import { getToken, setToken, showOrHideLoading } from "../common";
 import * as moment from "moment";
 import { Params, ActivatedRoute } from "@angular/router";
-import { loginUserDetails, PROTOCOL_ADDED, PROJECT_ADDED } from "../constants";
+import {
+  loginUserDetails,
+  PROTOCOL_ADDED,
+  PROJECT_ADDED,
+  IS_LOCAL_API
+} from "../constants";
 import { CommonService } from "../common.service";
 declare var jQuery: any;
 
@@ -62,7 +67,7 @@ export class HomeComponent implements OnInit {
     jQuery(".projects-table").colResizable({
       // resizeMode: "overflow",
       disabledColumns: [0, 1],
-      minWidth: 180
+      minWidth: 150
     });
   }
 
@@ -91,9 +96,12 @@ export class HomeComponent implements OnInit {
       showOrHideLoading(true);
       this.commonService.doLogin(loginUserDetails).subscribe(
         data => {
-          token = data["sessionId"];
-          // token = data["headers"].get("x-final-url");
-          // token = token.split("=").pop();
+          if (IS_LOCAL_API) {
+            token = data["sessionId"];
+          } else {
+            token = data["headers"].get("x-final-url");
+            token = token.split("=").pop();
+          }
           setToken(token);
           this.getProjectsList();
         },

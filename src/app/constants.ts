@@ -14,3 +14,4 @@ export const loginUserDetails: ILogin = {
 
 export const PROTOCOL_ADDED = "Protocol Added";
 export const PROJECT_ADDED = "Project Added";
+export const IS_LOCAL_API = true;

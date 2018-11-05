@@ -5,7 +5,8 @@ import {
   API_URL,
   LOCAL_API_URL,
   PROTOCOL_ADDED,
-  PROJECT_ADDED
+  PROJECT_ADDED,
+  IS_LOCAL_API
 } from "./constants";
 import { Subject, Observable } from "rxjs";
 
@@ -38,20 +39,22 @@ export class CommonService {
       "_spring_security_remember_me",
       login._spring_security_remember_me
     );
-    return this.http.post(
-      `${LOCAL_API_URL}/login`,
-      {
+    if (IS_LOCAL_API) {
+      return this.http.post(`${LOCAL_API_URL}/login`, {
         data: login,
         method: "post",
         url: API_URL + "j_spring_security_check?redirectAfterLogin="
-      }
-      // API_URL + "j_spring_security_check?redirectAfterLogin=",
-      // formData,
-      // {
-      //   headers,
-      //   responseType: "text" as "json",
-      //   observe: "response" as "body"
-      // }
-    );
+      });
+    } else {
+      return this.http.post(
+        API_URL + "j_spring_security_check?redirectAfterLogin=",
+        formData,
+        {
+          headers,
+          responseType: "text" as "json",
+          observe: "response" as "body"
+        }
+      );
+    }
   }
 }
