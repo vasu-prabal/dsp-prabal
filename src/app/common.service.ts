@@ -1,7 +1,12 @@
 import { Injectable } from "@angular/core";
 import { ILogin } from "./home/home-modal";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
-import { API_URL, LOCAL_API_URL, PROTOCOL_ADDED } from "./constants";
+import {
+  API_URL,
+  LOCAL_API_URL,
+  PROTOCOL_ADDED,
+  PROJECT_ADDED
+} from "./constants";
 import { Subject, Observable } from "rxjs";
 
 @Injectable({
@@ -17,6 +22,10 @@ export class CommonService {
 
   protocolAdded() {
     this.listener.next(PROTOCOL_ADDED);
+  }
+
+  projectAdded() {
+    this.listener.next(PROJECT_ADDED);
   }
 
   doLogin(login: ILogin) {

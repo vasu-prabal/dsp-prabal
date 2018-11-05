@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { IProject, IProjectColumns, IProjectsUser } from "../home/home-modal";
 import { HomeService } from "../home/home.service";
 import { showOrHideLoading, showToastMessage } from "../common";
+import { CommonService } from "../common.service";
 
 declare var jQuery: any;
 @Component({
@@ -25,7 +26,10 @@ export class CreateProjectComponent implements OnInit {
 
   coll = {};
 
-  constructor(public homeService: HomeService) {}
+  constructor(
+    public homeService: HomeService,
+    public commonService: CommonService
+  ) {}
 
   ngOnInit() {
     this.dropZone = document.getElementById("dropZone");
@@ -132,21 +136,35 @@ export class CreateProjectComponent implements OnInit {
   }
 
   addNewProject() {
-    this.newProject.colleagues = {};
-    this.usersProject.forEach(element => {
-      this.newProject.colleagues[element.id.toString()] = false;
-    });
+    // this.newProject.colleagues = {};
+    // this.usersProject.forEach(element => {
+    //   this.newProject.colleagues[element.id.toString()] = false;
+    // });
     console.log(this.newProject);
     showOrHideLoading(true);
-    this.homeService.addNewProject(this.newProject).subscribe((data: any) => {
-      if (data.errorMessage === null) {
-        showToastMessage(`Project Created Successfully`, "success");
-        jQuery(this.myModal.nativeElement).modal("hide");
-      } else {
+    delete this.newProject.lab;
+    delete this.newProject.description;
+    this.homeService.addNewProject(this.newProject).subscribe(
+      (data: any) => {
+        if (data.errorMessage === null) {
+          showToastMessage(`Project Created Successfully`, "success");
+          jQuery(this.myModal.nativeElement).modal("hide");
+          this.commonService.projectAdded();
+        } else {
+          showToastMessage(
+            `${
+              data.errorMessage ? data.errorMessage : "Failed to create project"
+            }`,
+            "error"
+          );
+        }
+        showOrHideLoading(false);
+      },
+      error => {
         showToastMessage(`Failed to create project`, "error");
+        showOrHideLoading(false);
       }
-      showOrHideLoading(false);
-    });
+    );
   }
 
   addUsersToProject() {

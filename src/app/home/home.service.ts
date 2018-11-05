@@ -29,7 +29,7 @@ export class HomeService {
   }
 
   addNewProject(projectDetails: IProject) {
-    let url = `${API_URL}/projects`;
+    let url = `${API_URL}projects`;
     url = appendSession(url);
 
     url = `${url}?userId=undefined`;

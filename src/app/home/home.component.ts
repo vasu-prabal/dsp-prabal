@@ -4,7 +4,7 @@ import { IMailSearch, ILogin, IMailsList, IProjectColumns } from "./home-modal";
 import { getToken, setToken, showOrHideLoading } from "../common";
 import * as moment from "moment";
 import { Params, ActivatedRoute } from "@angular/router";
-import { loginUserDetails } from "../constants";
+import { loginUserDetails, PROTOCOL_ADDED, PROJECT_ADDED } from "../constants";
 import { CommonService } from "../common.service";
 declare var jQuery: any;
 
@@ -50,6 +50,11 @@ export class HomeComponent implements OnInit {
   ) {
     this.route.params.subscribe((params: Params) => {
       this.checkToken(params.type);
+    });
+    this.commonService.listen().subscribe((type: any) => {
+      if (type === PROJECT_ADDED) {
+        this.getProjectsList();
+      }
     });
   }
 
