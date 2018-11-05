@@ -23,6 +23,6 @@ export class CreateSharingGroupComponent implements OnInit {
   }
 
   addNewSharingGroup() {
-    console.log(this.newSharingGroup);
+    // console.log(this.newSharingGroup);
   }
 }

@@ -46,6 +46,7 @@ export interface IScript {
 export interface IStudy {
   name?: string;
   project?: string;
+  protocol?: string;
   species?: string;
   allPrograms?: boolean;
   select?: string;

@@ -23,6 +23,6 @@ export class CreateScriptComponent implements OnInit {
   }
 
   addNewScript() {
-    console.log(this.newScript);
+    // console.log(this.newScript);
   }
 }

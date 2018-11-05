@@ -20,7 +20,6 @@ export class CreateExperimentComponent implements OnInit {
     this.dropZone = document.getElementById("experiment_drop_zone");
     this.dropZone.ondrop = function(e) {
       e.preventDefault();
-      console.log(e.dataTransfer.files);
       jQuery(e.target).removeClass("drop");
     };
 
@@ -39,7 +38,8 @@ export class CreateExperimentComponent implements OnInit {
     this.newExperiment = {};
     jQuery("#experimentWizard").smartWizard({
       theme: "circles",
-      showStepURLhash: false
+      showStepURLhash: false,
+      keyNavigation: false
     });
     jQuery(this.myModal.nativeElement)
       .modal({ backdrop: "static", keyboard: false })

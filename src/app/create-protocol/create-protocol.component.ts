@@ -30,11 +30,8 @@ export class CreateProtocolComponent implements OnInit {
         theme: "circles",
         selected: 0,
         showStepURLhash: false,
+        keyNavigation: false,
         buttonOrder: ["finish", "next", "prev"],
-        onLeaveStep: function() {
-          console.log("on leave");
-          return false;
-        },
         toolbarSettings: {
           toolbarExtraButtons: [
             jQuery("<button></button>")
@@ -63,7 +60,6 @@ export class CreateProtocolComponent implements OnInit {
         } else {
           jQuery(".sw-btn-group-extra").hide();
         }
-        console.log(this.newProtocol);
         if (
           stepNumber === 1 &&
           stepDirection === "forward" &&
@@ -108,7 +104,6 @@ export class CreateProtocolComponent implements OnInit {
   }
 
   createProtocol() {
-    console.log(this.newProtocol);
     const obj = this.newProtocol;
     obj.chromatographicDimension = Number(obj.chromatographicDimension);
     obj.diaMultiplexing = Boolean(obj.diaMultiplexing);
@@ -117,7 +112,6 @@ export class CreateProtocolComponent implements OnInit {
     if (this.newProtocol.id) {
       this.service.updateProtocol(obj).subscribe(
         data => {
-          console.log(data);
           showOrHideLoading(false);
           jQuery("#create_protocol_dialog").modal("hide");
           this.commonService.protocolAdded();
@@ -137,7 +131,6 @@ export class CreateProtocolComponent implements OnInit {
       obj.protocolDate = new Date();
       this.service.createProtocol(obj).subscribe(
         data => {
-          console.log(data);
           showOrHideLoading(false);
           jQuery("#create_protocol_dialog").modal("hide");
           this.commonService.protocolAdded();
@@ -152,7 +145,6 @@ export class CreateProtocolComponent implements OnInit {
   }
 
   editProtocol(id) {
-    console.log("protocol edit", id);
     showOrHideLoading(true);
     this.service.getProtocol(id).subscribe(
       data => {
@@ -162,7 +154,6 @@ export class CreateProtocolComponent implements OnInit {
         } else {
           showToastMessage("Error while getting protocol details", "error");
         }
-        console.log(data);
         showOrHideLoading(false);
       },
       error => {

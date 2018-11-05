@@ -36,7 +36,6 @@ export class CreateProjectComponent implements OnInit {
     this.dropZone = document.getElementById("dropZone");
     this.dropZone.ondrop = e => {
       e.preventDefault();
-      console.log(e.dataTransfer.files);
       this.addAttachments(e.dataTransfer.files);
       jQuery(e.target).removeClass("drop");
     };
@@ -60,14 +59,13 @@ export class CreateProjectComponent implements OnInit {
   getLabItems() {
     showOrHideLoading(true);
     this.homeService.getLabItems().subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
     });
   }
 
   getUsersList() {
     showOrHideLoading(true);
     this.homeService.getUsersList().subscribe((data: Array<Object>) => {
-      console.log(data);
       const userData = data.map(x => {
         const obj = {
           name: `${x["name"]} <${x["email"]}>`,
@@ -77,9 +75,6 @@ export class CreateProjectComponent implements OnInit {
         };
         return obj;
       });
-
-      console.log(`Complete user data`, userData);
-
       this.users = userData;
 
       // jQuery("#emails_input").typeahead({
@@ -102,13 +97,11 @@ export class CreateProjectComponent implements OnInit {
   }
 
   addAttachments(files) {
-    console.log(files);
     const fileDetails = {
       filename: files[0].name,
       sizeInBytes: files[0].size
     };
     this.homeService.getUploadFileId("project", fileDetails).subscribe(data => {
-      console.log(data);
       this.homeService
         .getUploadFilePath("project", data["attachmentId"])
         .subscribe(pathResp => {
@@ -121,7 +114,7 @@ export class CreateProjectComponent implements OnInit {
               this.homeService
                 .uploadFile(uploadUrl, files[0], pathResp["destinationPath"])
                 .subscribe(uploadResponse => {
-                  console.log("uploaded ..........");
+                  // console.log("uploaded ..........");
                 });
             });
         });
@@ -140,7 +133,6 @@ export class CreateProjectComponent implements OnInit {
     // this.usersProject.forEach(element => {
     //   this.newProject.colleagues[element.id.toString()] = false;
     // });
-    console.log(this.newProject);
     showOrHideLoading(true);
     delete this.newProject.lab;
     delete this.newProject.description;
@@ -168,7 +160,6 @@ export class CreateProjectComponent implements OnInit {
   }
 
   addUsersToProject() {
-    console.log(this.newProject.persons);
     if (this.newProject.persons !== null) {
       this.usersProject.push(this.newProject.persons);
 

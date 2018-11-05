@@ -4,11 +4,13 @@ import {
   ISpeciesList,
   ITechTypes,
   IVendorList,
-  IProject
+  IProject,
+  IProtocol
 } from "../home/home-modal";
 import { showOrHideLoading } from "../common";
 import { CreateStudyService } from "../create-study/create-study.service";
 import { HomeService } from "../home/home.service";
+import { ProtocolService } from "../protocol/protocol.service";
 
 declare var jQuery: any;
 @Component({
@@ -21,15 +23,17 @@ export class CreateStudyComponent implements OnInit {
   myModal: ElementRef;
   newStudy: IStudy = {};
   dropZone: HTMLElement;
-  species: Array<ISpeciesList>;
-  techTypes: Array<ITechTypes>;
-  vendors: Array<IVendorList>;
-  projects: Array<IProject>;
+  species: Array<ISpeciesList> = [];
+  techTypes: Array<ITechTypes> = [];
+  vendors: Array<IVendorList> = [];
+  projects: Array<IProject> = [];
+  protocols: Array<IProtocol> = [];
   fileUploadSize: number;
 
   constructor(
     public createStudyService: CreateStudyService,
-    public homeService: HomeService
+    public homeService: HomeService,
+    public protocolService: ProtocolService
   ) {}
 
   ngOnInit() {
@@ -37,7 +41,6 @@ export class CreateStudyComponent implements OnInit {
 
     this.dropZone.ondrop = e => {
       e.preventDefault();
-      console.log(e.dataTransfer.files);
       this.addAttachments(e.dataTransfer.files);
       jQuery(e.target).removeClass("drop");
     };
@@ -51,6 +54,30 @@ export class CreateStudyComponent implements OnInit {
       jQuery(e.target).removeClass("drop");
       return false;
     };
+    jQuery("#study_creation_wizard")
+      .smartWizard({
+        theme: "circles",
+        showStepURLhash: false,
+        keyNavigation: false,
+        buttonOrder: ["finish", "next", "prev"],
+        toolbarSettings: {
+          toolbarExtraButtons: [
+            jQuery("<button></button>")
+              .text("Finish")
+              .addClass("btn btn-info")
+              .on("click", () => {
+                this.addNewStudy();
+              })
+          ]
+        }
+      })
+      .on("showStep", (e, anchorObject, stepNumber, stepDirection) => {
+        if (jQuery("button.sw-btn-next").hasClass("disabled")) {
+          jQuery(".sw-btn-group-extra").show();
+        } else {
+          jQuery(".sw-btn-group-extra").hide();
+        }
+      });
   }
 
   openCreateStudyDialog() {
@@ -58,16 +85,19 @@ export class CreateStudyComponent implements OnInit {
     this.getTechType();
     this.getProjects();
     this.getMaxFileUploadSize();
-
-    this.newStudy = { select: "" };
-    jQuery("#smartwizard").smartWizard({
-      theme: "circles",
-      showStepURLhash: false
-    });
-
+    this.getProtocolsList();
+    this.newStudy = {};
+    jQuery("#study_creation_wizard").smartWizard("reset");
+    jQuery(".sw-btn-group-extra").hide();
     jQuery(this.myModal.nativeElement)
       .modal({ backdrop: "static", keyboard: false })
       .modal("show");
+  }
+
+  getProtocolsList() {
+    this.protocolService.getProtocolsList().subscribe(data => {
+      this.protocols = data;
+    });
   }
 
   getMaxFileUploadSize() {
@@ -75,13 +105,11 @@ export class CreateStudyComponent implements OnInit {
     this.homeService
       .getMaxFileSizeUpload("experiment")
       .subscribe((data: any) => {
-        console.log(data.value);
-        this.fileUploadSize = data.value / (1024 * 1024);
+        this.fileUploadSize = data.value / (1024 * 1024); // converting bytes to MB
       });
   }
 
   addAttachments(files) {
-    console.log(files);
     const fileDetails = {
       filename: files[0].name,
       sizeInBytes: files[0].size
@@ -89,7 +117,6 @@ export class CreateStudyComponent implements OnInit {
     this.homeService
       .getUploadFileId("experiment", fileDetails)
       .subscribe(data => {
-        console.log(data);
         this.homeService
           .getUploadFilePath("experiment", data["attachmentId"])
           .subscribe(pathResp => {
@@ -104,7 +131,7 @@ export class CreateStudyComponent implements OnInit {
                 this.homeService
                   .uploadFile(uploadUrl, files[0], pathResp["destinationPath"])
                   .subscribe(uploadResponse => {
-                    console.log("uploaded ..........");
+                    // console.log("uploaded ..........");
                   });
               });
           });
@@ -114,7 +141,6 @@ export class CreateStudyComponent implements OnInit {
   getProjects() {
     showOrHideLoading(true);
     this.createStudyService.getProjects().subscribe((data: any) => {
-      console.log(data);
       this.projects = data;
       showOrHideLoading(false);
     });
@@ -123,7 +149,6 @@ export class CreateStudyComponent implements OnInit {
   getSpecies() {
     showOrHideLoading(true);
     this.createStudyService.getSpecies().subscribe((data: any) => {
-      console.log(data);
       this.species = data;
       showOrHideLoading(false);
     });
@@ -134,20 +159,17 @@ export class CreateStudyComponent implements OnInit {
     this.createStudyService
       .getTechTypes()
       .subscribe((data: Array<ITechTypes>) => {
-        console.log(data);
         this.techTypes = data;
         showOrHideLoading(false);
       });
   }
 
   getVendorsList() {
-    console.log(this.newStudy.technology);
     if (this.newStudy.technology !== null) {
       showOrHideLoading(true);
       this.createStudyService
         .getVendorsList(this.newStudy.technology)
         .subscribe((data: Array<IVendorList>) => {
-          console.log(data);
           this.vendors = data;
           showOrHideLoading(false);
         });
@@ -158,6 +180,10 @@ export class CreateStudyComponent implements OnInit {
   }
 
   addNewStudy() {
-    console.log(this.newStudy);
+    showOrHideLoading(true);
+    setTimeout(() => {
+      jQuery(this.myModal.nativeElement).modal("hide");
+      showOrHideLoading(false);
+    }, 1000);
   }
 }

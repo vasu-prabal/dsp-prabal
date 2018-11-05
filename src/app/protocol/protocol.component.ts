@@ -66,7 +66,6 @@ export class ProtocolComponent implements OnInit {
     showOrHideLoading(true);
     this.protocolService.getProtocolsList().subscribe(
       data => {
-        console.log(data);
         this.protocols = data;
         this.protocols.forEach(protocol => {
           protocol.protocolDate = moment(protocol.protocolDate).format(
@@ -82,7 +81,7 @@ export class ProtocolComponent implements OnInit {
   }
 
   sortProjects(type) {
-    console.log(type);
+    // console.log(type);
   }
 
   deleteProtocol(id) {
@@ -91,7 +90,6 @@ export class ProtocolComponent implements OnInit {
       "Do you want to delete protocol",
       "warning",
       isConfirm => {
-        console.log(isConfirm);
         if (isConfirm) {
           this.protocolService.deleteProtocol(id).subscribe(
             data => {
@@ -104,13 +102,6 @@ export class ProtocolComponent implements OnInit {
         }
       }
     );
-
-    // const isConfirm = confirm("Do you want to delete protocol");
-    // if (isConfirm) {
-    //   this.protocolService.deleteProtocol(id).subscribe(data => {
-    //     console.log(data);
-    //   });
-    // }
   }
 
   editProtocol(id) {
