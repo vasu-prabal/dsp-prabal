@@ -11,6 +11,7 @@ import { showOrHideLoading } from "../common";
 import { CreateStudyService } from "../create-study/create-study.service";
 import { HomeService } from "../home/home.service";
 import { ProtocolService } from "../protocol/protocol.service";
+import { forkJoin } from "rxjs";
 
 declare var jQuery: any;
 @Component({
@@ -79,17 +80,53 @@ export class CreateStudyComponent implements OnInit {
   }
 
   openCreateStudyDialog() {
-    this.getSpecies();
-    this.getTechType();
-    this.getProjects();
-    this.getMaxFileUploadSize();
-    this.getProtocolsList();
+    this.getModalDropDownValues();
     this.newStudy = {};
     jQuery("#study_creation_wizard").smartWizard("reset");
     jQuery(".sw-btn-group-extra").hide();
     jQuery("#create_study_dialog")
       .modal({ backdrop: "static", keyboard: false })
       .modal("show");
+  }
+
+  getModalDropDownValues() {
+    const filter = {
+      asc: false,
+      filterQuery: "",
+      items: 25,
+      labId: 0,
+      page: 1,
+      sortingField: "modified"
+    };
+    showOrHideLoading(true);
+    const species = this.createStudyService.getSpecies();
+    const techTypes = this.createStudyService.getTechTypes();
+    const projects = this.homeService.getProjectsList("all", filter);
+    const maxFileUploadSize = this.homeService.getMaxFileSizeUpload(
+      "experiment"
+    );
+    const protocolList = this.protocolService.getProtocolsList();
+    // const instrumentList = this.createStudyService.getInstrumentList();
+    forkJoin(
+      species,
+      techTypes,
+      projects,
+      maxFileUploadSize,
+      protocolList,
+      // instrumentList
+    ).subscribe(
+      results => {
+        this.species = results[0];
+        this.techTypes = results[1];
+        this.projects = results[2].items;
+        this.fileUploadSize = results[3]["value"] / (1024 * 1024);
+        this.protocols = results[4];
+        showOrHideLoading(false);
+      },
+      error => {
+        showOrHideLoading(false);
+      }
+    );
   }
 
   getProtocolsList() {

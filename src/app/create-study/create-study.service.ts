@@ -25,7 +25,7 @@ export class CreateStudyService {
         params: { userId: undefined }
       });
     } else {
-      return this.http.get(url, {
+      return this.http.get<Array<IProject>>(url, {
         params: { userId: undefined },
         headers: getHttpHeaders()
       });
@@ -41,7 +41,7 @@ export class CreateStudyService {
         type: "get"
       });
     } else {
-      return this.http.get(url, { headers: getHttpHeaders() });
+      return this.http.get<Array<ISpeciesList>>(url, { headers: getHttpHeaders() });
     }
   }
 
@@ -54,7 +54,7 @@ export class CreateStudyService {
         type: "get"
       });
     } else {
-      return this.http.get(url, { headers: getHttpHeaders() });
+      return this.http.get<Array<ITechTypes>>(url, { headers: getHttpHeaders() });
     }
   }
 
@@ -68,10 +68,23 @@ export class CreateStudyService {
         params: { techType: techTypeId }
       });
     } else {
-      return this.http.get(url, {
+      return this.http.get<Array<IVendorList>>(url, {
         params: { techType: techTypeId },
         headers: getHttpHeaders()
       });
+    }
+  }
+
+  getInstrumentList() {
+    let url = `${API_URL}instrument-models/paged?asc=true&filter=undefined&filterQuery=&items=25&page=1&paged=paged&sortingField=name`;
+    url = appendSession(url);
+    if (IS_LOCAL_API) {
+      return this.http.post<Array<ITechTypes>>(LOCAL_API_URL, {
+        url: url,
+        type: "get"
+      });
+    } else {
+      return this.http.get<Array<ITechTypes>>(url, { headers: getHttpHeaders() });
     }
   }
 }
