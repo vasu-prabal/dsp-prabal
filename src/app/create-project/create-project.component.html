@@ -67,18 +67,22 @@
               <br />
               <br />
               <div class="member-container">
-                <p class="header-3">There are no Members</p>
-                <!-- <div *ngFor="let user of usersProject">
-                  <div>
-                    <p>{{user.email}}</p>
-                    <p>{{user.name}}</p>
+                <p class="header-3 no-project-users" *ngIf="projectUsers.length===0">There are no Members</p>
+                <div *ngFor="let user of projectUsers; let i = index" class="project-user-container">
+                  <div class="flex-center">
+                    <span class="fa fa-user fa-2x mr-2"></span>
+                    <div>
+                      <p class="m-0" [innerHTML]="user.email"></p>
+                      <p class="m-0" [innerHTML]="user.name"></p>
+                    </div>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input [(ngModel)]="user.allowCreateStudies" name="allowCreateStudies" type="checkbox" class="custom-control-input"
-                      id="allowCreateStudies">
-                    <label class="custom-control-label header-3" for="allowCreateStudies">Allow Create Studies</label>
+                    <input [(ngModel)]="user.allowCreateStudies" name="allowCreateStudies{{i}}" type="checkbox" class="custom-control-input"
+                      id="allowCreateStudies{{i}}">
+                    <label class="custom-control-label header-3" for="allowCreateStudies{{i}}">Allow Create Studies</label>
+                    <span class="fa fa-close header-2 ml-2 pointer" (click)="removeProjectUser(i)"></span>
                   </div>
-                </div> -->
+                </div>
               </div>
               <div class="member-invitation-container">
                 <span class="header-5">Invite People Personally or by group. Use "All" Special group to make project
@@ -86,7 +90,7 @@
                 <br />
                 <br />
                 <div class="form-group">
-                  <ng-select class="ng-select-dropdown" [items]="users" name="persons" bindLabel="name" [(ngModel)]="newProject.persons"
+                  <ng-select placeholder="Select user" class="ng-select-dropdown header-3 project-user-list" [items]="users" name="persons" bindLabel="name" [(ngModel)]="newProject.persons"
                     (change)="addUsersToProject()">
                   </ng-select>
                   <!-- <input [(ngModel)]="newProject.persons" autocomplete="off" id="emails_input" name="persons" class="form-control"

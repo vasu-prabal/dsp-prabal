@@ -14,15 +14,9 @@ export class CreateProjectComponent implements OnInit {
   @ViewChild("createProject")
   myModal: ElementRef;
   users: Array<Object> = [];
-
-  // = [
-  //   { id: 1, name: "John", fullName: "John <john@a.com>" },
-  //   { id: 2, name: "Alex", fullName: "Alex <alex@a.com>" },
-  //   { id: 3, name: "Terry", fullName: "Terry <terry@a.com>" }
-  // ];
   newProject: IProject = {};
   dropZone: HTMLElement;
-  usersProject: Array<IProjectsUser> = [];
+  projectUsers: Array<IProjectsUser> = [];
 
   coll = {};
 
@@ -76,22 +70,6 @@ export class CreateProjectComponent implements OnInit {
         return obj;
       });
       this.users = userData;
-
-      // jQuery("#emails_input").typeahead({
-      //   afterSelect: function(obj) {
-      //     console.log(obj);
-      //   },
-      //   source: userData,
-      //   displayText: function(item) {
-      //     console.log(item.displayText);
-      //     return item.displayText;
-      //   },
-      //   templates: {
-      //     empty: function(context) {
-      //       jQuery(".tt-dataset").text("No Results Found");
-      //     }
-      //   }
-      // });
       showOrHideLoading(false);
     });
   }
@@ -123,16 +101,23 @@ export class CreateProjectComponent implements OnInit {
 
   openCreateProjectDialog() {
     this.newProject = {};
+    this.getUsersList();
+    this.projectUsers = [];
     jQuery(this.myModal.nativeElement)
       .modal({ backdrop: "static", keyboard: false })
       .modal("show");
   }
 
   addNewProject() {
-    // this.newProject.colleagues = {};
-    // this.usersProject.forEach(element => {
-    //   this.newProject.colleagues[element.id.toString()] = false;
+    this.newProject.colleagues = {};
+    // this.projectUsers.forEach(element => {
+    //   const id = element.id.toString();
+    //   this.newProject.colleagues[id] = element.allowCreateStudies
+    //     ? element.allowCreateStudies
+    //     : false;
     // });
+    console.log(this.projectUsers);
+    console.log(this.newProject);
     showOrHideLoading(true);
     delete this.newProject.lab;
     delete this.newProject.description;
@@ -161,13 +146,21 @@ export class CreateProjectComponent implements OnInit {
 
   addUsersToProject() {
     if (this.newProject.persons !== null) {
-      this.usersProject.push(this.newProject.persons);
+      this.projectUsers.push(this.newProject.persons);
 
       this.users = this.users.filter(
         x => x["id"] !== this.newProject.persons.id
       );
-
-      this.newProject.persons = null;
+      jQuery(".project-user-list .ng-clear-wrapper").click();
+      setTimeout(() => {
+        this.newProject.persons = null;
+      });
     }
+  }
+
+  removeProjectUser(index) {
+    const userToRemove = this.projectUsers[index];
+    this.projectUsers.splice(index, 1);
+    this.users.push(userToRemove);
   }
 }
