@@ -103,6 +103,7 @@ export class CreateProjectComponent implements OnInit {
     this.newProject = {};
     this.getUsersList();
     this.projectUsers = [];
+    jQuery("#general-tab").click();
     jQuery(this.myModal.nativeElement)
       .modal({ backdrop: "static", keyboard: false })
       .modal("show");
