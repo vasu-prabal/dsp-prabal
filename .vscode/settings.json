@@ -22,7 +22,10 @@
     ],
     "cSpell.words": [
         "Acetylome",
+        "Acropora",
         "CPTAC",
+        "Cervicornics",
+        "Datepicker",
         "Exactive",
         "Glycoproteome",
         "Injectable",
@@ -37,16 +40,23 @@
         "Proteome",
         "Quantitation",
         "RPLC",
+        "SETD",
         "Swal",
+        "Ubits",
         "alkylation",
         "dropdown",
         "haspopup",
         "jsessionid",
         "labelledby",
+        "metabolomics",
+        "officedocument",
+        "openxmlformats",
         "singlefile",
+        "spreadsheetml",
         "sweetalert",
         "tabindex",
         "tablist",
-        "tabpanel"
+        "tabpanel",
+        "ubits"
     ]
 }
