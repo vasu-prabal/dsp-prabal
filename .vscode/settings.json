@@ -39,11 +39,14 @@
         "RPLC",
         "Swal",
         "alkylation",
+        "dropdown",
         "haspopup",
         "jsessionid",
         "labelledby",
         "singlefile",
         "sweetalert",
-        "tabindex"
+        "tabindex",
+        "tablist",
+        "tabpanel"
     ]
 }

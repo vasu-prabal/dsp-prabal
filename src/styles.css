@@ -167,10 +167,7 @@ body,
   background: #00abad;
   border-color: #00abad;
 }
-.typeahead.dropdown-menu {
-  width: 100%;
-  position: static;
-}
+
 .list-data-count {
   margin-left: 8px !important;
   margin-top: 3px !important;
@@ -221,9 +218,7 @@ body,
   width: 128px;
   height: 128px;
 }
-.typeahead.dropdown-menu {
-  position: sticky !important;
-}
+
 [data-notify="container"] {
   z-index: 9999 !important;
   position: absolute !important;
