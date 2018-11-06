@@ -112,7 +112,7 @@ export class CreateStudyComponent implements OnInit {
       techTypes,
       projects,
       maxFileUploadSize,
-      protocolList,
+      protocolList
       // instrumentList
     ).subscribe(
       results => {

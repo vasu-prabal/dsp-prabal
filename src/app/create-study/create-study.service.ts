@@ -26,8 +26,7 @@ export class CreateStudyService {
       });
     } else {
       return this.http.get<Array<IProject>>(url, {
-        params: { userId: undefined },
-        headers: getHttpHeaders()
+        params: { userId: undefined }
       });
     }
   }
@@ -41,7 +40,7 @@ export class CreateStudyService {
         type: "get"
       });
     } else {
-      return this.http.get<Array<ISpeciesList>>(url, { headers: getHttpHeaders() });
+      return this.http.get<Array<ISpeciesList>>(url);
     }
   }
 
@@ -54,7 +53,7 @@ export class CreateStudyService {
         type: "get"
       });
     } else {
-      return this.http.get<Array<ITechTypes>>(url, { headers: getHttpHeaders() });
+      return this.http.get<Array<ITechTypes>>(url);
     }
   }
 
@@ -69,8 +68,7 @@ export class CreateStudyService {
       });
     } else {
       return this.http.get<Array<IVendorList>>(url, {
-        params: { techType: techTypeId },
-        headers: getHttpHeaders()
+        params: { techType: techTypeId }
       });
     }
   }
@@ -84,7 +82,7 @@ export class CreateStudyService {
         type: "get"
       });
     } else {
-      return this.http.get<Array<ITechTypes>>(url, { headers: getHttpHeaders() });
+      return this.http.get<Array<ITechTypes>>(url);
     }
   }
 }

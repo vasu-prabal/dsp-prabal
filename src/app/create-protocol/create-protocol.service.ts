@@ -18,9 +18,7 @@ export class CreateProtocolService {
         data: protocolObj
       });
     } else {
-      return this.http.post(url, protocolObj, {
-        headers: getHttpHeaders()
-      });
+      return this.http.post(url, protocolObj);
     }
   }
 
@@ -34,9 +32,7 @@ export class CreateProtocolService {
         data: protocolObj
       });
     } else {
-      return this.http.put(url, protocolObj, {
-        headers: getHttpHeaders()
-      });
+      return this.http.put(url, protocolObj);
     }
   }
 
@@ -49,9 +45,7 @@ export class CreateProtocolService {
         type: "get"
       });
     } else {
-      return this.http.get(url, {
-        headers: getHttpHeaders()
-      });
+      return this.http.get(url);
     }
   }
 }

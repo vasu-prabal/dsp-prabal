@@ -19,9 +19,7 @@ export class ProtocolService {
         type: "get"
       });
     } else {
-      return this.http.get<Array<IProtocol>>(url, {
-        headers: headers
-      });
+      return this.http.get<Array<IProtocol>>(url);
     }
   }
 
@@ -35,9 +33,7 @@ export class ProtocolService {
       });
     } else {
       const headers = getHttpHeaders();
-      return this.http.delete(url, {
-        headers: headers
-      });
+      return this.http.delete(url);
     }
   }
 }

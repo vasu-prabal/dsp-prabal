@@ -21,8 +21,7 @@ export class HomeService {
       });
     } else {
       return this.http.get<IMailsList>(url, {
-        params: searchFilter,
-        headers: getHttpHeaders()
+        params: searchFilter
       });
     }
   }
@@ -40,9 +39,7 @@ export class HomeService {
         data: projectDetails
       });
     } else {
-      return this.http.post(url, projectDetails, {
-        headers: getHttpHeaders()
-      });
+      return this.http.post(url, projectDetails);
     }
   }
 
@@ -56,7 +53,7 @@ export class HomeService {
         type: "get"
       });
     } else {
-      return this.http.get(url, { headers: getHttpHeaders() });
+      return this.http.get(url);
     }
   }
 
@@ -70,9 +67,7 @@ export class HomeService {
         type: "get"
       });
     } else {
-      return this.http.get(url, {
-        headers: getHttpHeaders()
-      });
+      return this.http.get(url);
     }
   }
 
@@ -86,9 +81,7 @@ export class HomeService {
         type: "get"
       });
     } else {
-      return this.http.get(url, {
-        headers: getHttpHeaders()
-      });
+      return this.http.get(url);
     }
   }
 
@@ -103,9 +96,7 @@ export class HomeService {
         data: fileDetails
       });
     } else {
-      return this.http.post(url, fileDetails, {
-        headers: getHttpHeaders()
-      });
+      return this.http.post(url, fileDetails);
     }
   }
 
@@ -119,9 +110,7 @@ export class HomeService {
         type: "get"
       });
     } else {
-      return this.http.get(url, {
-        headers: getHttpHeaders()
-      });
+      return this.http.get(url);
     }
   }
 
@@ -135,9 +124,7 @@ export class HomeService {
         data: data
       });
     } else {
-      return this.http.post(url, data, {
-        headers: getHttpHeaders()
-      });
+      return this.http.post(url, data);
     }
   }
 
@@ -154,9 +141,7 @@ export class HomeService {
         data: file
       });
     } else {
-      return this.http.put(url, file, {
-        headers: new HttpHeaders({ "Content-Type": "image/jpg" })
-      });
+      return this.http.put(url, file);
     }
   }
 }

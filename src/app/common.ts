@@ -33,7 +33,9 @@ export function showOrHideLoading(isShow) {
       .modal({ backdrop: "static", keyboard: false })
       .modal("show");
   } else {
-    jQuery("#loader_modal").modal("hide");
+    setTimeout(() => {
+      jQuery("#loader_modal").modal("hide");
+    }, 1000);
   }
 }
 
