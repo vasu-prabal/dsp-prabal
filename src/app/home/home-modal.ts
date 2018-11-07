@@ -99,6 +99,14 @@ export interface IMailsList {
   totalPages: number;
 }
 
+export interface IProtocolList {
+  items: Array<IProtocol>;
+  itemsCount: number;
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+}
+
 export interface ISpeciesList {
   name: string;
   unspecified: boolean;

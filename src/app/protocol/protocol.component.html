@@ -28,30 +28,30 @@
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>
           </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='name'}" (click)="sortProjects('name')">PROTOCOL
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolName'}" (click)="sortProjects('protocolName')">PROTOCOL
             NAME
-            <span *ngIf="searchFilter.sortingField==='name'">
+            <span *ngIf="searchFilter.sortingField==='protocolName'">
               <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>
           </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='owner'}" (click)="sortProjects('owner')">
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolType'}" (click)="sortProjects('protocolType')">
             TYPE
-            <span *ngIf="searchFilter.sortingField==='owner'">
+            <span *ngIf="searchFilter.sortingField==='protocolType'">
               <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>
           </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='laboratory'}" (click)="sortProjects('laboratory')">DATE
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolDate'}" (click)="sortProjects('protocolDate')">DATE
 
-            <span *ngIf="searchFilter.sortingField==='laboratory'">
+            <span *ngIf="searchFilter.sortingField==='protocolDate'">
               <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>
           </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='area'}" (click)="sortProjects('area')">ENRICHMENT
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='enrichmentStrategy'}" (click)="sortProjects('enrichmentStrategy')">ENRICHMENT
             STRATEGY
-            <span *ngIf="searchFilter.sortingField==='area'">
+            <span *ngIf="searchFilter.sortingField==='enrichmentStrategy'">
               <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>

@@ -90,7 +90,7 @@ export class CreateStudyComponent implements OnInit {
   }
 
   getModalDropDownValues() {
-    const filter = {
+    const projectsFilter = {
       asc: false,
       filterQuery: "",
       items: 25,
@@ -98,14 +98,20 @@ export class CreateStudyComponent implements OnInit {
       page: 1,
       sortingField: "modified"
     };
+    const filter = {
+      page: 1,
+      items: 25,
+      asc: false,
+      sortingField: "protocolDate"
+    };
     showOrHideLoading(true);
     const species = this.createStudyService.getSpecies();
     const techTypes = this.createStudyService.getTechTypes();
-    const projects = this.homeService.getProjectsList("all", filter);
+    const projects = this.homeService.getProjectsList("all", projectsFilter);
     const maxFileUploadSize = this.homeService.getMaxFileSizeUpload(
       "experiment"
     );
-    const protocolList = this.protocolService.getProtocolsList();
+    const protocolList = this.protocolService.getProtocolsList(filter);
     // const instrumentList = this.createStudyService.getInstrumentList();
     forkJoin(
       species,
@@ -120,7 +126,7 @@ export class CreateStudyComponent implements OnInit {
         this.techTypes = results[1];
         this.projects = results[2].items;
         this.fileUploadSize = results[3]["value"] / (1024 * 1024);
-        this.protocols = results[4];
+        this.protocols = results[4].items;
         showOrHideLoading(false);
       },
       error => {
@@ -130,8 +136,14 @@ export class CreateStudyComponent implements OnInit {
   }
 
   getProtocolsList() {
-    this.protocolService.getProtocolsList().subscribe(data => {
-      this.protocols = data;
+    const filter = {
+      page: 1,
+      items: 25,
+      asc: false,
+      sortingField: "protocolDate"
+    };
+    this.protocolService.getProtocolsList(filter).subscribe(data => {
+      this.protocols = data.items;
     });
   }
 

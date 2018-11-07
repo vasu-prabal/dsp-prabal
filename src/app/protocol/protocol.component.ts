@@ -24,7 +24,9 @@ export class ProtocolComponent implements OnInit {
   protocols: Array<IProtocol> = [];
   searchFilter: IMailSearch = {
     page: 1,
-    items: 25
+    items: 25,
+    asc: false,
+    sortingField: "protocolDate"
   };
   constructor(
     public commonService: CommonService,
@@ -72,9 +74,9 @@ export class ProtocolComponent implements OnInit {
 
   getProtocolsList() {
     showOrHideLoading(true);
-    this.protocolService.getProtocolsList().subscribe(
+    this.protocolService.getProtocolsList(this.searchFilter).subscribe(
       data => {
-        this.protocols = data;
+        this.protocols = data.items;
         this.protocols.forEach(protocol => {
           protocol.protocolDate = moment(protocol.protocolDate).format(
             "MMM DD, YYYY"
@@ -88,8 +90,16 @@ export class ProtocolComponent implements OnInit {
     );
   }
 
-  sortProjects(type) {
-    // console.log(type);
+  sortProjects(sortType) {
+    // console.log(sortType);
+    let isAsc = false;
+    if (this.searchFilter.sortingField === sortType) {
+      isAsc = this.searchFilter.asc ? false : true;
+    }
+    this.searchFilter.sortingField = sortType;
+    this.searchFilter.page = 1;
+    this.searchFilter.asc = isAsc;
+    this.getProtocolsList();
   }
 
   deleteProtocol(id) {
