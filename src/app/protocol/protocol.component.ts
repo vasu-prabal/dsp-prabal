@@ -8,7 +8,7 @@ import {
 import { CommonService } from "../common.service";
 import { loginUserDetails, PROTOCOL_ADDED, IS_LOCAL_API } from "../constants";
 import { ProtocolService } from "./protocol.service";
-import { IProtocol, ISearch, IMailSearch } from "../home/home-modal";
+import { IProtocol, ISearch, IListSearchFilter } from "../home/home-modal";
 import * as moment from "moment";
 import { CreateButtonComponent } from "../create-button/create-button.component";
 
@@ -22,7 +22,7 @@ export class ProtocolComponent implements OnInit {
   @ViewChild(CreateButtonComponent)
   createButton: CreateButtonComponent;
   protocols: Array<IProtocol> = [];
-  searchFilter: IMailSearch = {
+  searchFilter: IListSearchFilter = {
     page: 1,
     items: 25,
     asc: false,

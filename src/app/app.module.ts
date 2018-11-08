@@ -24,6 +24,7 @@ import { UploadButtonComponent } from "./upload-button/upload-button.component";
 import { CreateProtocolService } from "./create-protocol/create-protocol.service";
 import { RequestInterceptor } from "./http-interceptor";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { StudiesComponent } from "./studies/studies.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     ProtocolComponent,
     CreateProtocolComponent,
     CreateButtonComponent,
-    UploadButtonComponent
+    UploadButtonComponent,
+    StudiesComponent
   ],
   imports: [
     BrowserModule,

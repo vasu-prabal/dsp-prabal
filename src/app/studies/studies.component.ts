@@ -1,53 +1,45 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { HomeService } from "./home.service";
-import { IListSearchFilter, ILogin, IMailsList, IProjectColumns } from "./home-modal";
-import { getToken, setToken, showOrHideLoading } from "../common";
-import * as moment from "moment";
-import { Params, ActivatedRoute } from "@angular/router";
-import {
-  loginUserDetails,
-  PROTOCOL_ADDED,
-  PROJECT_ADDED,
-  IS_LOCAL_API
-} from "../constants";
+import { Component, OnInit } from "@angular/core";
+import { IStudyList, IStudyModal } from "./study-modal";
+import { IStudy, IListSearchFilter } from "../home/home-modal";
+import { StudyService } from "./study.service";
+import { ActivatedRoute, Params } from "@angular/router";
 import { CommonService } from "../common.service";
-declare var jQuery: any;
-
+import { STUDY_ADDED, IS_LOCAL_API, loginUserDetails } from "../constants";
+import { showOrHideLoading, setToken, getToken } from "../common";
+import * as moment from "moment";
+declare var jQuery;
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"]
+  selector: "app-studies",
+  templateUrl: "./studies.component.html",
+  styleUrls: ["./studies.component.css"]
 })
-export class HomeComponent implements OnInit {
-  mailsList: IMailsList = {
+export class StudiesComponent implements OnInit {
+  studyList: IStudyList = {
     items: [],
     itemsCount: 0,
     pageNumber: 0,
     pageSize: 0,
     totalPages: 0
   };
-  newProject: IProjectColumns = {
+  newStudy: IStudyModal = {
     id: undefined,
-    name: "",
-    area: "",
-    laboratory: "",
-    modified: "",
-    owner: ""
+    name: ""
   };
   searchFilter: IListSearchFilter = {
     asc: false,
+    filter: "all",
     filterQuery: "",
     items: 25,
     labId: 0,
     page: 1,
-    sortingField: "modified",
-    userId: undefined
+    paged: "paged",
+    sortingField: "modified"
   };
   type = "all";
-  projectType = "All Projects";
-  defaultProjectTypes: Array<string> = ["all", "my", "shared", "public"];
+  studyType = "All Studies";
+  defaultStudyTypes: Array<string> = ["all", "my", "shared", "public"];
   constructor(
-    public homeService: HomeService,
+    public studyService: StudyService,
     public route: ActivatedRoute,
     public commonService: CommonService
   ) {
@@ -55,36 +47,36 @@ export class HomeComponent implements OnInit {
       this.checkToken(params.type);
     });
     this.commonService.listen().subscribe((type: any) => {
-      if (type === PROJECT_ADDED) {
-        this.getProjectsList();
+      if (type === STUDY_ADDED) {
+        this.getStudyList();
       }
     });
   }
 
   ngOnInit() {
-    jQuery(".projects-table").colResizable({
+    jQuery(".study-table").colResizable({
       // resizeMode: "overflow",
       disabledColumns: [0, 1],
       minWidth: 150
     });
   }
 
-  checkToken(projectType) {
-    if (projectType) {
-      if (this.defaultProjectTypes.indexOf(projectType) > -1) {
-        this.type = projectType;
+  checkToken(studyType) {
+    if (studyType) {
+      if (this.defaultStudyTypes.indexOf(studyType) > -1) {
+        this.type = studyType;
         switch (this.type) {
           case "all":
-            this.projectType = "All Projects";
+            this.studyType = "All Studies";
             break;
           case "my":
-            this.projectType = "My Projects";
+            this.studyType = "My Studies";
             break;
           case "public":
-            this.projectType = "Public Projects";
+            this.studyType = "Public Studies";
             break;
           case "shared":
-            this.projectType = "Shared Projects";
+            this.studyType = "Shared with Me Studies";
             break;
         }
       }
@@ -101,24 +93,24 @@ export class HomeComponent implements OnInit {
             token = token.split("=").pop();
           }
           setToken(token);
-          this.getProjectsList();
+          this.getStudyList();
         },
         error => {
           showOrHideLoading(false);
         }
       );
     } else {
-      this.getProjectsList();
+      this.getStudyList();
     }
   }
 
-  getProjectsList() {
+  getStudyList() {
     showOrHideLoading(true);
-    this.homeService.getProjectsList(this.type, this.searchFilter).subscribe(
+    this.studyService.getStudyList(this.type, this.searchFilter).subscribe(
       data => {
-        this.mailsList = data;
-        this.mailsList.items.forEach(project => {
-          project.columns.modified = moment(project.columns.modified).format(
+        this.studyList = data;
+        this.studyList.items.forEach(study => {
+          study.columns.modified = moment(study.columns.modified).format(
             "MMM DD, YYYY"
           );
         });
@@ -130,7 +122,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  sortProjects(sortType) {
+  sortStudies(sortType) {
     let isAsc = false;
     if (this.searchFilter.sortingField === sortType) {
       isAsc = this.searchFilter.asc ? false : true;
@@ -138,6 +130,6 @@ export class HomeComponent implements OnInit {
     this.searchFilter.sortingField = sortType;
     this.searchFilter.page = 1;
     this.searchFilter.asc = isAsc;
-    this.getProjectsList();
+    this.getStudyList();
   }
 }

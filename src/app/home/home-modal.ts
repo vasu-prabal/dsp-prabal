@@ -78,13 +78,15 @@ export interface ISearch {
   items: number;
 }
 
-export interface IMailSearch extends ISearch {
+export interface IListSearchFilter extends ISearch {
   sortingField?: string;
   asc?: boolean;
   filterQuery?: string;
   labId?: number;
   modified?: string;
   userId?: string;
+  filter?: string;
+  paged?: string;
 }
 
 export interface ILogin {
@@ -93,20 +95,19 @@ export interface ILogin {
   _spring_security_remember_me: string;
 }
 
-export interface IMailsList {
-  items: Array<IProject>;
+export interface ISearchFilter {
   itemsCount: number;
   pageNumber: number;
   pageSize: number;
   totalPages: number;
 }
 
-export interface IProtocolList {
+export interface IMailsList extends ISearchFilter {
+  items: Array<IProject>;
+}
+
+export interface IProtocolList extends ISearchFilter {
   items: Array<IProtocol>;
-  itemsCount: number;
-  pageNumber: number;
-  pageSize: number;
-  totalPages: number;
 }
 
 export interface ISpeciesList {

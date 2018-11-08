@@ -228,6 +228,7 @@ export class CreateStudyComponent implements OnInit {
       instrumentsData => {
         this.instruments = instrumentsData;
         showOrHideLoading(false);
+        this.newStudy.instrument = null;
       },
       error => {
         this.instruments = [];
