@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { API_URL, LOCAL_API_URL, IS_LOCAL_API } from "../constants";
-import { getToken, getHttpHeaders, appendSession } from "../common";
+import { appendSession } from "../common";
 import {
   ISpeciesList,
   ITechTypes,
   IVendorList,
   IProject
 } from "../home/home-modal";
+import { IInstrumentModel, IInstrument, IExperimentType } from "./study-modal";
 
 @Injectable({
   providedIn: "root"
@@ -57,7 +58,7 @@ export class CreateStudyService {
     }
   }
 
-  getVendorsList(techTypeId: string) {
+  getVendorsList(techTypeId) {
     let url = `${API_URL}instruments/vendorsByStudyType`;
     url = appendSession(url);
     if (IS_LOCAL_API) {
@@ -73,16 +74,43 @@ export class CreateStudyService {
     }
   }
 
-  getInstrumentList() {
-    let url = `${API_URL}instrument-models/paged?asc=true&filter=undefined&filterQuery=&items=25&page=1&paged=paged&sortingField=name`;
+  checkInstrumentModalExists(species, technologyType, technologyValue, vendor) {
+    let url = `${API_URL}experiments/new/instrumentModels`;
     url = appendSession(url);
+    url = `${url}?species=${species}&technologyType=${technologyType}&technologyTypeValue=${technologyValue}&vendor=${vendor}`;
     if (IS_LOCAL_API) {
-      return this.http.post<Array<ITechTypes>>(LOCAL_API_URL, {
+      return this.http.post<Array<IInstrumentModel>>(LOCAL_API_URL, {
         url: url,
         type: "get"
       });
     } else {
-      return this.http.get<Array<ITechTypes>>(url);
+      return this.http.get<Array<IInstrumentModel>>(url);
+    }
+  }
+  getInstrumentsList(vendor) {
+    let url = `${API_URL}experiments/new/instruments`;
+    url = appendSession(url);
+    url = `${url}?instrumentModel=${vendor}`;
+    if (IS_LOCAL_API) {
+      return this.http.post<Array<IInstrument>>(LOCAL_API_URL, {
+        url: url,
+        type: "get"
+      });
+    } else {
+      return this.http.get<Array<IInstrument>>(url);
+    }
+  }
+
+  getExperimentTypes() {
+    let url = `${API_URL}experiments/new/experimentTypes`;
+    url = appendSession(url);
+    if (IS_LOCAL_API) {
+      return this.http.post<Array<IExperimentType>>(LOCAL_API_URL, {
+        url: url,
+        type: "get"
+      });
+    } else {
+      return this.http.get<Array<IExperimentType>>(url);
     }
   }
 }

@@ -1,3 +1,5 @@
+import { IExperimentType } from "../create-study/study-modal";
+
 export interface IProject {
   id?: number;
   blogEnabled?: boolean;
@@ -50,12 +52,12 @@ export interface IStudy {
   species?: string;
   allPrograms?: boolean;
   select?: string;
-  technology?: string;
+  technology?: string | number;
   vendor?: string;
   description?: string;
   instrumentModel?: string;
   instrument?: string;
-  experimentType?: string;
+  experimentType?: IExperimentType;
   lc?: string;
   labeled?: string;
   filterNameHasSelected?: boolean;

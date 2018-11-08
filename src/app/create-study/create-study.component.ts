@@ -12,6 +12,7 @@ import { CreateStudyService } from "../create-study/create-study.service";
 import { HomeService } from "../home/home.service";
 import { ProtocolService } from "../protocol/protocol.service";
 import { forkJoin } from "rxjs";
+import { IInstrumentModel, IInstrument, IExperimentType } from "./study-modal";
 
 declare var jQuery: any;
 @Component({
@@ -28,7 +29,9 @@ export class CreateStudyComponent implements OnInit {
   projects: Array<IProject> = [];
   protocols: Array<IProtocol> = [];
   fileUploadSize: number;
-
+  instrumentModels: Array<IInstrumentModel> = [];
+  instruments: Array<IInstrument> = [];
+  experimentTypes: Array<IExperimentType> = [];
   constructor(
     public createStudyService: CreateStudyService,
     public homeService: HomeService,
@@ -112,14 +115,14 @@ export class CreateStudyComponent implements OnInit {
       "experiment"
     );
     const protocolList = this.protocolService.getProtocolsList(filter);
-    // const instrumentList = this.createStudyService.getInstrumentList();
+    const experimentTypes = this.createStudyService.getExperimentTypes();
     forkJoin(
       species,
       techTypes,
       projects,
       maxFileUploadSize,
-      protocolList
-      // instrumentList
+      protocolList,
+      experimentTypes
     ).subscribe(
       results => {
         this.species = results[0];
@@ -127,33 +130,13 @@ export class CreateStudyComponent implements OnInit {
         this.projects = results[2].items;
         this.fileUploadSize = results[3]["value"] / (1024 * 1024);
         this.protocols = results[4].items;
+        this.experimentTypes = results[5];
         showOrHideLoading(false);
       },
       error => {
         showOrHideLoading(false);
       }
     );
-  }
-
-  getProtocolsList() {
-    const filter = {
-      page: 1,
-      items: 25,
-      asc: false,
-      sortingField: "protocolDate"
-    };
-    this.protocolService.getProtocolsList(filter).subscribe(data => {
-      this.protocols = data.items;
-    });
-  }
-
-  getMaxFileUploadSize() {
-    showOrHideLoading(true);
-    this.homeService
-      .getMaxFileSizeUpload("experiment")
-      .subscribe((data: any) => {
-        this.fileUploadSize = data.value / (1024 * 1024); // converting bytes to MB
-      });
   }
 
   addAttachments(files) {
@@ -185,41 +168,6 @@ export class CreateStudyComponent implements OnInit {
       });
   }
 
-  getProjects() {
-    showOrHideLoading(true);
-    const filter = {
-      asc: false,
-      filterQuery: "",
-      items: 25,
-      labId: 0,
-      page: 1,
-      sortingField: "modified"
-    };
-    // this.createStudyService.getProjects
-    this.homeService.getProjectsList("all", filter).subscribe((data: any) => {
-      this.projects = data.items;
-      showOrHideLoading(false);
-    });
-  }
-
-  getSpecies() {
-    showOrHideLoading(true);
-    this.createStudyService.getSpecies().subscribe((data: any) => {
-      this.species = data;
-      showOrHideLoading(false);
-    });
-  }
-
-  getTechType() {
-    showOrHideLoading(true);
-    this.createStudyService
-      .getTechTypes()
-      .subscribe((data: Array<ITechTypes>) => {
-        this.techTypes = data;
-        showOrHideLoading(false);
-      });
-  }
-
   getVendorsList() {
     if (this.newStudy.technology !== null) {
       showOrHideLoading(true);
@@ -241,5 +189,50 @@ export class CreateStudyComponent implements OnInit {
       jQuery("#create_study_dialog").modal("hide");
       showOrHideLoading(false);
     }, 1000);
+  }
+
+  checkInstrumentModalExists() {
+    const selectedTechnology = this.techTypes.find(
+      x => x.id === this.newStudy.technology
+    );
+    if (selectedTechnology) {
+      showOrHideLoading(true);
+      this.createStudyService
+        .checkInstrumentModalExists(
+          this.newStudy.species,
+          this.newStudy.technology,
+          selectedTechnology.name,
+          this.newStudy.vendor
+        )
+        .subscribe(
+          data => {
+            showOrHideLoading(false);
+            this.instrumentModels = data;
+            if (this.instrumentModels.length > 0) {
+              this.getInstrumentsList(this.instrumentModels[0].id);
+            } else {
+              this.instruments = [];
+            }
+          },
+          error => {
+            console.log(error);
+            showOrHideLoading(false);
+          }
+        );
+    }
+  }
+
+  getInstrumentsList(instrumentModelId) {
+    showOrHideLoading(true);
+    this.createStudyService.getInstrumentsList(instrumentModelId).subscribe(
+      instrumentsData => {
+        this.instruments = instrumentsData;
+        showOrHideLoading(false);
+      },
+      error => {
+        this.instruments = [];
+        showOrHideLoading(false);
+      }
+    );
   }
 }

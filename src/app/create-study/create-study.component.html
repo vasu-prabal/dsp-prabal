@@ -51,12 +51,6 @@
                                             placeholder="Study Name" />
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                                        <!-- <label for="name">Project</label> -->
-                                        <!-- <select class="form-control custom-input-border" name="project" [(ngModel)]="newStudy.project">
-                                            <option value="project 1">Project 1</option>
-                                            <option value="project 2">Project 2</option>
-                                        </select> -->
-
                                         <ng-select placeholder="Project" class="ng-select-dropdown header-3" [items]="projects"
                                             name="project" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.project">
                                         </ng-select>
@@ -85,31 +79,24 @@
                                         </label>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                        <!-- <label for="name">Select one</label> -->
-                                        <select class="form-control custom-input-border header-3" name="project"
-                                            [(ngModel)]="newStudy.select">
-                                            <option value="">--Select One--</option>
-                                            <option value="project 1">Project 1</option>
-                                            <option value="project 2">Project 2</option>
-                                        </select>
+                                        <ng-select [disabled]="newStudy.allPrograms" class="ng-select-dropdown header-3"
+                                            name="select" [(ngModel)]="newStudy.select">
+                                            <ng-option value="">--Select One--</ng-option>
+                                            <ng-option value="project 1">Project 1</ng-option>
+                                            <ng-option value="project 2">Project 2</ng-option>
+                                        </ng-select>
                                     </div>
 
                                     <div class="col-lg-6 mt-4 col-md-6 col-sm-12 col-xs-12 form-group">
-                                        <!-- <label for="name">Technology type</label> -->
-                                        <!-- <input [(ngModel)]="newStudy.technology" name="species" class="form-control header-3 custom-input-border"
-                                            placeholder="Technology type"> -->
                                         <ng-select placeholder="Technology" class="ng-select-dropdown header-3" [items]="techTypes"
                                             name="technology" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.technology"
                                             (change)="getVendorsList()">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-6 mt-4 col-md-6 col-sm-12 col-xs-12 form-group">
-                                        <!-- <label for="name">Vendor</label> -->
-                                        <!-- <input [(ngModel)]="newStudy.vendor" name="species" class="form-control header-3 custom-input-border"
-                                            placeholder="Vendor"> -->
-
                                         <ng-select placeholder="Vendor" class="ng-select-dropdown header-3" [items]="vendors"
-                                            name="vendor" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.vendor">
+                                            name="vendor" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.vendor"
+                                            (change)="checkInstrumentModalExists()">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
@@ -138,28 +125,32 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <ng-select placeholder="Instrument Model" class="ng-select-dropdown header-3"
-                                        [(ngModel)]="newStudy.instrumentModel">
-                                        <ng-option value="Agilent">Agilent - 6200 Series Accurate-Mass Time</ng-option>
+                                        [(ngModel)]="newStudy.instrumentModel" [items]="instrumentModels" name="instrumentModel"
+                                        bindLabel="name" bindValue="id" (change)="getInstrumentsList(newStudy.instrumentModel)">
                                     </ng-select>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
-                                    <ng-select placeholder="Instrument" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.instrument">
-                                        <ng-option value="Agilent">Agilent - 6520 Series Accurate-Mass Q-TOP LC/MS</ng-option>
+                                    <ng-select placeholder="Instrument" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.instrument"
+                                        [items]="instruments" name="instruments" bindLabel="name" bindValue="id">
                                     </ng-select>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <ng-select placeholder="Experiment Type" class="ng-select-dropdown header-3"
-                                        [(ngModel)]="newStudy.experimentType">
-                                        <ng-option value="exp1">Experiment 1</ng-option>
+                                        [(ngModel)]="newStudy.experimentType" [items]="experimentTypes" name="experimentType"
+                                        bindLabel="name">
                                     </ng-select>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
-                                    <ng-select placeholder="2D/LC" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.lc">
+                                    <ng-select [disabled]="newStudy.experimentType && !newStudy.experimentType.allowed2DLC"
+                                        placeholder="2D/LC" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.lc">
+                                        <ng-option value="yes">Yes</ng-option>
                                         <ng-option value="no">No</ng-option>
                                     </ng-select>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
-                                    <ng-select placeholder="Labeled" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.labeled">
+                                    <ng-select [disabled]="newStudy.experimentType && !newStudy.experimentType.allowLabels"
+                                        placeholder="Labeled" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.labeled">
+                                        <ng-option value="yes">Yes</ng-option>
                                         <ng-option value="no">No</ng-option>
                                     </ng-select>
                                 </div>
