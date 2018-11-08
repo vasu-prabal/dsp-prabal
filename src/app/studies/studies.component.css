@@ -13,7 +13,7 @@
 }
 .pagination-footer {
   float: right;
-  padding: 15px 8px;
+  padding: 8px 8px 0;
 }
 .pagination-footer > button {
   width: 100px;

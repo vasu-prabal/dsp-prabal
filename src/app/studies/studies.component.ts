@@ -122,6 +122,16 @@ export class StudiesComponent implements OnInit {
     );
   }
 
+  getNextResults() {
+    this.searchFilter.page += 1;
+    this.getStudyList();
+  }
+
+  getPreviousResults() {
+    this.searchFilter.page -= 1;
+    this.getStudyList();
+  }
+
   sortStudies(sortType) {
     let isAsc = false;
     if (this.searchFilter.sortingField === sortType) {
