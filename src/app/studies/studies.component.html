@@ -71,13 +71,13 @@
       <tbody>
         <tr *ngFor="let study of studyList.items">
           <td class="header-3">...</td>
-          <td [innerHtml]="study.id"></td>
-          <td [innerHtml]="study.columns.name"></td>
-          <td [innerHtml]="study.columns.owner"></td>
-          <td [innerHtml]="study.columns.laboratory"></td>
-          <td [innerHtml]="study.columns.project"></td>
-          <td [innerHtml]="study.columns.files"></td>
-          <td [innerHtml]="study.columns.modified"></td>
+          <td [innerHtml]="study.id" title="{{study.id}}"></td>
+          <td [innerHtml]="study.columns.name" title="{{study.columns.name}}"></td>
+          <td [innerHtml]="study.columns.owner" title="{{study.columns.owner}}"></td>
+          <td [innerHtml]="study.columns.laboratory" title="{{study.columns.laboratory}}"></td>
+          <td [innerHtml]="study.columns.project" title="{{study.columns.project}}"></td>
+          <td [innerHtml]="study.columns.files" title="{{study.columns.files}}"></td>
+          <td [innerHtml]="study.columns.modified" title="{{study.columns.modified}}"></td>
         </tr>
         <tr *ngIf="studyList.items.length==0">
           <td class="header-3 text-center no-results" colspan="7">No data found</td>

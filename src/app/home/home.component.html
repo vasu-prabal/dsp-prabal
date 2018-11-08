@@ -66,12 +66,12 @@
             <tbody>
                 <tr *ngFor="let mail of mailsList.items">
                     <td class="header-3">...</td>
-                    <td [innerHtml]="mail.id"></td>
-                    <td [innerHtml]="mail.columns.name"></td>
-                    <td [innerHtml]="mail.columns.owner"></td>
-                    <td [innerHtml]="mail.columns.laboratory"></td>
-                    <td [innerHtml]="mail.columns.area"></td>
-                    <td [innerHtml]="mail.columns.modified"></td>
+                    <td [innerHtml]="mail.id" title="{{mail.id}}"></td>
+                    <td [innerHtml]="mail.columns.name" title="{{mail.columns.name}}"></td>
+                    <td [innerHtml]="mail.columns.owner" title="{{mail.columns.owner}}"></td>
+                    <td [innerHtml]="mail.columns.laboratory" title="{{mail.columns.laboratory}}"></td>
+                    <td [innerHtml]="mail.columns.area" title="{{mail.columns.area}}"></td>
+                    <td [innerHtml]="mail.columns.modified" title="{{mail.columns.modified}}"></td>
                 </tr>
                 <tr *ngIf="mailsList.items.length==0">
                     <td class="header-3 text-center no-results" colspan="7">No data found</td>

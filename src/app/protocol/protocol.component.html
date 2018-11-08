@@ -3,7 +3,6 @@
     <app-create-button #createProtocol></app-create-button>
     <app-upload-button></app-upload-button>
     <h4 class="list-data-count header-1 text-white bold">Protocols (<span [innerHtml]="protocols.length"></span>)
-      <!-- &nbsp;&nbsp;(<span [innerHTML]="mailsList.itemsCount"></span>) -->
     </h4>
   </div>
   <div>
@@ -62,11 +61,11 @@
       <tbody>
         <tr class="table-cell-hover" *ngFor="let protocol of protocols">
           <td class="header-3">...</td>
-          <td [innerHtml]="protocol.id"></td>
-          <td [innerHtml]="protocol.protocolName"></td>
-          <td [innerHtml]="protocol.protocolType"></td>
-          <td [innerHtml]="protocol.protocolDate"></td>
-          <td [innerHtml]="protocol.enrichmentStrategy"></td>
+          <td [innerHtml]="protocol.id" title="{{protocol.id}}"></td>
+          <td [innerHtml]="protocol.protocolName" title="{{protocol.protocolName}}"></td>
+          <td [innerHtml]="protocol.protocolType" title="{{protocol.protocolType}}"></td>
+          <td [innerHtml]="protocol.protocolDate" title="{{protocol.protocolDate}}"></td>
+          <td [innerHtml]="protocol.enrichmentStrategy" title="{{protocol.enrichmentStrategy}}"></td>
           <td class="table-actions">
             <span class="fa fa-edit" (click)="editProtocol(protocol.id)"></span>
             <span class="fa fa-trash" (click)="deleteProtocol(protocol.id)"></span>

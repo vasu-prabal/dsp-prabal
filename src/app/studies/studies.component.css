@@ -11,3 +11,13 @@
   max-width: 70px !important;
   width: 70px !important;
 }
+.pagination-footer {
+  float: right;
+  padding: 15px 8px;
+}
+.pagination-footer > button {
+  width: 100px;
+}
+.pagination-footer > button:nth-child(1) {
+  margin-right: 8px;
+}
