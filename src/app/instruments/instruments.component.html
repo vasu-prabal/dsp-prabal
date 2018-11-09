@@ -152,8 +152,8 @@
               title="{{instrument.instrumentType.name}}"
             ></td>
             <td
-              [innerHtml]="instrument.extensions[0]"
-              title="{{instrument.extensions[0]}}"
+              [innerHtml]="instrument.extensions.join(',')"
+              title="{{instrument.extensions.join(',')}}"
             ></td>
           </tr>
           <tr *ngIf="instrumentsList.items.length == 0">
