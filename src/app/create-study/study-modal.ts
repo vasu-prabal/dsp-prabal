@@ -1,8 +1,5 @@
-export interface IInstrumentModel {
-  id: number;
-  name: string;
-  unspecified: boolean;
-}
+import { IAttributeModal } from "../instruments/instruments-modal";
+
 export interface IInstrument {
   creator: number;
   id: number;
@@ -11,7 +8,7 @@ export interface IInstrument {
   serial: string;
 }
 
-export interface IExperimentType extends IInstrumentModel {
+export interface IExperimentType extends IAttributeModal {
   allowLabels: boolean;
   allowed2DLC: boolean;
 }

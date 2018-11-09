@@ -2,13 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { API_URL, LOCAL_API_URL, IS_LOCAL_API } from "../constants";
 import { appendSession } from "../common";
-import {
-  ISpeciesList,
-  ITechTypes,
-  IVendorList,
-  IProject
-} from "../home/home-modal";
+import { IProject } from "../home/home-modal";
 import { IInstrumentModel, IInstrument, IExperimentType } from "./study-modal";
+import { IAttributeModal } from "../instruments/instruments-modal";
 
 @Injectable({
   providedIn: "root"
@@ -36,12 +32,12 @@ export class CreateStudyService {
     let url = `${API_URL}experiments/new/species`;
     url = appendSession(url);
     if (IS_LOCAL_API) {
-      return this.http.post<Array<ISpeciesList>>(LOCAL_API_URL, {
+      return this.http.post<Array<IAttributeModal>>(LOCAL_API_URL, {
         url: url,
         type: "get"
       });
     } else {
-      return this.http.get<Array<ISpeciesList>>(url);
+      return this.http.get<Array<IAttributeModal>>(url);
     }
   }
 
@@ -49,12 +45,12 @@ export class CreateStudyService {
     let url = `${API_URL}instruments/studyTypes`;
     url = appendSession(url);
     if (IS_LOCAL_API) {
-      return this.http.post<Array<ITechTypes>>(LOCAL_API_URL, {
+      return this.http.post<Array<IAttributeModal>>(LOCAL_API_URL, {
         url: url,
         type: "get"
       });
     } else {
-      return this.http.get<Array<ITechTypes>>(url);
+      return this.http.get<Array<IAttributeModal>>(url);
     }
   }
 
@@ -62,13 +58,13 @@ export class CreateStudyService {
     let url = `${API_URL}instruments/vendorsByStudyType`;
     url = appendSession(url);
     if (IS_LOCAL_API) {
-      return this.http.post<Array<IVendorList>>(LOCAL_API_URL, {
+      return this.http.post<Array<IAttributeModal>>(LOCAL_API_URL, {
         url: url,
         type: "get",
         params: { techType: techTypeId }
       });
     } else {
-      return this.http.get<Array<IVendorList>>(url, {
+      return this.http.get<Array<IAttributeModal>>(url, {
         params: { techType: techTypeId }
       });
     }

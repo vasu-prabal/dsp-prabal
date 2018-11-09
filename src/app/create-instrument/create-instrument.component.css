@@ -1,0 +1,12 @@
+.custom-file-extensions {
+  width: 100%;
+  border-bottom: 1px solid #585858;
+  padding: 8px;
+}
+.file-extension-placeholder {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.custom-file-extensions .fa-close:hover {
+  color: #dc3545;
+}

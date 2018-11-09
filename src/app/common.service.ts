@@ -6,7 +6,8 @@ import {
   LOCAL_API_URL,
   PROTOCOL_ADDED,
   PROJECT_ADDED,
-  IS_LOCAL_API
+  IS_LOCAL_API,
+  INSTRUMENT_MODEL_ADDED
 } from "./constants";
 import { Subject, Observable } from "rxjs";
 
@@ -27,6 +28,10 @@ export class CommonService {
 
   projectAdded() {
     this.listener.next(PROJECT_ADDED);
+  }
+
+  instrumentModelAdded() {
+    this.listener.next(INSTRUMENT_MODEL_ADDED);
   }
 
   doLogin(login: ILogin) {

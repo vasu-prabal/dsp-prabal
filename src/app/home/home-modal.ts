@@ -110,24 +110,6 @@ export interface IProtocolList extends ISearchFilter {
   items: Array<IProtocol>;
 }
 
-export interface ISpeciesList {
-  name: string;
-  unspecified: boolean;
-  id: number;
-}
-
-export interface ITechTypes {
-  name: string;
-  unspecified: boolean;
-  id: number;
-}
-
-export interface IVendorList {
-  name: string;
-  unspecified: boolean;
-  id: number;
-}
-
 export interface INewSharingGroup {
   persons?: string;
   name?: string;

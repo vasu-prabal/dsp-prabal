@@ -1,18 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
-import {
-  IStudy,
-  ISpeciesList,
-  ITechTypes,
-  IVendorList,
-  IProject,
-  IProtocol
-} from "../home/home-modal";
+import { IStudy, IProject, IProtocol } from "../home/home-modal";
 import { showOrHideLoading } from "../common";
 import { CreateStudyService } from "../create-study/create-study.service";
 import { HomeService } from "../home/home.service";
 import { ProtocolService } from "../protocol/protocol.service";
 import { forkJoin } from "rxjs";
 import { IInstrumentModel, IInstrument, IExperimentType } from "./study-modal";
+import { IAttributeModal } from "../instruments/instruments-modal";
 
 declare var jQuery: any;
 @Component({
@@ -23,9 +17,9 @@ declare var jQuery: any;
 export class CreateStudyComponent implements OnInit {
   newStudy: IStudy = {};
   dropZone: HTMLElement;
-  species: Array<ISpeciesList> = [];
-  techTypes: Array<ITechTypes> = [];
-  vendors: Array<IVendorList> = [];
+  species: Array<IAttributeModal> = [];
+  techTypes: Array<IAttributeModal> = [];
+  vendors: Array<IAttributeModal> = [];
   projects: Array<IProject> = [];
   protocols: Array<IProtocol> = [];
   fileUploadSize: number;
@@ -173,7 +167,7 @@ export class CreateStudyComponent implements OnInit {
       showOrHideLoading(true);
       this.createStudyService
         .getVendorsList(this.newStudy.technology)
-        .subscribe((data: Array<IVendorList>) => {
+        .subscribe((data: Array<IAttributeModal>) => {
           this.vendors = data;
           showOrHideLoading(false);
         });

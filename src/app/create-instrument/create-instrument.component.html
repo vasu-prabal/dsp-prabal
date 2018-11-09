@@ -1,0 +1,112 @@
+<div
+  #createInstrument
+  id="create_instrument_dialog"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="instrumentDialog"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title header-2 bold" id="instrumentDialog">
+          Create an Instrument Model
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true" [inlineSVG]="'./assets/icons/close.svg'">
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-11 form-group">
+            <ng-select
+              placeholder="Technology Type"
+              class="ng-select-dropdown header-3"
+              name="technologyType"
+              (change)="getInstrumentTypes()"
+              [(ngModel)]="newInstrumentModel.technologyType"
+              [items]="technologyList"
+              bindLabel="name"
+            >
+            </ng-select>
+          </div>
+          <div class="col-1"></div>
+          <div class="col-11 form-group">
+            <ng-select
+              placeholder="Vendor"
+              class="ng-select-dropdown header-3"
+              name="vendor"
+              (change)="getInstrumentTypes()"
+              [(ngModel)]="newInstrumentModel.vendor"
+              [items]="vendorList"
+              bindLabel="name"
+            >
+            </ng-select>
+          </div>
+          <div class="col-1"></div>
+          <div class="col-11 form-group">
+            <ng-select
+              placeholder="Instrument Type"
+              class="ng-select-dropdown header-3"
+              name="instrumentType"
+              [(ngModel)]="newInstrumentModel.instrumentType"
+              [items]="instrumentTypes"
+              bindLabel="name"
+            >
+            </ng-select>
+          </div>
+          <div class="col-1"></div>
+          <div class="col-11 form-group">
+            <div class="custom-file-extensions">
+              <span
+                *ngFor="
+                  let extension of newInstrumentModel.extensions;
+                  let i = index
+                "
+                class="header-3"
+              >
+                <span [innerHTML]="extension"></span>
+                <span
+                  class="fa fa-close  pointer ml-1"
+                  (click)="removeExtension(i)"
+                ></span>
+                <span *ngIf="i < newInstrumentModel.extensions.length - 1"
+                  >,</span
+                >
+              </span>
+              <span
+                *ngIf="extensions.length === 0"
+                class="header-3 file-extension-placeholder"
+                >File Extensions</span
+              >
+            </div>
+          </div>
+          <div class="col-1"></div>
+          <div class="col-12 form-group">
+              <input [(ngModel)]="newInstrumentModel.name" name="name" autocomplete="off" class="form-control input-border header-3"
+              placeholder="Name">
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="addNewInstrumentModel()"
+        >
+          Create
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

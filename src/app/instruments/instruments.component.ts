@@ -3,7 +3,11 @@ import { IInstrumentList } from "./instruments-modal";
 import { InstrumentsService } from "./instruments.service";
 import { IListSearchFilter } from "../home/home-modal";
 import { CommonService } from "../common.service";
-import { INSTRUMENT_ADDED, loginUserDetails, IS_LOCAL_API } from "../constants";
+import {
+  INSTRUMENT_MODEL_ADDED,
+  loginUserDetails,
+  IS_LOCAL_API
+} from "../constants";
 import { getToken, showOrHideLoading, setToken } from "../common";
 
 declare var jQuery;
@@ -34,7 +38,7 @@ export class InstrumentsComponent implements OnInit {
     public commonService: CommonService
   ) {
     this.commonService.listen().subscribe((type: any) => {
-      if (type === INSTRUMENT_ADDED) {
+      if (type === INSTRUMENT_MODEL_ADDED) {
         this.searchFilter.page = 1;
         this.searchFilter.filterQuery = "";
         this.getInstrumentsList();
@@ -105,6 +109,7 @@ export class InstrumentsComponent implements OnInit {
     }
     this.searchFilter.sortingField = sortType;
     this.searchFilter.asc = isAsc;
+    this.searchResults();
   }
 
   searchResults() {

@@ -26,6 +26,7 @@ import { RequestInterceptor } from "./http-interceptor";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { StudiesComponent } from "./studies/studies.component";
 import { InstrumentsComponent } from "./instruments/instruments.component";
+import { CreateInstrumentComponent } from "./create-instrument/create-instrument.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { InstrumentsComponent } from "./instruments/instruments.component";
     CreateButtonComponent,
     UploadButtonComponent,
     StudiesComponent,
-    InstrumentsComponent
+    InstrumentsComponent,
+    CreateInstrumentComponent
   ],
   imports: [
     BrowserModule,

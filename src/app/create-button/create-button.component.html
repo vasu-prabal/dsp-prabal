@@ -1,18 +1,60 @@
 <div class="btn-group m-1">
-  <button type="button" class="btn btn-success" (click)="createProjectModalRef.openCreateProjectDialog()">
-    <span class="fa fa-plus"></span> &nbsp;&nbsp;Create</button>
-  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
-    aria-haspopup="true" aria-expanded="false">
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="createProjectModalRef.openCreateProjectDialog()"
+  >
+    <span class="fa fa-plus"></span> &nbsp;&nbsp;Create
+  </button>
+  <button
+    type="button"
+    class="btn btn-success dropdown-toggle dropdown-toggle-split"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
     <span class="sr-only"></span>
   </button>
   <div class="dropdown-menu create-menu-actions">
-    <a class="dropdown-item" (click)="createProjectModalRef.openCreateProjectDialog()">Project</a>
-    <a class="dropdown-item" (click)="createProtocolModalRef.openCreateProtocolDialog()">Protocol</a>
-    <a class="dropdown-item" (click)="createStudyModalRef.openCreateStudyDialog()">Study</a>
-    <!-- <a class="dropdown-item" (click)="createScriptModalRef.openCreateScriptDialog()">Script</a>
-    <a class="dropdown-item" (click)="createSharingGroupModalRef.openCreateSHaringGroupDialog()">Sharing
-      Group</a>
-    <a class="dropdown-item" (click)="createExperimentModalRef.openCreateExperimentDialog()">Experiment</a> -->
+    <a
+      class="dropdown-item"
+      (click)="createProjectModalRef.openCreateProjectDialog()"
+      >Project</a
+    >
+    <a
+      class="dropdown-item"
+      (click)="createProtocolModalRef.openCreateProtocolDialog()"
+      >Protocol</a
+    >
+    <a
+      class="dropdown-item"
+      (click)="createStudyModalRef.openCreateStudyDialog()"
+      >Study</a
+    >
+
+    <a
+      class="dropdown-item"
+      (click)="createInstrumentModalRef.openCreateInstrumentDialog()"
+      >Instrument</a
+    >
+
+    <!--
+      <a class="dropdown-item" (click)="createScriptModalRef.openCreateScriptDialog()">Script</a>
+
+
+
+      <a class="dropdown-item" (click)="createSharingGroupModalRef.openCreateSHaringGroupDialog()">Sharing
+
+
+
+
+        Group</a>
+
+
+
+
+      <a class="dropdown-item" (click)="createExperimentModalRef.openCreateExperimentDialog()">Experiment</a>
+    -->
   </div>
 </div>
 
@@ -22,7 +64,11 @@
 
 <app-create-script #createScriptModalRef></app-create-script>
 
-<app-create-sharing-group #createSharingGroupModalRef></app-create-sharing-group>
+<app-create-sharing-group
+  #createSharingGroupModalRef
+></app-create-sharing-group>
 
 <app-create-experiment #createExperimentModalRef></app-create-experiment>
 <app-create-protocol #createProtocolModalRef></app-create-protocol>
+
+<app-create-instrument #createInstrumentModalRef></app-create-instrument>
