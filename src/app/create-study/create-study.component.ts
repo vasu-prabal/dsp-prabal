@@ -5,7 +5,7 @@ import { CreateStudyService } from "../create-study/create-study.service";
 import { HomeService } from "../home/home.service";
 import { ProtocolService } from "../protocol/protocol.service";
 import { forkJoin } from "rxjs";
-import { IInstrumentModel, IInstrument, IExperimentType } from "./study-modal";
+import { IInstrument, IExperimentType } from "./study-modal";
 import { IAttributeModal } from "../instruments/instruments-modal";
 
 declare var jQuery: any;
@@ -23,7 +23,7 @@ export class CreateStudyComponent implements OnInit {
   projects: Array<IProject> = [];
   protocols: Array<IProtocol> = [];
   fileUploadSize: number;
-  instrumentModels: Array<IInstrumentModel> = [];
+  instrumentModels: Array<IAttributeModal> = [];
   instruments: Array<IInstrument> = [];
   experimentTypes: Array<IExperimentType> = [];
   constructor(

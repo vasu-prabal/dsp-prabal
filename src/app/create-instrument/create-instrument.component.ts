@@ -66,15 +66,23 @@ export class CreateInstrumentComponent implements OnInit {
         this.newInstrumentModel.technologyType.id,
         this.newInstrumentModel.vendor.id
       );
-      this.instrumentTypes = [];
+      this.instrumentTypes = [
+        {
+          id: undefined,
+          name: "None",
+          unspecified: false
+        }
+      ];
       this.extensions = [];
       this.newInstrumentModel.instrumentType = null;
       this.newInstrumentModel.extensions = null;
       forkJoin(instrumentTypes, extensions).subscribe(
         results => {
-          this.instrumentTypes = results[0]["value"];
-          this.extensions = results[1]["value"];
+          if (results[0]["value"].length > 0) {
+            this.instrumentTypes = results[0]["value"];
+          }
           this.newInstrumentModel.instrumentType = this.instrumentTypes[0];
+          this.extensions = results[1]["value"];
           this.newInstrumentModel.extensions = this.extensions;
           showOrHideLoading(false);
         },
@@ -93,17 +101,17 @@ export class CreateInstrumentComponent implements OnInit {
   addNewInstrumentModel() {
     if (
       !this.newInstrumentModel.technologyType ||
-      !this.newInstrumentModel.technologyType.id
+      !this.newInstrumentModel.technologyType.name
     ) {
       showToastMessage("Please select technology type", "error");
     } else if (
       !this.newInstrumentModel.vendor ||
-      !this.newInstrumentModel.vendor.id
+      !this.newInstrumentModel.vendor.name
     ) {
       showToastMessage("Please select vendor", "error");
     } else if (
       !this.newInstrumentModel.instrumentType ||
-      !this.newInstrumentModel.instrumentType.id
+      !this.newInstrumentModel.instrumentType.name
     ) {
       showToastMessage("Please select instrument type", "error");
     } else if (

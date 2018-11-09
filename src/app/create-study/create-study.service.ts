@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { API_URL, LOCAL_API_URL, IS_LOCAL_API } from "../constants";
 import { appendSession } from "../common";
 import { IProject } from "../home/home-modal";
-import { IInstrumentModel, IInstrument, IExperimentType } from "./study-modal";
+import { IInstrument, IExperimentType } from "./study-modal";
 import { IAttributeModal } from "../instruments/instruments-modal";
 
 @Injectable({
@@ -75,12 +75,12 @@ export class CreateStudyService {
     url = appendSession(url);
     url = `${url}?species=${species}&technologyType=${technologyType}&technologyTypeValue=${technologyValue}&vendor=${vendor}`;
     if (IS_LOCAL_API) {
-      return this.http.post<Array<IInstrumentModel>>(LOCAL_API_URL, {
+      return this.http.post<Array<IAttributeModal>>(LOCAL_API_URL, {
         url: url,
         type: "get"
       });
     } else {
-      return this.http.get<Array<IInstrumentModel>>(url);
+      return this.http.get<Array<IAttributeModal>>(url);
     }
   }
   getInstrumentsList(vendor) {
