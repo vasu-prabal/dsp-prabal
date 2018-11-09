@@ -28,6 +28,7 @@ export class CreateInstrumentComponent implements OnInit {
   ngOnInit() {}
 
   openCreateInstrumentDialog() {
+    this.newInstrumentModel = {};
     jQuery("#create_instrument_dialog")
       .modal({ backdrop: "static", keyboard: false })
       .modal("show");
