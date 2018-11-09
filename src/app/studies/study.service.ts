@@ -20,9 +20,7 @@ export class StudyService {
         data: searchFilter
       });
     } else {
-      return this.http.get<IStudyList>(url, {
-        params: searchFilter
-      });
+      return this.http.post<IStudyList>(url, searchFilter);
     }
   }
 }
