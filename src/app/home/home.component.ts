@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { HomeService } from "./home.service";
-import { IListSearchFilter, ILogin, IMailsList, IProjectColumns } from "./home-modal";
+import {
+  IListSearchFilter,
+  ILogin,
+  IMailsList,
+  IProjectColumns
+} from "./home-modal";
 import { getToken, setToken, showOrHideLoading } from "../common";
 import * as moment from "moment";
 import { Params, ActivatedRoute } from "@angular/router";
@@ -56,6 +61,7 @@ export class HomeComponent implements OnInit {
     });
     this.commonService.listen().subscribe((type: any) => {
       if (type === PROJECT_ADDED) {
+        this.searchFilter.page = 1;
         this.getProjectsList();
       }
     });

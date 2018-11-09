@@ -20,42 +20,42 @@
       <thead>
         <tr class="table-cell-hover">
           <th class="header-3">...</th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='id'}" (click)="sortProjects('id')">
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='id'}" (click)="sortProtocols('id')">
             ID
             <span *ngIf="searchFilter.sortingField==='id'">
               <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>
           </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolName'}" (click)="sortProjects('protocolName')">PROTOCOL
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolName'}" (click)="sortProtocols('protocolName')">PROTOCOL
             NAME
             <span *ngIf="searchFilter.sortingField==='protocolName'">
               <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>
           </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolType'}" (click)="sortProjects('protocolType')">
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolType'}" (click)="sortProtocols('protocolType')">
             TYPE
             <span *ngIf="searchFilter.sortingField==='protocolType'">
               <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>
           </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolDate'}" (click)="sortProjects('protocolDate')">DATE
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolDate'}" (click)="sortProtocols('protocolDate')">DATE
 
             <span *ngIf="searchFilter.sortingField==='protocolDate'">
               <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>
           </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='enrichmentStrategy'}" (click)="sortProjects('enrichmentStrategy')">ENRICHMENT
+          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='enrichmentStrategy'}" (click)="sortProtocols('enrichmentStrategy')">ENRICHMENT
             STRATEGY
             <span *ngIf="searchFilter.sortingField==='enrichmentStrategy'">
               <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
               <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
             </span>
           </th>
-          <th class="header-3">Actions</th>
+          <th class="header-3 not-sortable">Actions</th>
         </tr>
       </thead>
       <tbody>

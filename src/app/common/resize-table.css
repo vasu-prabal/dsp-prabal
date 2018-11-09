@@ -1,0 +1,35 @@
+.JColResizer > tbody > tr > td,
+.JColResizer > tbody > tr > th {
+  overflow: hidden;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+.custom-table thead,
+.custom-table thead th:nth-child(1),
+.custom-table thead th:nth-child(2),
+.custom-table tbody td:not(.no-results):nth-child(1) {
+  max-width: 70px !important;
+  width: 70px !important;
+}
+.pagination-footer {
+  float: right;
+  padding: 8px;
+}
+.pagination-footer > button {
+  width: 100px;
+}
+.pagination-footer > button:nth-child(1) {
+  margin-right: 8px;
+}
+.custom-table-container {
+  height: calc(100vh - 160px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.custom-table-container.has-pagination {
+  height: calc(100vh - 205px);
+}
+.not-sortable {
+  cursor: default !important;
+  text-decoration: none !important;
+}

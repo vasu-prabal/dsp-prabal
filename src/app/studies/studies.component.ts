@@ -48,6 +48,7 @@ export class StudiesComponent implements OnInit {
     });
     this.commonService.listen().subscribe((type: any) => {
       if (type === STUDY_ADDED) {
+        this.searchFilter.page = 1;
         this.getStudyList();
       }
     });

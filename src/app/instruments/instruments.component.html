@@ -1,0 +1,192 @@
+<div
+  class="d-flex justify-content-between align-items-center projects-actions-container"
+>
+  <div>
+    <app-create-button></app-create-button>
+    <app-upload-button></app-upload-button>
+    <h4 class="list-data-count header-1 text-white bold">
+      Instruments &nbsp;&nbsp;(<span
+        [innerHTML]="instrumentsList.itemsCount"
+      ></span
+      >)
+    </h4>
+  </div>
+  <div>
+    <div class="input-group">
+      <input
+        type="text"
+        name="filterQuery"
+        [(ngModel)]="searchFilter.filterQuery"
+        (keyup.enter)="searchResults()"
+        class="form-control filter-list-container"
+        placeholder="Filter List"
+      />
+    </div>
+  </div>
+</div>
+<div class="email-container">
+  <div class="side-menu-container"><app-side-menu></app-side-menu></div>
+  <div class="custom-table">
+    <div
+      class="custom-table-container"
+      [ngClass]="{
+        'has-pagination':
+          searchFilter.page > 1 ||
+          searchFilter.items === instrumentsList.items.length
+      }"
+    >
+      <table class="table instruments-table">
+        <thead>
+          <tr class="table-cell-hover">
+            <th class="header-3">...</th>
+            <th
+              class="header-3"
+              [ngClass]="{ 'is-sorted': searchFilter.sortingField === 'id' }"
+              (click)="sortInstruments('id')"
+            >
+              ID
+              <span *ngIf="searchFilter.sortingField === 'id'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{ 'is-sorted': searchFilter.sortingField === 'name' }"
+              (click)="sortInstruments('name')"
+            >
+              NAME
+              <span *ngIf="searchFilter.sortingField === 'name'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{
+                'is-sorted': searchFilter.sortingField === 'studyType'
+              }"
+              (click)="sortInstruments('studyType')"
+            >
+              Technology type
+              <span *ngIf="searchFilter.sortingField === 'studyType'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{
+                'is-sorted': searchFilter.sortingField === 'vendor'
+              }"
+              (click)="sortInstruments('vendor')"
+            >
+              Vendor
+
+              <span *ngIf="searchFilter.sortingField === 'vendor'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{
+                'is-sorted': searchFilter.sortingField === 'instrumentType'
+              }"
+              (click)="sortInstruments('instrumentType')"
+            >
+              Instrument Type
+              <span *ngIf="searchFilter.sortingField === 'instrumentType'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th class="header-3 not-sortable">File Extension</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let instrument of instrumentsList.items">
+            <td class="header-3">...</td>
+            <td [innerHtml]="instrument.id" title="{{instrument.id}}"></td>
+            <td [innerHtml]="instrument.name" title="{{instrument.name}}"></td>
+            <td
+              [innerHtml]="instrument.technologyType.name"
+              title="{{instrument.technologyType.name}}"
+            ></td>
+            <td
+              [innerHtml]="instrument.vendor.name"
+              title="{{instrument.vendor.name}}"
+            ></td>
+            <td
+              [innerHtml]="instrument.instrumentType.name"
+              title="{{instrument.instrumentType.name}}"
+            ></td>
+            <td
+              [innerHtml]="instrument.extensions[0]"
+              title="{{instrument.extensions[0]}}"
+            ></td>
+          </tr>
+          <tr *ngIf="instrumentsList.items.length == 0">
+            <td class="header-3 text-center no-results" colspan="7">
+              No data found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="pagination-footer"
+      *ngIf="
+        searchFilter.page > 1 ||
+        searchFilter.items === instrumentsList.items.length
+      "
+    >
+      <button
+        type="button"
+        class="btn btn-outline"
+        [disabled]="searchFilter.page === 1"
+        (click)="getPreviousResults()"
+      >
+        Previous
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline"
+        [disabled]="instrumentsList.items.length < searchFilter.items"
+        (click)="getNextResults()"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>

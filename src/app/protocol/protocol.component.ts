@@ -34,6 +34,7 @@ export class ProtocolComponent implements OnInit {
   ) {
     this.commonService.listen().subscribe((type: any) => {
       if (type === PROTOCOL_ADDED) {
+        this.searchFilter.page = 1;
         this.getProtocolsList();
       }
     });
@@ -90,7 +91,7 @@ export class ProtocolComponent implements OnInit {
     );
   }
 
-  sortProjects(sortType) {
+  sortProtocols(sortType) {
     // console.log(sortType);
     let isAsc = false;
     if (this.searchFilter.sortingField === sortType) {

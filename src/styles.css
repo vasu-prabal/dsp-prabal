@@ -38,7 +38,8 @@ body,
 .custom-table {
   width: calc(100% - 200px);
   margin: 0 6px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .custom-table {
   background: #fff;
@@ -69,11 +70,12 @@ body,
   border-bottom: 1px solid #ddd;
 }
 .custom-table .is-sorted {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #aed2e9 !important;
+  position: relative;
 }
-
+.custom-table .is-sorted > span {
+  position: absolute;
+  right: 8px;
+}
 .custom-table td {
   width: 100%;
   white-space: nowrap;
