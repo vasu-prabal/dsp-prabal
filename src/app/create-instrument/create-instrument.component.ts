@@ -19,6 +19,10 @@ export class CreateInstrumentComponent implements OnInit {
   newInstrumentModel: IInstrument = {};
   instrumentTypes: Array<IAttributeModal> = [];
   extensions: Array<string> = [];
+  instrumentModelType: string;
+  instrumentModelTypeTitle: string;
+  instrumentModelTypeName: string;
+  newExtension: string;
   constructor(
     public studyService: CreateStudyService,
     public createInstrumentService: CreateInstrumentService,
@@ -58,14 +62,6 @@ export class CreateInstrumentComponent implements OnInit {
       this.newInstrumentModel.vendor
     ) {
       showOrHideLoading(true);
-      const instrumentTypes = this.createInstrumentService.getInstrumentTypesByTechnologyTypeAndVendor(
-        this.newInstrumentModel.technologyType.id,
-        this.newInstrumentModel.vendor.id
-      );
-      const extensions = this.createInstrumentService.getVendorExtensionsByTechnologyTypeAndVendor(
-        this.newInstrumentModel.technologyType.id,
-        this.newInstrumentModel.vendor.id
-      );
       this.instrumentTypes = [
         {
           id: undefined,
@@ -73,24 +69,41 @@ export class CreateInstrumentComponent implements OnInit {
           unspecified: false
         }
       ];
-      this.extensions = [];
-      this.newInstrumentModel.instrumentType = null;
-      this.newInstrumentModel.extensions = null;
-      forkJoin(instrumentTypes, extensions).subscribe(
-        results => {
-          if (results[0]["value"].length > 0) {
-            this.instrumentTypes = results[0]["value"];
+      if (
+        this.newInstrumentModel.technologyType.id &&
+        this.newInstrumentModel.vendor.id
+      ) {
+        const instrumentTypes = this.createInstrumentService.getInstrumentTypesByTechnologyTypeAndVendor(
+          this.newInstrumentModel.technologyType.id,
+          this.newInstrumentModel.vendor.id
+        );
+        const extensions = this.createInstrumentService.getVendorExtensionsByTechnologyTypeAndVendor(
+          this.newInstrumentModel.technologyType.id,
+          this.newInstrumentModel.vendor.id
+        );
+        this.extensions = [];
+        this.newInstrumentModel.instrumentType = null;
+        this.newInstrumentModel.extensions = null;
+        forkJoin(instrumentTypes, extensions).subscribe(
+          results => {
+            if (results[0]["value"].length > 0) {
+              this.instrumentTypes = results[0]["value"];
+            }
+            this.newInstrumentModel.instrumentType = this.instrumentTypes[0];
+            this.extensions = results[1]["value"];
+            this.newInstrumentModel.extensions = this.extensions;
+            showOrHideLoading(false);
+          },
+          error => {
+            showOrHideLoading(false);
+            console.log(error);
           }
-          this.newInstrumentModel.instrumentType = this.instrumentTypes[0];
-          this.extensions = results[1]["value"];
-          this.newInstrumentModel.extensions = this.extensions;
-          showOrHideLoading(false);
-        },
-        error => {
-          showOrHideLoading(false);
-          console.log(error);
-        }
-      );
+        );
+      } else {
+        this.newInstrumentModel.instrumentType = this.instrumentTypes[0];
+        this.newInstrumentModel.extensions = [];
+        showOrHideLoading(false);
+      }
     }
   }
 
@@ -171,6 +184,85 @@ export class CreateInstrumentComponent implements OnInit {
             showToastMessage("Error while validating unique name", "error");
           }
         );
+    }
+  }
+
+  showInstrumentModelType(type) {
+    this.instrumentModelType = type;
+    switch (type) {
+      case "technology":
+        this.instrumentModelTypeTitle = "New Technology Type";
+        break;
+      case "vendor":
+        this.instrumentModelTypeTitle = "New Vendor";
+        break;
+      case "instrument-type":
+        this.instrumentModelTypeTitle = "New Instrument Type";
+        break;
+      default:
+        this.instrumentModelTypeTitle = "New Technology Type";
+    }
+    this.instrumentModelTypeName = "";
+    jQuery("#create_instrument_model_dialog")
+      .modal({ backdrop: "static", keyboard: false })
+      .modal("show");
+  }
+
+  addNewInstrumentModelType() {
+    const addedData = {
+      id: undefined,
+      name: this.instrumentModelTypeName,
+      unspecified: false
+    };
+    switch (this.instrumentModelType) {
+      case "technology":
+        const matchedTechnologies = this.technologyList.filter(
+          x =>
+            x.name.toLowerCase() === this.instrumentModelTypeName.toLowerCase()
+        );
+        if (matchedTechnologies.length === 0) {
+          this.technologyList = [...this.technologyList, addedData];
+          this.newInstrumentModel.technologyType = addedData;
+        } else {
+          this.newInstrumentModel.technologyType = matchedTechnologies[0];
+        }
+        break;
+      case "vendor":
+        const matchedVendors = this.vendorList.filter(
+          x =>
+            x.name.toLowerCase() === this.instrumentModelTypeName.toLowerCase()
+        );
+        if (matchedVendors.length === 0) {
+          this.vendorList = [...this.vendorList, addedData];
+          this.newInstrumentModel.vendor = addedData;
+        } else {
+          this.newInstrumentModel.vendor = matchedVendors[0];
+        }
+        break;
+      case "instrument-type":
+        const matchedInstrumentsTypes = this.instrumentTypes.filter(
+          x =>
+            x.name.toLowerCase() === this.instrumentModelTypeName.toLowerCase()
+        );
+        if (matchedInstrumentsTypes.length === 0) {
+          this.instrumentTypes = [...this.instrumentTypes, addedData];
+          this.newInstrumentModel.instrumentType = addedData;
+        } else {
+          this.newInstrumentModel.instrumentType = matchedInstrumentsTypes[0];
+        }
+        break;
+    }
+    this.getInstrumentTypes();
+    jQuery("#create_instrument_model_dialog").modal("hide");
+  }
+
+  addedExtension() {
+    if (this.newExtension) {
+      if (!this.newInstrumentModel.extensions) {
+        this.newInstrumentModel.extensions = [];
+      }
+      this.newInstrumentModel.extensions.push(this.newExtension);
+      this.newExtension = "";
     }
   }
 }

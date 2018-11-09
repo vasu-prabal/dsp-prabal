@@ -24,7 +24,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="row">
+        <div class="row flex-center">
           <div class="col-11 form-group">
             <ng-select
               placeholder="Technology Type"
@@ -37,7 +37,14 @@
             >
             </ng-select>
           </div>
-          <div class="col-1"></div>
+          <div class="col-1">
+            <button
+              class="btn btn-outline instrument-modal-add-btn"
+              (click)="showInstrumentModelType('technology')"
+            >
+              <span class="fa fa-plus"></span>
+            </button>
+          </div>
           <div class="col-11 form-group">
             <ng-select
               placeholder="Vendor"
@@ -50,7 +57,14 @@
             >
             </ng-select>
           </div>
-          <div class="col-1"></div>
+          <div class="col-1">
+            <button
+              class="btn btn-outline instrument-modal-add-btn"
+              (click)="showInstrumentModelType('vendor')"
+            >
+              <span class="fa fa-plus"></span>
+            </button>
+          </div>
           <div class="col-11 form-group">
             <ng-select
               placeholder="Instrument Type"
@@ -62,8 +76,15 @@
             >
             </ng-select>
           </div>
-          <div class="col-1"></div>
-          <div class="col-11 form-group">
+          <div class="col-1">
+            <button
+              class="btn btn-outline instrument-modal-add-btn"
+              (click)="showInstrumentModelType('instrument-type')"
+            >
+              <span class="fa fa-plus"></span>
+            </button>
+          </div>
+          <div class="col-9 form-group">
             <div class="custom-file-extensions">
               <span
                 *ngFor="
@@ -77,22 +98,45 @@
                   class="fa fa-close  pointer ml-1"
                   (click)="removeExtension(i)"
                 ></span>
-                <span *ngIf="i < newInstrumentModel.extensions.length - 1"
+                <span class="mr-1" *ngIf="i < newInstrumentModel.extensions.length - 1"
                   >,</span
                 >
               </span>
               <span
-                *ngIf="extensions.length === 0"
+                *ngIf="!newInstrumentModel.extensions || newInstrumentModel.extensions.length === 0"
                 class="header-3 file-extension-placeholder"
                 >File Extensions</span
               >
             </div>
           </div>
-          <div class="col-1"></div>
+          <div class="col-2">
+            <input
+              [(ngModel)]="newExtension"
+              name="extension"
+              autocomplete="off"
+              class="form-control header-3"
+              placeholder=".extension"
+              (keyup.enter)="addedExtension()"
+            />
+          </div>
+          <div class="col-1">
+            <button
+              class="btn btn-outline"
+              [disabled]="!newExtension"
+              (click)="addedExtension()"
+            >
+              <span class="fa fa-plus"></span>
+            </button>
+          </div>
           <div class="col-12 form-group">
-              <input [(ngModel)]="newInstrumentModel.name" name="name" autocomplete="off" class="form-control input-border header-3"
-              placeholder="Name">
-            </div>
+            <input
+              [(ngModel)]="newInstrumentModel.name"
+              name="name"
+              autocomplete="off"
+              class="form-control input-border header-3"
+              placeholder="Name"
+            />
+          </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -105,6 +149,59 @@
           (click)="addNewInstrumentModel()"
         >
           Create
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="create_instrument_model_dialog"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="instrumentTypeDialog"
+  aria-hidden="true"
+>
+  <div class="modal-dialog instrument-model-type-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title header-2 bold"
+          id="instrumentTypeDialog"
+          [innerHtml]="instrumentModelTypeTitle"
+        ></h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true" [inlineSVG]="'./assets/icons/close.svg'">
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input
+            [(ngModel)]="instrumentModelTypeName"
+            name="name"
+            autocomplete="off"
+            class="form-control input-border header-3"
+            placeholder="Name"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="addNewInstrumentModelType()"
+        >
+          Ok
         </button>
       </div>
     </div>

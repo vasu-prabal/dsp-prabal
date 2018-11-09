@@ -10,3 +10,10 @@
 .custom-file-extensions .fa-close:hover {
   color: #dc3545;
 }
+.instrument-model-type-dialog {
+  width: 550px !important;
+  margin-top: 10%;
+}
+.instrument-modal-add-btn {
+  margin-top: -10px;
+}
