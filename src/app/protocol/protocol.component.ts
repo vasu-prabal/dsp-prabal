@@ -16,7 +16,7 @@ declare var jQuery: any;
 @Component({
   selector: "app-protocol",
   templateUrl: "./protocol.component.html",
-  styleUrls: ["./protocol.component.css"]
+  styleUrls: ["../common/resize-table.css", "./protocol.component.css"]
 })
 export class ProtocolComponent implements OnInit {
   @ViewChild(CreateButtonComponent)
@@ -35,6 +35,7 @@ export class ProtocolComponent implements OnInit {
     this.commonService.listen().subscribe((type: any) => {
       if (type === PROTOCOL_ADDED) {
         this.searchFilter.page = 1;
+        this.searchFilter.filterQuery = "";
         this.getProtocolsList();
       }
     });
@@ -91,6 +92,16 @@ export class ProtocolComponent implements OnInit {
     );
   }
 
+  getNextResults() {
+    this.searchFilter.page += 1;
+    this.getProtocolsList();
+  }
+
+  getPreviousResults() {
+    this.searchFilter.page -= 1;
+    this.getProtocolsList();
+  }
+
   sortProtocols(sortType) {
     // console.log(sortType);
     let isAsc = false;
@@ -98,8 +109,12 @@ export class ProtocolComponent implements OnInit {
       isAsc = this.searchFilter.asc ? false : true;
     }
     this.searchFilter.sortingField = sortType;
-    this.searchFilter.page = 1;
     this.searchFilter.asc = isAsc;
+    this.searchResults();
+  }
+
+  searchResults() {
+    this.searchFilter.page = 1;
     this.getProtocolsList();
   }
 

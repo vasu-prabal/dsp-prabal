@@ -1,80 +1,196 @@
-<div class="d-flex justify-content-between align-items-center projects-actions-container">
+<div
+  class="d-flex justify-content-between align-items-center projects-actions-container"
+>
   <div>
     <app-create-button #createProtocol></app-create-button>
     <app-upload-button></app-upload-button>
-    <h4 class="list-data-count header-1 text-white bold">Protocols (<span [innerHtml]="protocols.length"></span>)
+    <h4 class="list-data-count header-1 text-white bold">
+      Protocols (<span [innerHtml]="protocols.length"></span>)
     </h4>
   </div>
   <div>
     <div class="input-group">
-      <input type="text" class="form-control filter-list-container" placeholder="Filter List" />
+      <input
+        type="text"
+        name="filterQuery"
+        [(ngModel)]="searchFilter.filterQuery"
+        (keyup.enter)="searchResults()"
+        class="form-control filter-list-container"
+        placeholder="Filter List"
+      />
     </div>
   </div>
 </div>
 <div class="email-container">
-  <div class="side-menu-container">
-    <app-side-menu></app-side-menu>
-  </div>
+  <div class="side-menu-container"><app-side-menu></app-side-menu></div>
   <div class="custom-table">
-    <table class="table protocols-table">
-      <thead>
-        <tr class="table-cell-hover">
-          <th class="header-3">...</th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='id'}" (click)="sortProtocols('id')">
-            ID
-            <span *ngIf="searchFilter.sortingField==='id'">
-              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-            </span>
-          </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolName'}" (click)="sortProtocols('protocolName')">PROTOCOL
-            NAME
-            <span *ngIf="searchFilter.sortingField==='protocolName'">
-              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-            </span>
-          </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolType'}" (click)="sortProtocols('protocolType')">
-            TYPE
-            <span *ngIf="searchFilter.sortingField==='protocolType'">
-              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-            </span>
-          </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='protocolDate'}" (click)="sortProtocols('protocolDate')">DATE
+    <div
+      class="custom-table-container"
+      [ngClass]="{
+        'has-pagination':
+          searchFilter.page > 1 || searchFilter.items === protocols.length
+      }"
+    >
+      <table class="table protocols-table">
+        <thead>
+          <tr class="table-cell-hover">
+            <th class="header-3">...</th>
+            <th
+              class="header-3"
+              [ngClass]="{ 'is-sorted': searchFilter.sortingField === 'id' }"
+              (click)="sortProtocols('id')"
+            >
+              ID
+              <span *ngIf="searchFilter.sortingField === 'id'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{
+                'is-sorted': searchFilter.sortingField === 'protocolName'
+              }"
+              (click)="sortProtocols('protocolName')"
+            >
+              PROTOCOL NAME
+              <span *ngIf="searchFilter.sortingField === 'protocolName'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{
+                'is-sorted': searchFilter.sortingField === 'protocolType'
+              }"
+              (click)="sortProtocols('protocolType')"
+            >
+              TYPE
+              <span *ngIf="searchFilter.sortingField === 'protocolType'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{
+                'is-sorted': searchFilter.sortingField === 'protocolDate'
+              }"
+              (click)="sortProtocols('protocolDate')"
+            >
+              DATE
 
-            <span *ngIf="searchFilter.sortingField==='protocolDate'">
-              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-            </span>
-          </th>
-          <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='enrichmentStrategy'}" (click)="sortProtocols('enrichmentStrategy')">ENRICHMENT
-            STRATEGY
-            <span *ngIf="searchFilter.sortingField==='enrichmentStrategy'">
-              <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-              <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-            </span>
-          </th>
-          <th class="header-3 not-sortable">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-cell-hover" *ngFor="let protocol of protocols">
-          <td class="header-3">...</td>
-          <td [innerHtml]="protocol.id" title="{{protocol.id}}"></td>
-          <td [innerHtml]="protocol.protocolName" title="{{protocol.protocolName}}"></td>
-          <td [innerHtml]="protocol.protocolType" title="{{protocol.protocolType}}"></td>
-          <td [innerHtml]="protocol.protocolDate" title="{{protocol.protocolDate}}"></td>
-          <td [innerHtml]="protocol.enrichmentStrategy" title="{{protocol.enrichmentStrategy}}"></td>
-          <td class="table-actions">
-            <span class="fa fa-edit" (click)="editProtocol(protocol.id)"></span>
-            <span class="fa fa-trash" (click)="deleteProtocol(protocol.id)"></span>
-          </td>
-        </tr>
-        <tr *ngIf="protocols.length==0">
-          <td class="header-3 text-center no-results" colspan="7">No data found</td>
-        </tr>
-      </tbody>
-    </table>
+              <span *ngIf="searchFilter.sortingField === 'protocolDate'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{
+                'is-sorted': searchFilter.sortingField === 'enrichmentStrategy'
+              }"
+              (click)="sortProtocols('enrichmentStrategy')"
+            >
+              ENRICHMENT STRATEGY
+              <span *ngIf="searchFilter.sortingField === 'enrichmentStrategy'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th class="header-3 not-sortable">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-cell-hover" *ngFor="let protocol of protocols">
+            <td class="header-3">...</td>
+            <td [innerHtml]="protocol.id" title="{{protocol.id}}"></td>
+            <td
+              [innerHtml]="protocol.protocolName"
+              title="{{protocol.protocolName}}"
+            ></td>
+            <td
+              [innerHtml]="protocol.protocolType"
+              title="{{protocol.protocolType}}"
+            ></td>
+            <td
+              [innerHtml]="protocol.protocolDate"
+              title="{{protocol.protocolDate}}"
+            ></td>
+            <td
+              [innerHtml]="protocol.enrichmentStrategy"
+              title="{{protocol.enrichmentStrategy}}"
+            ></td>
+            <td class="table-actions">
+              <span
+                class="fa fa-edit"
+                (click)="editProtocol(protocol.id)"
+              ></span>
+              <span
+                class="fa fa-trash"
+                (click)="deleteProtocol(protocol.id)"
+              ></span>
+            </td>
+          </tr>
+          <tr *ngIf="protocols.length == 0">
+            <td class="header-3 text-center no-results" colspan="7">
+              No data found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="pagination-footer"
+      *ngIf="searchFilter.page > 1 || searchFilter.items === protocols.length"
+    >
+      <button
+        type="button"
+        class="btn btn-outline"
+        [disabled]="searchFilter.page === 1"
+        (click)="getPreviousResults()"
+      >
+        Previous
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline"
+        [disabled]="protocols.length < searchFilter.items"
+        (click)="getNextResults()"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </div>

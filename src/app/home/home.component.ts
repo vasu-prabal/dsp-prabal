@@ -21,7 +21,7 @@ declare var jQuery: any;
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"]
+  styleUrls: ["../common/resize-table.css", "./home.component.css"]
 })
 export class HomeComponent implements OnInit {
   mailsList: IMailsList = {
@@ -57,6 +57,8 @@ export class HomeComponent implements OnInit {
     public commonService: CommonService
   ) {
     this.route.params.subscribe((params: Params) => {
+      this.searchFilter.page = 1;
+      this.searchFilter.filterQuery = "";
       this.checkToken(params.type);
     });
     this.commonService.listen().subscribe((type: any) => {
@@ -136,14 +138,28 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  getNextResults() {
+    this.searchFilter.page += 1;
+    this.getProjectsList();
+  }
+
+  getPreviousResults() {
+    this.searchFilter.page -= 1;
+    this.getProjectsList();
+  }
+
   sortProjects(sortType) {
     let isAsc = false;
     if (this.searchFilter.sortingField === sortType) {
       isAsc = this.searchFilter.asc ? false : true;
     }
     this.searchFilter.sortingField = sortType;
-    this.searchFilter.page = 1;
     this.searchFilter.asc = isAsc;
+    this.searchResults();
+  }
+
+  searchResults() {
+    this.searchFilter.page = 1;
     this.getProjectsList();
   }
 }

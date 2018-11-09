@@ -36,6 +36,7 @@ export class InstrumentsComponent implements OnInit {
     this.commonService.listen().subscribe((type: any) => {
       if (type === INSTRUMENT_ADDED) {
         this.searchFilter.page = 1;
+        this.searchFilter.filterQuery = "";
         this.getInstrumentsList();
       }
     });

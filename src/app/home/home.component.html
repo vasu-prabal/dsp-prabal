@@ -1,84 +1,208 @@
-<div class="d-flex justify-content-between align-items-center projects-actions-container">
-    <div>
-        <app-create-button></app-create-button>
-        <app-upload-button></app-upload-button>
-        <h4 class="list-data-count header-1 text-white bold"><span [innerHTML]="projectType"></span> &nbsp;&nbsp;(<span
-                [innerHTML]="mailsList.itemsCount"></span>)</h4>
+<div
+  class="d-flex justify-content-between align-items-center projects-actions-container"
+>
+  <div>
+    <app-create-button></app-create-button>
+    <app-upload-button></app-upload-button>
+    <h4 class="list-data-count header-1 text-white bold">
+      <span [innerHTML]="projectType"></span> &nbsp;&nbsp;(<span
+        [innerHTML]="mailsList.itemsCount"
+      ></span
+      >)
+    </h4>
+  </div>
+  <div>
+    <div class="input-group">
+      <input
+        type="text"
+        name="filterQuery"
+        [(ngModel)]="searchFilter.filterQuery"
+        (keyup.enter)="searchResults()"
+        class="form-control filter-list-container"
+        placeholder="Filter List"
+      />
     </div>
-    <div>
-        <div class="input-group">
-            <input type="text" class="form-control filter-list-container" placeholder="Filter List" />
-        </div>
-    </div>
+  </div>
 </div>
 <div class="email-container">
-    <div class="side-menu-container">
-        <app-side-menu></app-side-menu>
+  <div class="side-menu-container"><app-side-menu></app-side-menu></div>
+  <div class="custom-table">
+    <div
+      class="custom-table-container"
+      [ngClass]="{
+        'has-pagination':
+          searchFilter.page > 1 ||
+          searchFilter.items === mailsList.items.length
+      }"
+    >
+      <table class="table projects-table">
+        <thead>
+          <tr class="table-cell-hover">
+            <th class="header-3">...</th>
+            <th
+              class="header-3"
+              [ngClass]="{ 'is-sorted': searchFilter.sortingField === 'id' }"
+              (click)="sortProjects('id')"
+            >
+              ID
+              <span *ngIf="searchFilter.sortingField === 'id'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{ 'is-sorted': searchFilter.sortingField === 'name' }"
+              (click)="sortProjects('name')"
+            >
+              PROJECT NAME
+              <span *ngIf="searchFilter.sortingField === 'name'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{ 'is-sorted': searchFilter.sortingField === 'owner' }"
+              (click)="sortProjects('owner')"
+            >
+              OWNER
+              <span *ngIf="searchFilter.sortingField === 'owner'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{
+                'is-sorted': searchFilter.sortingField === 'laboratory'
+              }"
+              (click)="sortProjects('laboratory')"
+            >
+              LABORATORY
+
+              <span *ngIf="searchFilter.sortingField === 'laboratory'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{ 'is-sorted': searchFilter.sortingField === 'area' }"
+              (click)="sortProjects('area')"
+            >
+              AREA OF RESEARCH
+              <span *ngIf="searchFilter.sortingField === 'area'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+            <th
+              class="header-3"
+              [ngClass]="{
+                'is-sorted': searchFilter.sortingField === 'modified'
+              }"
+              (click)="sortProjects('modified')"
+            >
+              MODIFIED
+              <span *ngIf="searchFilter.sortingField === 'modified'">
+                <span
+                  *ngIf="searchFilter.asc === false"
+                  class="fa fa-caret-down sort-icon"
+                ></span>
+                <span
+                  *ngIf="searchFilter.asc === true"
+                  class="fa fa-caret-up sort-icon"
+                ></span>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mail of mailsList.items">
+            <td class="header-3">...</td>
+            <td [innerHtml]="mail.id" title="{{mail.id}}"></td>
+            <td
+              [innerHtml]="mail.columns.name"
+              title="{{mail.columns.name}}"
+            ></td>
+            <td
+              [innerHtml]="mail.columns.owner"
+              title="{{mail.columns.owner}}"
+            ></td>
+            <td
+              [innerHtml]="mail.columns.laboratory"
+              title="{{mail.columns.laboratory}}"
+            ></td>
+            <td
+              [innerHtml]="mail.columns.area"
+              title="{{mail.columns.area}}"
+            ></td>
+            <td
+              [innerHtml]="mail.columns.modified"
+              title="{{mail.columns.modified}}"
+            ></td>
+          </tr>
+          <tr *ngIf="mailsList.items.length == 0">
+            <td class="header-3 text-center no-results" colspan="7">
+              No data found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div
+        class="pagination-footer"
+        *ngIf="
+          searchFilter.page > 1 || searchFilter.items === mailsList.items.length
+        "
+      >
+        <button
+          type="button"
+          class="btn btn-outline"
+          [disabled]="searchFilter.page === 1"
+          (click)="getPreviousResults()"
+        >
+          Previous
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline"
+          [disabled]="mailsList.items.length < searchFilter.items"
+          (click)="getNextResults()"
+        >
+          Next
+        </button>
+      </div>
     </div>
-    <div class="custom-table">
-        <table class="table projects-table">
-            <thead>
-                <tr class="table-cell-hover">
-                    <th class="header-3">...</th>
-                    <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='id'}" (click)="sortProjects('id')">
-                        ID
-                        <span *ngIf="searchFilter.sortingField==='id'">
-                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-                        </span>
-                    </th>
-                    <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='name'}" (click)="sortProjects('name')">PROJECT
-                        NAME
-                        <span *ngIf="searchFilter.sortingField==='name'">
-                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-                        </span>
-                    </th>
-                    <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='owner'}" (click)="sortProjects('owner')">
-                        OWNER
-                        <span *ngIf="searchFilter.sortingField==='owner'">
-                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-                        </span>
-                    </th>
-                    <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='laboratory'}" (click)="sortProjects('laboratory')">LABORATORY
-
-                        <span *ngIf="searchFilter.sortingField==='laboratory'">
-                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-                        </span>
-                    </th>
-                    <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='area'}" (click)="sortProjects('area')">AREA
-                        OF RESEARCH
-                        <span *ngIf="searchFilter.sortingField==='area'">
-                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-                        </span>
-                    </th>
-                    <th class="header-3" [ngClass]="{'is-sorted': searchFilter.sortingField==='modified'}" (click)="sortProjects('modified')">MODIFIED
-                        <span *ngIf="searchFilter.sortingField==='modified'">
-                            <span *ngIf="searchFilter.asc===false" class="fa fa-caret-down sort-icon"></span>
-                            <span *ngIf="searchFilter.asc===true" class="fa fa-caret-up sort-icon"></span>
-                        </span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let mail of mailsList.items">
-                    <td class="header-3">...</td>
-                    <td [innerHtml]="mail.id" title="{{mail.id}}"></td>
-                    <td [innerHtml]="mail.columns.name" title="{{mail.columns.name}}"></td>
-                    <td [innerHtml]="mail.columns.owner" title="{{mail.columns.owner}}"></td>
-                    <td [innerHtml]="mail.columns.laboratory" title="{{mail.columns.laboratory}}"></td>
-                    <td [innerHtml]="mail.columns.area" title="{{mail.columns.area}}"></td>
-                    <td [innerHtml]="mail.columns.modified" title="{{mail.columns.modified}}"></td>
-                </tr>
-                <tr *ngIf="mailsList.items.length==0">
-                    <td class="header-3 text-center no-results" colspan="7">No data found</td>
-
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
+  </div>
 </div>

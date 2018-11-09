@@ -11,7 +11,7 @@ declare var jQuery;
 @Component({
   selector: "app-studies",
   templateUrl: "./studies.component.html",
-  styleUrls: ["./studies.component.css"]
+  styleUrls: ["../common/resize-table.css", "./studies.component.css"]
 })
 export class StudiesComponent implements OnInit {
   studyList: IStudyList = {
@@ -44,6 +44,8 @@ export class StudiesComponent implements OnInit {
     public commonService: CommonService
   ) {
     this.route.params.subscribe((params: Params) => {
+      this.searchFilter.page = 1;
+      this.searchFilter.filterQuery = "";
       this.checkToken(params.type);
     });
     this.commonService.listen().subscribe((type: any) => {
@@ -139,8 +141,12 @@ export class StudiesComponent implements OnInit {
       isAsc = this.searchFilter.asc ? false : true;
     }
     this.searchFilter.sortingField = sortType;
-    this.searchFilter.page = 1;
     this.searchFilter.asc = isAsc;
+    this.searchResults();
+  }
+
+  searchResults() {
+    this.searchFilter.page = 1;
     this.getStudyList();
   }
 }
