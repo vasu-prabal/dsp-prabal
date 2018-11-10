@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
     public route: ActivatedRoute,
     public commonService: CommonService
   ) {
+    localStorage.clear();
     this.route.params.subscribe((params: Params) => {
       this.searchFilter.page = 1;
       this.searchFilter.filterQuery = "";
