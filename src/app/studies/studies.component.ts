@@ -84,27 +84,7 @@ export class StudiesComponent implements OnInit {
         }
       }
     }
-    let token = getToken();
-    if (!token) {
-      showOrHideLoading(true);
-      this.commonService.doLogin(loginUserDetails).subscribe(
-        data => {
-          if (IS_LOCAL_API) {
-            token = data["sessionId"];
-          } else {
-            token = data["headers"].get("x-final-url");
-            token = token.split("=").pop();
-          }
-          setToken(token);
-          this.getStudyList();
-        },
-        error => {
-          showOrHideLoading(false);
-        }
-      );
-    } else {
-      this.getStudyList();
-    }
+    this.getStudyList();
   }
 
   getStudyList() {

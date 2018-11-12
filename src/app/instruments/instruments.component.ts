@@ -52,31 +52,7 @@ export class InstrumentsComponent implements OnInit {
       disabledColumns: [0, 1],
       minWidth: 150
     });
-    this.checkToken();
-  }
-
-  checkToken() {
-    let token = getToken();
-    if (!token) {
-      showOrHideLoading(true);
-      this.commonService.doLogin(loginUserDetails).subscribe(
-        data => {
-          if (IS_LOCAL_API) {
-            token = data["sessionId"];
-          } else {
-            token = data["headers"].get("x-final-url");
-            token = token.split("=").pop();
-          }
-          setToken(token);
-          this.getInstrumentsList();
-        },
-        error => {
-          showOrHideLoading(false);
-        }
-      );
-    } else {
-      this.getInstrumentsList();
-    }
+    this.getInstrumentsList();
   }
 
   getInstrumentsList() {

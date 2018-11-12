@@ -138,6 +138,7 @@ export class CreateInstrumentComponent implements OnInit {
       const modelId = this.newInstrumentModel.id
         ? this.newInstrumentModel.id
         : undefined;
+      showOrHideLoading(true);
       this.createInstrumentService
         .checkInstrumentModelNameExists(
           modelId,
@@ -154,7 +155,6 @@ export class CreateInstrumentComponent implements OnInit {
                 technologyType: this.newInstrumentModel.technologyType.name,
                 vendor: this.newInstrumentModel.vendor.name
               };
-              showOrHideLoading(true);
               this.createInstrumentService.createInstrumentModel(obj).subscribe(
                 data => {
                   jQuery("#create_instrument_dialog").modal("hide");
@@ -162,9 +162,11 @@ export class CreateInstrumentComponent implements OnInit {
                     "Instrument model added successfully",
                     "success"
                   );
+                  showOrHideLoading(false);
                   this.commonService.instrumentModelAdded();
                 },
                 error => {
+                  showOrHideLoading(false);
                   showToastMessage(
                     "Error while creating instrument model",
                     "error"
@@ -173,6 +175,7 @@ export class CreateInstrumentComponent implements OnInit {
                 }
               );
             } else {
+              showOrHideLoading(false);
               showToastMessage(
                 "Name already exists please try another one",
                 "error"
