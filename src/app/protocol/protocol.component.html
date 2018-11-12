@@ -5,7 +5,7 @@
     <app-create-button #createProtocol></app-create-button>
     <app-upload-button></app-upload-button>
     <h4 class="list-data-count header-1 text-white bold">
-      Protocols (<span [innerHtml]="protocols.length"></span>)
+      Protocols (<span [innerHtml]="protocols.itemsCount"></span>)
     </h4>
   </div>
   <div>
@@ -28,7 +28,7 @@
       class="custom-table-container"
       [ngClass]="{
         'has-pagination':
-          searchFilter.page > 1 || searchFilter.items === protocols.length
+          searchFilter.page > 1 || searchFilter.items === protocols.items.length
       }"
     >
       <table class="table protocols-table">
@@ -133,7 +133,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="table-cell-hover" *ngFor="let protocol of protocols">
+          <tr class="table-cell-hover" *ngFor="let protocol of protocols.items">
             <td class="header-3">...</td>
             <td [innerHtml]="protocol.id" title="{{protocol.id}}"></td>
             <td
@@ -163,7 +163,7 @@
               ></span>
             </td>
           </tr>
-          <tr *ngIf="protocols.length == 0">
+          <tr *ngIf="protocols.items.length == 0">
             <td class="header-3 text-center no-results" colspan="7">
               No data found
             </td>
@@ -173,7 +173,7 @@
     </div>
     <div
       class="pagination-footer"
-      *ngIf="searchFilter.page > 1 || searchFilter.items === protocols.length"
+      *ngIf="searchFilter.page > 1 || searchFilter.items === protocols.items.length"
     >
       <button
         type="button"
@@ -186,7 +186,7 @@
       <button
         type="button"
         class="btn btn-outline"
-        [disabled]="protocols.length < searchFilter.items"
+        [disabled]="protocols.items.length < searchFilter.items"
         (click)="getNextResults()"
       >
         Next

@@ -180,29 +180,29 @@
           </tr>
         </tbody>
       </table>
-      <div
-        class="pagination-footer"
-        *ngIf="
-          searchFilter.page > 1 || searchFilter.items === mailsList.items.length
-        "
+    </div>
+    <div
+      class="pagination-footer"
+      *ngIf="
+        searchFilter.page > 1 || searchFilter.items === mailsList.items.length
+      "
+    >
+      <button
+        type="button"
+        class="btn btn-outline"
+        [disabled]="searchFilter.page === 1"
+        (click)="getPreviousResults()"
       >
-        <button
-          type="button"
-          class="btn btn-outline"
-          [disabled]="searchFilter.page === 1"
-          (click)="getPreviousResults()"
-        >
-          Previous
-        </button>
-        <button
-          type="button"
-          class="btn btn-outline"
-          [disabled]="mailsList.items.length < searchFilter.items"
-          (click)="getNextResults()"
-        >
-          Next
-        </button>
-      </div>
+        Previous
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline"
+        [disabled]="mailsList.items.length < searchFilter.items"
+        (click)="getNextResults()"
+      >
+        Next
+      </button>
     </div>
   </div>
 </div>

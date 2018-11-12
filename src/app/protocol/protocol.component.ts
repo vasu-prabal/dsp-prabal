@@ -8,7 +8,12 @@ import {
 import { CommonService } from "../common.service";
 import { loginUserDetails, PROTOCOL_ADDED, IS_LOCAL_API } from "../constants";
 import { ProtocolService } from "./protocol.service";
-import { IProtocol, ISearch, IListSearchFilter } from "../home/home-modal";
+import {
+  IProtocol,
+  ISearch,
+  IListSearchFilter,
+  IProtocolList
+} from "../home/home-modal";
 import * as moment from "moment";
 import { CreateButtonComponent } from "../create-button/create-button.component";
 
@@ -21,7 +26,13 @@ declare var jQuery: any;
 export class ProtocolComponent implements OnInit {
   @ViewChild(CreateButtonComponent)
   createButton: CreateButtonComponent;
-  protocols: Array<IProtocol> = [];
+  protocols: IProtocolList = {
+    items: [],
+    itemsCount: 0,
+    pageNumber: 0,
+    pageSize: 0,
+    totalPages: 0
+  };
   searchFilter: IListSearchFilter = {
     page: 1,
     items: 25,
@@ -54,8 +65,8 @@ export class ProtocolComponent implements OnInit {
     showOrHideLoading(true);
     this.protocolService.getProtocolsList(this.searchFilter).subscribe(
       data => {
-        this.protocols = data.items;
-        this.protocols.forEach(protocol => {
+        this.protocols = data;
+        this.protocols.items.forEach(protocol => {
           protocol.protocolDate = moment(protocol.protocolDate).format(
             "MMM DD, YYYY"
           );
