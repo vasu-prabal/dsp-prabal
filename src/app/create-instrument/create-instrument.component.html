@@ -85,7 +85,14 @@
             </button>
           </div>
           <div class="col-9 form-group">
-            <div class="custom-file-extensions">
+            <div
+              class="custom-file-extensions"
+              [ngClass]="{
+                'opacity-6':
+                  !newInstrumentModel.extensions ||
+                  newInstrumentModel.extensions.length === 0
+              }"
+            >
               <span
                 *ngFor="
                   let extension of newInstrumentModel.extensions;
@@ -98,12 +105,17 @@
                   class="fa fa-close  pointer ml-1"
                   (click)="removeExtension(i)"
                 ></span>
-                <span class="mr-1" *ngIf="i < newInstrumentModel.extensions.length - 1"
+                <span
+                  class="mr-1"
+                  *ngIf="i < newInstrumentModel.extensions.length - 1"
                   >,</span
                 >
               </span>
               <span
-                *ngIf="!newInstrumentModel.extensions || newInstrumentModel.extensions.length === 0"
+                *ngIf="
+                  !newInstrumentModel.extensions ||
+                  newInstrumentModel.extensions.length === 0
+                "
                 class="header-3 file-extension-placeholder"
                 >File Extensions</span
               >

@@ -73,9 +73,15 @@ export class CreateStudyComponent implements OnInit {
         if (stepDirection === "forward") {
           if (stepNumber === 0) {
             const isError = this.validateStudyStep1();
+            if (isError) {
+              this.errorMessage = "";
+            }
             return isError ? false : true;
           } else if (stepNumber === 1) {
             const isError = this.validateStudyStep2();
+            if (isError) {
+              this.errorMessage = "";
+            }
             return isError ? false : true;
           }
         }
