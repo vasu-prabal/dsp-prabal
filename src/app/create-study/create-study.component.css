@@ -109,3 +109,11 @@
   justify-content: flex-start;
   align-items: flex-end;
 }
+.warning-message {
+  display: block !important;
+  color: #917a00;
+}
+.project-selection-field {
+  margin-top: -20px;
+  margin-bottom: 0;
+}

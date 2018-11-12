@@ -1,343 +1,628 @@
-<div #createStudy id="create_study_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="studyModal"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title header-2 bold" id="studyModal">Create Study</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" [inlineSVG]="'./assets/icons/close.svg'">
-                    </span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="study_creation_wizard">
-                    <ul>
-                        <li>
-                            <a href="#step-1">1<br />
-                                <div class="step-description">General Info</div>
-                            </a>
-                        </li>
-                        <li><a href="#step-2">2<br />
-                                <div class="step-description">Analysis</div>
-                            </a>
-                        </li>
-                        <li><a href="#step-3">3<br />
-                                <div class="step-description">File selection</div>
-                            </a>
-                        </li>
-                        <!-- <li><a href="#step-4">4<br />
-                                <div class="step-description">File to prep</div>
-                            </a></li>
-                        <li><a href="#step-5">5<br />
-                                <div class="step-description">Sample to prep</div>
-                            </a></li> -->
-                        <li><a href="#step-6">4<br />
-                                <div class="step-description">Study Design</div>
-                            </a>
-                        </li>
-                        <li><a href="#step-7">5<br />
-                                <div class="step-description">Confirm</div>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <div>
-                        <div id="step-1" class="">
-                            <form>
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                        <!-- <label for="name">Study Name</label> -->
-                                        <input [(ngModel)]="newStudy.name" name="name" class="form-control header-3 custom-input-border"
-                                            placeholder="Study Name" />
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                                        <ng-select placeholder="Project" class="ng-select-dropdown header-3" [items]="projects"
-                                            name="project" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.project">
-                                        </ng-select>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-
-                                        <ng-select placeholder="Protocol" class="ng-select-dropdown header-3" [items]="protocols"
-                                            name="protocols" bindLabel="protocolName" bindValue="id" [(ngModel)]="newStudy.protocol">
-                                        </ng-select>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                                        <!-- <label for="name">Species</label> -->
-                                        <!-- <input [(ngModel)]="newStudy.species" name="species" class="form-control input-border header-3"
-                                            placeholder="Species"> -->
-                                        <ng-select placeholder="Species" class="ng-select-dropdown header-3" [items]="species"
-                                            name="species" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.species">
-                                        </ng-select>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-control custom-checkbox">
-                                        <label>Program</label>
-                                        <br />
-                                        <input [(ngModel)]="newStudy.allPrograms" name="allPrograms" type="checkbox"
-                                            class="custom-control-input" id="allPrograms" />
-                                        <label class="custom-control-label look-program-checkbox" for="allPrograms">Look
-                                            through all Programs
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                        <ng-select [disabled]="newStudy.allPrograms" class="ng-select-dropdown header-3"
-                                            name="select" [(ngModel)]="newStudy.select">
-                                            <ng-option value="">--Select One--</ng-option>
-                                            <ng-option value="project 1">Project 1</ng-option>
-                                            <ng-option value="project 2">Project 2</ng-option>
-                                        </ng-select>
-                                    </div>
-
-                                    <div class="col-lg-6 mt-4 col-md-6 col-sm-12 col-xs-12 form-group">
-                                        <ng-select placeholder="Technology" class="ng-select-dropdown header-3" [items]="techTypes"
-                                            name="technology" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.technology"
-                                            (change)="getVendorsList()">
-                                        </ng-select>
-                                    </div>
-                                    <div class="col-lg-6 mt-4 col-md-6 col-sm-12 col-xs-12 form-group">
-                                        <ng-select placeholder="Vendor" class="ng-select-dropdown header-3" [items]="vendors"
-                                            name="vendor" bindLabel="name" bindValue="id" [(ngModel)]="newStudy.vendor"
-                                            (change)="checkInstrumentModalExists()">
-                                        </ng-select>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                        <label for="area">Description (Optional)</label>
-                                        <textarea class="form-control custom-full-border" name="description" id="description"
-                                            [(ngModel)]="newStudy.description" rows="4"></textarea>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                        <label for="area">Attachments (Optional)</label>
-                                        <div class="upload-drop-zone custom-full-border" id="study_drop_zone">
-                                            <span class="mr-2" [inlineSVG]="'./assets/icons/upload.svg'"></span>
-                                            Drag and Drop files to dialog (Maximum file size is <span [innerHtml]="fileUploadSize"></span>
-                                            MB)
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div id="step-2" class="">
-                            <p class="text-center">
-                                <span>
-                                    <label class="study-info">i</label> Select files that are part of the
-                                    experiment. Scroll down to load more.
-                                </span>
-                            </p>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <ng-select placeholder="Instrument Model" class="ng-select-dropdown header-3"
-                                        [(ngModel)]="newStudy.instrumentModel" [items]="instrumentModels" name="instrumentModel"
-                                        bindLabel="name" bindValue="id" (change)="getInstrumentsList(newStudy.instrumentModel)">
-                                    </ng-select>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <ng-select placeholder="Instrument" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.instrument"
-                                        [items]="instruments" name="instruments" bindLabel="name" bindValue="id">
-                                    </ng-select>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <ng-select placeholder="Experiment Type" class="ng-select-dropdown header-3"
-                                        [(ngModel)]="newStudy.experimentType" [items]="experimentTypes" name="experimentType"
-                                        bindLabel="name" (change)="newStudy.lc='no';newStudy.labeled='no'">
-                                    </ng-select>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <ng-select [disabled]="newStudy.experimentType && !newStudy.experimentType.allowed2DLC"
-                                        placeholder="2D/LC" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.lc">
-                                        <ng-option value="yes">Yes</ng-option>
-                                        <ng-option value="no">No</ng-option>
-                                    </ng-select>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <ng-select [disabled]="newStudy.experimentType && !newStudy.experimentType.allowLabels"
-                                        placeholder="Labeled" class="ng-select-dropdown header-3" [(ngModel)]="newStudy.labeled">
-                                        <ng-option value="yes">Yes</ng-option>
-                                        <ng-option value="no">No</ng-option>
-                                    </ng-select>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="step-3" class="">
-                            <p class="text-center">
-                                <span><label class="study-info">i</label> Specify experiment type for data processing
-                                    and analysis</span>
-                            </p>
-                            <label>Filter</label>
-                            <div class="filter-container">
-                                <div class="row">
-                                    <div class="filter-align-center col-lg-10">
-                                        <input [(ngModel)]="newStudy.filterNameHasSelected" name="filterNameHasSelected"
-                                            type="checkbox" class="filter-checkbox" id="filterNameHasSelected" />
-                                        <input [(ngModel)]="newStudy.filterName" name="filterName" class="form-control header-3 custom-input-border"
-                                            placeholder="Name Contains" />
-                                    </div>
-                                </div>
-
-                                <br />
-
-                                <div class="row">
-                                    <div class="input-group col-lg-4">
-                                        <input [(ngModel)]="newStudy.filterUploadFromSelected" name="filterUploadFromSelected"
-                                            type="checkbox" class="filter-checkbox" id="filterUploadFromSelected" />
-                                        <input class="form-control" placeholder="yyyy-mm-dd" name="uploadFrom"
-                                            [(ngModel)]="newStudy.filterUploadFrom" ngbDatepicker #uploadFrom="ngbDatepicker" />
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" (click)="uploadFrom.toggle()"
-                                                type="button">
-                                                <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="input-group col-lg-4">
-                                        <input [(ngModel)]="newStudy.filterUploadToSelected" name="filterUploadToSelected"
-                                            type="checkbox" class="filter-checkbox" id="filterUploadToSelected" />
-                                        <input class="form-control" placeholder="yyyy-mm-dd" name="uploadTo"
-                                            [(ngModel)]="newStudy.filterUploadTo" ngbDatepicker #uploadTo="ngbDatepicker" />
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" (click)="uploadTo.toggle()" type="button">
-                                                <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <button class="btn btn-primary custom-primary-btn filter-apply-btn">Apply</button>
-                                    </div>
-                                </div>
-                                <br />
-                                <div class="row">
-                                    <div class="col-lg-12 selected-files-container">
-                                        <label class="header-3">Selected Files(selected 0)</label>
-                                        <label class="header-3">Files loaded (0 of 0)</label>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <table class="table">
-                                            <thead>
-                                                <tr class="filter-files">
-                                                    <th>
-                                                        <input [(ngModel)]="newStudy.filterFilesSelectAll" name="filterFilesSelectAll"
-                                                            type="checkbox" class="filter-checkbox" id="filterFilesSelectAll">
-                                                    </th>
-                                                    <th><label>FILE NAME</label></th>
-                                                    <th><label>DATE</label></th>
-                                                    <th>Labels
-                                                        <input [(ngModel)]="newStudy.filterFilesBy" name="filterFilesBy"
-                                                            class="form-control header-3" placeholder="Filter List">
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                    </div>
-                                </div>
+<div
+  #createStudy
+  id="create_study_dialog"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="studyModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title header-2 bold" id="studyModal">Create Study</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true" [inlineSVG]="'./assets/icons/close.svg'">
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="study_creation_wizard">
+          <ul>
+            <li>
+              <a href="#step-1"
+                >1<br />
+                <div class="step-description">General Info</div>
+              </a>
+            </li>
+            <li>
+              <a href="#step-2"
+                >2<br />
+                <div class="step-description">Analysis</div>
+              </a>
+            </li>
+            <li>
+              <a href="#step-3"
+                >3<br />
+                <div class="step-description">File selection</div>
+              </a>
+            </li>
+            <!--
+              <li><a href="#step-4">4<br />
 
 
 
-                            </div>
-                        </div>
-                        <!-- <div id="step-4" class="">
-                            Step Content4
-                        </div>
-                        <div id="step-5" class="">
-                            Step Content5
-                        </div> -->
-                        <div id="step-6" class="">
-                            <div class="text-center">
-                                <div class="study-design-info">
-                                    <label class="study-info">i</label>
-                                    <ul>
-                                        <li>Specify Experiment Design</li>
-                                        <li>Add factors as a stable columns and fill factor levels as column values to
-                                            assign biological condition(treatment group)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <label>Add Factor</label>
-                            <div class="row design-factor-container">
-                                <div class="col-lg-10">
-                                    <input [(ngModel)]="newStudy.factorName" name="factorName" class="form-control header-3 custom-input-border"
-                                        placeholder="Factor Name">
-                                </div>
-                                <div class="col-lg-4">
-                                    <input [(ngModel)]="newStudy.valueType" name="valueType" class="form-control header-3 custom-input-border"
-                                        placeholder="Value Type">
-                                </div>
-                                <div class="col-lg-4">
-                                    <input [(ngModel)]="newStudy.ubits" name="ubits" class="form-control header-3 custom-input-border"
-                                        placeholder="Ubits">
-                                </div>
-                                <div class="col-lg-2">
-                                    <button class="btn btn-primary custom-primary-btn filter-apply-btn">Apply</button>
-                                </div>
-                            </div>
-                            <br />
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>ROW</th>
-                                        <th>SAMPLE NAME</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <label>Choose Annotation CSV File</label>
-                            <input type="file" class="choose-csv-file" accept=".csv" />
-                            <!--  , application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel -->
-                        </div>
-                        <div id="step-7" class="">
-                            <p class="text-center">
-                                <span><label class="study-info">i</label> Verify experiment design</span>
-                            </p>
 
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <th>Name</th>
-                                        <td>Test</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Project</th>
-                                        <td>SETD2 metabolomics</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Laboratory</th>
-                                        <td>Look through all labs</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Species</th>
-                                        <td>Acropora Cervicornics (coral)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Files</th>
-                                        <td>1</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <label class="header-3">Experiment Design</label>
-                            <br />
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>ROW</th>
-                                        <th>SAMPLE NAME</th>
-                                        <th>CONDITION</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+
+
+
+
+
+
+
+
+                      <div class="step-description">File to prep</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  </a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <li><a href="#step-5">5<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      <div class="step-description">Sample to prep</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  </a></li>
+            -->
+            <li>
+              <a href="#step-6"
+                >4<br />
+                <div class="step-description">Study Design</div>
+              </a>
+            </li>
+            <li>
+              <a href="#step-7"
+                >5<br />
+                <div class="step-description">Confirm</div>
+              </a>
+            </li>
+          </ul>
+
+          <div>
+            <div id="step-1" class="">
+              <form>
+                <div class="row">
+                  <div
+                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group"
+                  >
+                    <!-- <label for="name">Study Name</label> -->
+                    <input
+                      [(ngModel)]="newStudy.name"
+                      name="name"
+                      class="form-control header-3 custom-input-border"
+                      placeholder="Study Name"
+                    />
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select
+                      placeholder="Project"
+                      class="ng-select-dropdown header-3"
+                      [items]="projects"
+                      name="project"
+                      bindLabel="name"
+                      bindValue="id"
+                      [(ngModel)]="newStudy.project"
+                    >
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                    <ng-select
+                      placeholder="Species"
+                      class="ng-select-dropdown header-3"
+                      [items]="species"
+                      name="species"
+                      bindLabel="name"
+                      bindValue="id"
+                      [(ngModel)]="newStudy.species"
+                    >
+                    </ng-select>
+                  </div>
+                  <div
+                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-control custom-checkbox"
+                  >
+                    <label>Program</label> <br />
+                    <input
+                      [(ngModel)]="newStudy.allPrograms"
+                      name="allPrograms"
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="allPrograms"
+                    />
+                    <label
+                      class="custom-control-label look-program-checkbox"
+                      for="allPrograms"
+                      >Look through all Programs
+                    </label>
+                  </div>
+                  <div
+                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group project-selection-field"
+                  >
+                    <ng-select
+                      [disabled]="newStudy.allPrograms"
+                      class="ng-select-dropdown header-3"
+                      name="select"
+                      [(ngModel)]="newStudy.selectedPrograms"
+                    >
+                      <ng-option value="">--Select One--</ng-option>
+                      <ng-option value="project 1">Project 1</ng-option>
+                      <ng-option value="project 2">Project 2</ng-option>
+                    </ng-select>
+                  </div>
+
+                  <div
+                    class="col-lg-6 mt-4 col-md-6 col-sm-12 col-xs-12 form-group"
+                  >
+                    <ng-select
+                      placeholder="Technology"
+                      class="ng-select-dropdown header-3"
+                      [items]="techTypes"
+                      name="technology"
+                      bindLabel="name"
+                      bindValue="id"
+                      [(ngModel)]="newStudy.technology"
+                      (change)="getVendorsList()"
+                    >
+                    </ng-select>
+                  </div>
+                  <div
+                    class="col-lg-6 mt-4 col-md-6 col-sm-12 col-xs-12 form-group"
+                  >
+                    <ng-select
+                      placeholder="Vendor"
+                      class="ng-select-dropdown header-3"
+                      [items]="vendors"
+                      name="vendor"
+                      bindLabel="name"
+                      bindValue="id"
+                      [(ngModel)]="newStudy.vendor"
+                      (change)="checkInstrumentModalExists()"
+                    >
+                    </ng-select>
+                  </div>
+                  <div
+                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group"
+                  >
+                    <label for="area">Description (Optional)</label>
+                    <textarea
+                      class="form-control custom-full-border"
+                      name="description"
+                      id="description"
+                      [(ngModel)]="newStudy.description"
+                      rows="4"
+                    ></textarea>
+                  </div>
+                  <div
+                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group"
+                  >
+                    <label for="area">Attachments (Optional)</label>
+                    <div
+                      class="upload-drop-zone custom-full-border"
+                      id="study_drop_zone"
+                    >
+                      <span
+                        class="mr-2"
+                        [inlineSVG]="'./assets/icons/upload.svg'"
+                      ></span>
+                      Drag and Drop files to dialog (Maximum file size is
+                      <span [innerHtml]="fileUploadSize"></span> MB)
                     </div>
+                  </div>
                 </div>
+              </form>
             </div>
+            <div id="step-2" class="">
+              <p class="text-center">
+                <span>
+                  <label class="study-info">i</label> Select files that are part
+                  of the experiment. Scroll down to load more.
+                </span>
+              </p>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <ng-select
+                    placeholder="Instrument Model"
+                    class="ng-select-dropdown header-3"
+                    [(ngModel)]="newStudy.instrumentModel"
+                    [items]="instrumentModels"
+                    name="instrumentModel"
+                    bindLabel="name"
+                    bindValue="id"
+                    (change)="getInstrumentsList(newStudy.instrumentModel)"
+                  >
+                  </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <ng-select
+                    placeholder="Instrument"
+                    class="ng-select-dropdown header-3"
+                    [(ngModel)]="newStudy.instrument"
+                    [items]="instruments"
+                    name="instruments"
+                    bindLabel="name"
+                    bindValue="id"
+                    (change)="checkFileExists()"
+                  >
+                  </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                  <ng-select
+                    placeholder="Protocol"
+                    class="ng-select-dropdown header-3"
+                    [items]="protocols"
+                    name="protocols"
+                    bindLabel="protocolName"
+                    bindValue="id"
+                    [(ngModel)]="newStudy.protocol"
+                  >
+                  </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <ng-select
+                    placeholder="Experiment Type"
+                    class="ng-select-dropdown header-3"
+                    [(ngModel)]="newStudy.experimentType"
+                    [items]="experimentTypes"
+                    name="experimentType"
+                    bindLabel="name"
+                    (change)="newStudy.lc = 'no'; newStudy.labeled = 'no'"
+                  >
+                  </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <ng-select
+                    [disabled]="
+                      newStudy.experimentType &&
+                      !newStudy.experimentType.allowed2DLC
+                    "
+                    placeholder="2D/LC"
+                    class="ng-select-dropdown header-3"
+                    [(ngModel)]="newStudy.lc"
+                  >
+                    <ng-option value="yes">Yes</ng-option>
+                    <ng-option value="no">No</ng-option>
+                  </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <ng-select
+                    [disabled]="
+                      newStudy.experimentType &&
+                      !newStudy.experimentType.allowLabels
+                    "
+                    placeholder="Labeled"
+                    class="ng-select-dropdown header-3"
+                    [(ngModel)]="newStudy.labeled"
+                  >
+                    <ng-option value="yes">Yes</ng-option>
+                    <ng-option value="no">No</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+            <div id="step-3" class="">
+              <p class="text-center">
+                <span
+                  ><label class="study-info">i</label> Specify experiment type
+                  for data processing and analysis</span
+                >
+              </p>
+              <label>Filter</label>
+              <div class="filter-container">
+                <div class="row">
+                  <div class="filter-align-center col-lg-10">
+                    <input
+                      [(ngModel)]="newStudy.filterNameHasSelected"
+                      name="filterNameHasSelected"
+                      type="checkbox"
+                      class="filter-checkbox"
+                      id="filterNameHasSelected"
+                    />
+                    <input
+                      [(ngModel)]="newStudy.filterName"
+                      name="filterName"
+                      class="form-control header-3 custom-input-border"
+                      placeholder="Name Contains"
+                    />
+                  </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                  <div class="input-group col-lg-4">
+                    <input
+                      [(ngModel)]="newStudy.filterUploadFromSelected"
+                      name="filterUploadFromSelected"
+                      type="checkbox"
+                      class="filter-checkbox"
+                      id="filterUploadFromSelected"
+                    />
+                    <input
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="uploadFrom"
+                      [(ngModel)]="newStudy.filterUploadFrom"
+                      ngbDatepicker
+                      #uploadFrom="ngbDatepicker"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary"
+                        (click)="uploadFrom.toggle()"
+                        type="button"
+                      >
+                        <i
+                          class="fa fa-calendar-minus-o"
+                          aria-hidden="true"
+                        ></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="input-group col-lg-4">
+                    <input
+                      [(ngModel)]="newStudy.filterUploadToSelected"
+                      name="filterUploadToSelected"
+                      type="checkbox"
+                      class="filter-checkbox"
+                      id="filterUploadToSelected"
+                    />
+                    <input
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="uploadTo"
+                      [(ngModel)]="newStudy.filterUploadTo"
+                      ngbDatepicker
+                      #uploadTo="ngbDatepicker"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary"
+                        (click)="uploadTo.toggle()"
+                        type="button"
+                      >
+                        <i
+                          class="fa fa-calendar-minus-o"
+                          aria-hidden="true"
+                        ></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <button
+                      class="btn btn-primary custom-primary-btn filter-apply-btn"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </div>
+                <br />
+                <div class="row">
+                  <div class="col-lg-12 selected-files-container">
+                    <label class="header-3">Selected Files(selected 0)</label>
+                    <label class="header-3">Files loaded (0 of 0)</label>
+                  </div>
+                  <div class="col-lg-12">
+                    <table class="table">
+                      <thead>
+                        <tr class="filter-files">
+                          <th>
+                            <input
+                              [(ngModel)]="newStudy.filterFilesSelectAll"
+                              name="filterFilesSelectAll"
+                              type="checkbox"
+                              class="filter-checkbox"
+                              id="filterFilesSelectAll"
+                            />
+                          </th>
+                          <th><label>FILE NAME</label></th>
+                          <th><label>DATE</label></th>
+                          <th>
+                            Labels
+                            <input
+                              [(ngModel)]="newStudy.filterFilesBy"
+                              name="filterFilesBy"
+                              class="form-control header-3"
+                              placeholder="Filter List"
+                            />
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--
+              <div id="step-4" class="">Step Content4</div>
+
+
+
+
+
+
+
+              <div id="step-5" class="">Step Content5</div>
+            -->
+
+            <div id="step-6" class="">
+              <div class="text-center">
+                <div class="study-design-info">
+                  <label class="study-info">i</label>
+                  <ul>
+                    <li>Specify Experiment Design</li>
+                    <li>
+                      Add factors as a stable columns and fill factor levels as
+                      column values to assign biological condition(treatment
+                      group)
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <label>Add Factor</label>
+              <div class="row design-factor-container">
+                <div class="col-lg-10">
+                  <input
+                    [(ngModel)]="newStudy.factorName"
+                    name="factorName"
+                    class="form-control header-3 custom-input-border"
+                    placeholder="Factor Name"
+                  />
+                </div>
+                <div class="col-lg-4">
+                  <input
+                    [(ngModel)]="newStudy.valueType"
+                    name="valueType"
+                    class="form-control header-3 custom-input-border"
+                    placeholder="Value Type"
+                  />
+                </div>
+                <div class="col-lg-4">
+                  <input
+                    [(ngModel)]="newStudy.ubits"
+                    name="ubits"
+                    class="form-control header-3 custom-input-border"
+                    placeholder="Ubits"
+                  />
+                </div>
+                <div class="col-lg-2">
+                  <button
+                    class="btn btn-primary custom-primary-btn filter-apply-btn"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+              <br />
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>ROW</th>
+                    <th>SAMPLE NAME</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <label>Choose Annotation CSV File</label>
+              <input type="file" class="choose-csv-file" accept=".csv" />
+              <!--
+                , application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel
+              -->
+            </div>
+            <div id="step-7" class="">
+              <p class="text-center">
+                <span
+                  ><label class="study-info">i</label> Verify experiment
+                  design</span
+                >
+              </p>
+
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th>Name</th>
+                    <td>Test</td>
+                  </tr>
+                  <tr>
+                    <th>Project</th>
+                    <td>SETD2 metabolomics</td>
+                  </tr>
+                  <tr>
+                    <th>Laboratory</th>
+                    <td>Look through all labs</td>
+                  </tr>
+                  <tr>
+                    <th>Species</th>
+                    <td>Acropora Cervicornics (coral)</td>
+                  </tr>
+                  <tr>
+                    <th>Files</th>
+                    <td>1</td>
+                  </tr>
+                </tbody>
+              </table>
+              <label class="header-3">Experiment Design</label> <br />
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>ROW</th>
+                    <th>SAMPLE NAME</th>
+                    <th>CONDITION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="warning-message header-3">
+              <span *ngIf="errorMessage.length > 0">
+                <span class="fa fa-exclamation-triangle"></span> &nbsp;
+                <span [innerHTML]="errorMessage"></span>
+              </span>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

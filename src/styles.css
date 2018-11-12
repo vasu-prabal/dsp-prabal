@@ -231,6 +231,7 @@ body,
 [data-notify="container"] {
   z-index: 9999 !important;
   position: absolute !important;
+  padding-right: 24px !important;
 }
 ng-select .ng-value-icon {
   float: right;

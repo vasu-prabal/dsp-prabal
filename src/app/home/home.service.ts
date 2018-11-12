@@ -134,14 +134,14 @@ export class HomeService {
       Body: file,
       ContentType: file.type
     };
-    if (IS_LOCAL_API) {
-      return this.http.post(LOCAL_API_URL, {
-        url: url,
-        type: "put",
-        data: file
-      });
-    } else {
+    // if (IS_LOCAL_API) {
+    //   return this.http.post(LOCAL_API_URL, {
+    //     url: url,
+    //     type: "put",
+    //     data: file
+    //   });
+    // } else {
       return this.http.put(url, file);
-    }
+    // }
   }
 }

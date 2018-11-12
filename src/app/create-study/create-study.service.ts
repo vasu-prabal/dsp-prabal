@@ -109,4 +109,23 @@ export class CreateStudyService {
       return this.http.get<Array<IExperimentType>>(url);
     }
   }
+
+  checkFileExists(instrument, model, species) {
+    let url = `${API_URL}experiments/new/files/exist`;
+    url = appendSession(url);
+    const params = {
+      instrument: instrument,
+      model: model,
+      species: species
+    };
+    if (IS_LOCAL_API) {
+      return this.http.post(LOCAL_API_URL, {
+        url: url,
+        type: "get",
+        params: params
+      });
+    } else {
+      return this.http.get(url, { params: params });
+    }
+  }
 }

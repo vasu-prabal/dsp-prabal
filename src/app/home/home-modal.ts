@@ -51,7 +51,7 @@ export interface IStudy {
   protocol?: string;
   species?: string;
   allPrograms?: boolean;
-  select?: string;
+  selectedPrograms?: string;
   technology?: string | number;
   vendor?: string;
   description?: string;
