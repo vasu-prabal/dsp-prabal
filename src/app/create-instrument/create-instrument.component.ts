@@ -137,7 +137,7 @@ export class CreateInstrumentComponent implements OnInit {
     } else {
       const modelId = this.newInstrumentModel.id
         ? this.newInstrumentModel.id
-        : undefined;
+        : "";
       showOrHideLoading(true);
       this.createInstrumentService
         .checkInstrumentModelNameExists(
