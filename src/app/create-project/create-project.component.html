@@ -1,10 +1,24 @@
-<div #createProject id="createProject" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div
+  #createProject
+  id="createProject"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title header-2 bold" id="exampleModalLabel">Create Project</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title header-2 bold" id="exampleModalLabel">
+          Create Project
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true" [inlineSVG]="'./assets/icons/close.svg'">
           </span>
         </button>
@@ -12,41 +26,96 @@
       <div class="modal-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active header-3 letter-spacing-0" id="general-tab" data-toggle="tab" href="#general"
-              role="tab" aria-controls="general" aria-selected="true">General</a>
+            <a
+              class="nav-link active header-3 letter-spacing-0"
+              id="general-tab"
+              data-toggle="tab"
+              href="#general"
+              role="tab"
+              aria-controls="general"
+              aria-selected="true"
+              >General</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link header-3 letter-spacing-0" id="sharing-tab" data-toggle="tab" href="#sharing" role="tab"
-              aria-controls="sharing" aria-selected="false">Sharing</a>
+            <a
+              class="nav-link header-3 letter-spacing-0"
+              id="sharing-tab"
+              data-toggle="tab"
+              href="#sharing"
+              role="tab"
+              aria-controls="sharing"
+              aria-selected="false"
+              >Sharing</a
+            >
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane bootstrap-tab-content fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+          <div
+            class="tab-pane bootstrap-tab-content fade show active"
+            id="general"
+            role="tabpanel"
+            aria-labelledby="general-tab"
+          >
             <form>
               <div class="form-group">
                 <!-- <label for="name">Project Name</label> -->
-                <input [(ngModel)]="newProject.name" name="name" autocomplete="off" class="form-control input-border header-3"
-                  placeholder="Project Name">
+                <input
+                  [(ngModel)]="newProject.name"
+                  name="name"
+                  autocomplete="off"
+                  class="form-control input-border header-3"
+                  placeholder="Project Name"
+                />
               </div>
               <div class="form-group">
-                <!-- <label for="laboratory">Laboratory</label> -->
-                <input [(ngModel)]="newProject.lab" name="laboratory" class="form-control header-3 input-border"
+                <!--
+                  <label for="laboratory">Laboratory</label>
+                  <input [(ngModel)]="newProject.lab" name="laboratory" class="form-control header-3 input-border"
                   placeholder="Laboratory">
+                -->
+                <ng-select
+                  placeholder="Laboratory"
+                  class="ng-select-dropdown header-3"
+                  [items]="labs"
+                  name="laboratory"
+                  bindLabel="name"
+                  bindValue="id"
+                  [clearable]="false"
+                  [(ngModel)]="newProject.lab"
+                >
+                </ng-select>
               </div>
               <div class="form-group">
                 <!-- <label for="area">Area of Research</label> -->
-                <input [(ngModel)]="newProject.areaOfResearch" name="area" class="form-control header-3 input-border"
-                  placeholder="Area of Research">
+                <input
+                  [(ngModel)]="newProject.areaOfResearch"
+                  name="area"
+                  class="form-control header-3 input-border"
+                  placeholder="Area of Research"
+                />
               </div>
               <div class="custom-control custom-checkbox">
-                <input [(ngModel)]="newProject.blogEnabled" name="enableBlog" type="checkbox" class="custom-control-input"
-                  id="enableBlog">
-                <label class="custom-control-label header-3" for="enableBlog">Enable Blog</label>
+                <input
+                  [(ngModel)]="newProject.blogEnabled"
+                  name="enableBlog"
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="enableBlog"
+                />
+                <label class="custom-control-label header-3" for="enableBlog"
+                  >Enable Blog</label
+                >
               </div>
               <div class="form-group">
                 <label for="area">Description (Optional)</label>
-                <textarea class="form-control custom-textarea-border" name="description" id="description" [(ngModel)]="newProject.description"
-                  rows="4"></textarea>
+                <textarea
+                  class="form-control custom-textarea-border"
+                  name="description"
+                  id="description"
+                  [(ngModel)]="newProject.description"
+                  rows="4"
+                ></textarea>
               </div>
               <div class="form-group">
                 <label for="area">Attachments (Optional)</label>
@@ -57,18 +126,34 @@
                 </div>
               </div>
             </form>
-
           </div>
-          <div class="tab-pane bootstrap-tab-content fade" id="sharing" role="tabpanel" aria-labelledby="sharing-tab">
-
+          <div
+            class="tab-pane bootstrap-tab-content fade"
+            id="sharing"
+            role="tabpanel"
+            aria-labelledby="sharing-tab"
+          >
             <form>
-              <label class="header-3"><span class="mr-2" [inlineSVG]="'./assets/icons/lock.svg'"></span> Private
-                Project</label>
+              <label class="header-3"
+                ><span
+                  class="mr-2"
+                  [inlineSVG]="'./assets/icons/lock.svg'"
+                ></span>
+                Private Project</label
+              >
               <br />
               <br />
               <div class="member-container">
-                <p class="header-3 no-project-users" *ngIf="projectUsers.length===0">There are no Members</p>
-                <div *ngFor="let user of projectUsers; let i = index" class="project-user-container">
+                <p
+                  class="header-3 no-project-users"
+                  *ngIf="projectUsers.length === 0"
+                >
+                  There are no Members
+                </p>
+                <div
+                  *ngFor="let user of projectUsers; let i = index"
+                  class="project-user-container"
+                >
                   <div class="flex-center">
                     <span class="fa fa-user fa-2x mr-2"></span>
                     <div>
@@ -77,39 +162,79 @@
                     </div>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input [(ngModel)]="user.allowCreateStudies" name="allowCreateStudies{{i}}" type="checkbox" class="custom-control-input"
-                      id="allowCreateStudies{{i}}">
-                    <label class="custom-control-label header-3" for="allowCreateStudies{{i}}">Allow Create Studies</label>
-                    <span class="fa fa-close header-2 ml-2 pointer" (click)="removeProjectUser(i)"></span>
+                    <input
+                      [(ngModel)]="user.allowCreateStudies"
+                      name="allowCreateStudies{{i}}"
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="allowCreateStudies{{i}}"
+                    />
+                    <label
+                      class="custom-control-label header-3"
+                      for="allowCreateStudies{{i}}"
+                      >Allow Create Studies</label
+                    >
+                    <span
+                      class="fa fa-close header-2 ml-2 pointer"
+                      (click)="removeProjectUser(i)"
+                    ></span>
                   </div>
                 </div>
               </div>
               <div class="member-invitation-container">
-                <span class="header-5">Invite People Personally or by group. Use "All" Special group to make project
-                  public</span>
+                <span class="header-5"
+                  >Invite People Personally or by group. Use "All" Special group
+                  to make project public</span
+                >
                 <br />
                 <br />
                 <div class="form-group">
-                  <ng-select placeholder="Select user" class="ng-select-dropdown header-3 project-user-list" [items]="users" name="persons" bindLabel="name" [(ngModel)]="newProject.persons"
-                    (change)="addUsersToProject()">
+                  <ng-select
+                    placeholder="Select user"
+                    class="ng-select-dropdown header-3 project-user-list"
+                    [items]="users"
+                    name="persons"
+                    bindLabel="name"
+                    [(ngModel)]="newProject.persons"
+                    (change)="addUsersToProject()"
+                  >
                   </ng-select>
-                  <!-- <input [(ngModel)]="newProject.persons" autocomplete="off" id="emails_input" name="persons" class="form-control"
-                    placeholder="Enter Person's Email, group Name or  &quot;All&quot; special group Name"> -->
+                  <!--
+                    <input [(ngModel)]="newProject.persons" autocomplete="off" id="emails_input" name="persons" class="form-control"
+                    placeholder="Enter Person's Email, group Name or  &quot;All&quot; special group Name">
+                  -->
                 </div>
               </div>
               <div class="custom-control custom-checkbox mr-sm-2">
-                <input [(ngModel)]="newProject.withEmailNotification" name="sendNotification" type="checkbox" class="custom-control-input"
-                  id="sendNotification">
-                <label class="custom-control-label header-4" for="sendNotification">Send Email Notifications</label>
+                <input
+                  [(ngModel)]="newProject.withEmailNotification"
+                  name="sendNotification"
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="sendNotification"
+                />
+                <label
+                  class="custom-control-label header-4"
+                  for="sendNotification"
+                  >Send Email Notifications</label
+                >
               </div>
             </form>
-
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary custom-primary-btn" (click)="addNewProject()">Create</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary custom-primary-btn"
+          (click)="addNewProject()"
+          [disabled]="!newProject.name || !newProject.areaOfResearch"
+        >
+          Create
+        </button>
       </div>
     </div>
   </div>

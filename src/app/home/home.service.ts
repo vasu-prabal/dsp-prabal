@@ -4,6 +4,7 @@ import { ILogin, IMailsList, IProject } from "./home-modal";
 import { getToken, getHttpHeaders, appendSession } from "../common";
 import { API_URL, LOCAL_API_URL, IS_LOCAL_API } from "../constants";
 import { RequestOptions } from "@angular/http";
+import { IProjectLab } from "../create-project/create-project-modal";
 @Injectable({
   providedIn: "root"
 })
@@ -48,12 +49,12 @@ export class HomeService {
     url = appendSession(url);
 
     if (IS_LOCAL_API) {
-      return this.http.post(LOCAL_API_URL, {
+      return this.http.post<Array<IProjectLab>>(LOCAL_API_URL, {
         url: url,
         type: "get"
       });
     } else {
-      return this.http.get(url);
+      return this.http.get<Array<IProjectLab>>(url);
     }
   }
 

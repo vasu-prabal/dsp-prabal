@@ -176,6 +176,11 @@ body,
   background: #00abad;
   border-color: #00abad;
 }
+.custom-primary-btn.disabled,
+.custom-primary-btn:disabled {
+  background: #19d3d5;
+  border: 1px solid #19d3d5;
+}
 
 .list-data-count {
   margin-left: 8px !important;

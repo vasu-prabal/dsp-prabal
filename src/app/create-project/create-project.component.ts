@@ -3,6 +3,7 @@ import { IProject, IProjectColumns, IProjectsUser } from "../home/home-modal";
 import { HomeService } from "../home/home.service";
 import { showOrHideLoading, showToastMessage } from "../common";
 import { CommonService } from "../common.service";
+import { IProjectLab } from "./create-project-modal";
 
 declare var jQuery: any;
 @Component({
@@ -17,6 +18,7 @@ export class CreateProjectComponent implements OnInit {
   newProject: IProject = {};
   dropZone: HTMLElement;
   projectUsers: Array<IProjectsUser> = [];
+  labs: Array<IProjectLab> = [];
 
   coll = {};
 
@@ -52,8 +54,14 @@ export class CreateProjectComponent implements OnInit {
 
   getLabItems() {
     showOrHideLoading(true);
-    this.homeService.getLabItems().subscribe((data: any) => {
-      // console.log(data);
+    this.homeService.getLabItems().subscribe(data => {
+      data.unshift({
+        id: "no-lab",
+        name: "--No Lab--"
+      });
+      this.labs = data;
+      this.newProject.lab = "no-lab";
+      showOrHideLoading(false);
     });
   }
 
@@ -68,6 +76,12 @@ export class CreateProjectComponent implements OnInit {
           id: x["id"]
         };
         return obj;
+      });
+      userData.push({
+        name: `All`,
+        userName: "all",
+        email: undefined,
+        id: "all"
       });
       this.users = userData;
       showOrHideLoading(false);
@@ -111,17 +125,28 @@ export class CreateProjectComponent implements OnInit {
 
   addNewProject() {
     this.newProject.colleagues = {};
-    // this.projectUsers.forEach(element => {
-    //   const id = element.id.toString();
-    //   this.newProject.colleagues[id] = element.allowCreateStudies
-    //     ? element.allowCreateStudies
-    //     : false;
-    // });
+    this.projectUsers.forEach(element => {
+      if (element.id !== "all") {
+        const id = element.id.toString();
+        this.newProject.colleagues[id] = element.allowCreateStudies
+          ? element.allowCreateStudies
+          : false;
+      }
+    });
+    this.newProject.groups = {};
+    const allSelected = this.projectUsers.find(person => person.id === "all");
+    if (allSelected) {
+      this.newProject.groups[1] = allSelected.allowCreateStudies
+        ? allSelected.allowCreateStudies
+        : false;
+    }
+    this.newProject.lab =
+      this.newProject.lab === "no-lab" ? null : this.newProject.lab;
+    delete this.newProject.persons;
+
     console.log(this.projectUsers);
     console.log(this.newProject);
     showOrHideLoading(true);
-    delete this.newProject.lab;
-    delete this.newProject.description;
     this.homeService.addNewProject(this.newProject).subscribe(
       (data: any) => {
         if (data.errorMessage === null) {
@@ -162,6 +187,8 @@ export class CreateProjectComponent implements OnInit {
   removeProjectUser(index) {
     const userToRemove = this.projectUsers[index];
     this.projectUsers.splice(index, 1);
-    this.users.push(userToRemove);
+    const users = this.users;
+    users.push(userToRemove);
+    this.users = [...users];
   }
 }
